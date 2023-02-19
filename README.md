@@ -84,7 +84,8 @@ Please note it may take 3-4 minutes for traces to show up and you will see full 
  
 It is recommended to use a -15m look back during this lab. You may need to change it from time to time (for example to -5m or a custom -10m) to make sure you are only looking at the newer traces after your changes.
 
-<img width="731" alt="Screen Shot 2023-02-14 at 8 25 19 PM" src="https://user-images.githubusercontent.com/32849847/218923108-6c6a7efb-588e-4f7b-b788-768037eae4bb.png">
+<img width="746" alt="Screen Shot 2023-02-14 at 6 35 55 PM" src="https://user-images.githubusercontent.com/32849847/219972207-c1270d13-6893-433e-97ec-62f48a6f03d4.png">
+
 
 NOTE: Typically, to identify root cause and route an issue, an SRE or alert responder would check metrics and logs to determine if it is a software or hardware related issue, and thus route to the correct party. In this excercise we are ONLY handling software issues, so we are skipping the metrics and logs parts of normal triage. 
 
