@@ -197,7 +197,7 @@ To add even more information to help our developers find the root cause faster,
 
 Splunk Full Fidelity APM allows our customers development teams to debug their code as it ran in production, 100% of the time . Add with Custom Attribution, you are providing repeatable Mean Time to Repair reduction...  100% of the time, only with Full Fidelity tracing.
  
-To expedite manual instrumentation implementation for this exercise, we have provided a tool which will annotate the entirety of the "shop" and "products" services with OpenTelemetry standard annotations for every method call without having to write any code. This "annotator" tool will also tag every parameter in every function, which adds a span tag with `Parameter=Value`. 
+To expedite manual instrumentation implementation for this exercise, we have provided a tool which will annotate the entirety of the "shop" and "products" services with OpenTelemetry standard annotations for every function call without having to write any code. This "annotator" tool will also tag every parameter in every function, which adds a span tag with `Parameter=Value`. 
 
 # Run Manual Instrumentation Tool
 
@@ -233,9 +233,6 @@ We can see that the actual function call that has the latency was not ProductRes
 the function call "ProductResource.myCoolFunction234234234" !
 
 Since we now have the parameter tagged as part of our span metadata the actual root cause is seemingly related to the  "location" Colorado ! And it appears the one custom attribute that was tagged for function "ProductResource.myCoolFunction234234234" was "myInt" with a value of 999. With this information a Developer can debug very quickly. 
-	
-Consider the case of debugging code which each of you have just experienced. Imagine that you may have not written the code yourself and the code is a mess, which I can tell you from a former developer, everyone else's code sucks.... So without Parameter Values at the time of the issue .. You would have no choice but to go line .... by line ..... by line..... which I am sorry I forced you to do earlier... this can take a very long time. 
-
 
 NOTE: We added additional span information, which we call "Custom Attributes" here at Splunk, in this case our "Custom Attributes" are "Parameter Values at Time of Latency". 
 
