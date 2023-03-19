@@ -84,6 +84,10 @@ Clone the workshop repository:
 git clone -b tko-fy24-distributed-tracing https://github.com/shabuhabs/javashop-otel.git
 ```
 
+Access the workshop directory:
+```
+cd javashop-otel
+```
 ### Set Environment Variables
   After your environment is setup per the Instructions above, proceed to run the workshop !
   
