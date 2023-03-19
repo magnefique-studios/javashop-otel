@@ -13,13 +13,6 @@ Our technical staff has already on-boarded the data from these new locations and
 
 We now have a total of 6 locations !
 
-# Environment Setup Linux
-
-You can run this on any linux VM minimum 8GB Ram. 4CPU min recommended.
-
-Software Requirements:
-docker, docker-compose, git, maven
-
 # Environment Setup MACOS
 
 Tested on Macos Ventura 13.2.1 ( Tested on Mac M1/M2 , Intel Macs should be OK. )
@@ -75,7 +68,14 @@ brew install git
 brew install maven
 ```
 
-# Install All Platforms
+# Environment Setup Linux
+
+You can run this on any linux VM minimum 8GB Ram. 4CPU min recommended.
+
+Software Requirements:
+docker, docker-compose, git, maven
+
+### Install All Platforms
 
 	Confirm git / maven / docker / docker-compose Installed.
 	
@@ -84,7 +84,9 @@ Clone the workshop repository:
 git clone -b tko-fy24-distributed-tracing https://github.com/shabuhabs/javashop-otel.git
 ```
 
-# Set Environment Variables
+### Set Environment Variables
+  After your environment is setup per the Instructions above, proceed to run the workshop !
+  
 - Using nano edit the `.env` file.
   - **Important Note**: Do not put any spaces in your name
 ```
