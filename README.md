@@ -88,11 +88,13 @@ Today we will learn the type of data ( In the form of a trace ) that an SRE or a
 
 While we will be spending time Debugging code, .... Don't worry, ...there is no programming experience necessary, as our goal here is for everyone in the audience to understand how using Custom Attributes in Splunk APM @ Full Fidelity can accelerate Mean Time to Repair Software problems for our customers. 
 
-Translated, Developers are High Cost resources, with high opportunity cost. Less time on fixing problems = more time for features.
+Translated, Developers are High Cost resources, with high opportunity cost. Less time on fixing problems = Less Developer Time/Cost spent on repairs and more time for building new features.  
 
 # Let's define a few terms for those new to APM / Software Development or Java
 
-1. **What is a Function in Java?**
+1. **What Are Custom Attributes / Custom Tags in Splunk APM ?**
+	A First, you will hear poeple refer to Custom Attributes in the context of Splunk Enterprise, however in Splunk APM, Custom Attributes are called 	    		Custom Tags in Opentelemetry and the Splunk Tag Splotlight.
+2. **What is a Function in Java?**
 	A Function  in most languages includeing Java, is a logical chunk of code when executed solves a repeatable task. This is basically what our 		customers Dev teams spend thier time building and where software issues will most commonly be.
 3. **What is a Method in Java?**
  	See What's a function -> Function and method are synonomous.
