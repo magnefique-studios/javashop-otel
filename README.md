@@ -9,19 +9,23 @@ Our technical staff has already on-boarded the data from these new locations and
 
 We now have a total of 6 locations !
 
+# Environment Setup Linux
+
 # Environment Setup MACOS
 
 Tested on Macos Ventura 13.2.1 ( Tested on Mac M1/M2 , Intel Macs should be OK. )
 
 ## IMPORTANT: Docker must have access to 6-GB RAM.
 
-### Option 1: Install Multipass
+### Option 1: Macos - Install Multipass
 
 Multipass Installation - follow instructions here https://github.com/signalfx/observability-workshop/tree/main/multipass
 
 Multipass Docker should consume memory as available, so please have 6GB RAM free to run successfully.
 
-### Option 2: Install Colima
+Skip below to "Install All Platforms"
+
+### Option 2: Macos- Install Colima
 
 Colima - Colima is a docker daemon that does not require Docker Desktop. This is used to avoid any docker license issues with Docker Desktop.
 
@@ -62,7 +66,13 @@ brew install git
 brew install maven
 ```
 
-#
+# Install All Platforms
+
+	Confirm java / git / maven / docker / docker-compose Installed.
+	
+Clone this repository:
+
+
 
 # Set Environment Variables
 - Using nano edit the `.env` file.
