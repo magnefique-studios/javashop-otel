@@ -1,7 +1,7 @@
 
 # Scenario
 
-Here at Buttercup Instruments, our business is expanding!
+Here at Splunk Instruments, our business is expanding!
 
 We have recently added 3 new locations: Two locations in the USA (Colorado and Chicago) and one international location in Sri Lanka. 
 
@@ -9,22 +9,21 @@ Our technical staff has already on-boarded the data from these new locations and
 
 We now have a total of 6 locations !
 
-# Environment Setup
+# Environment Setup MACOS
 
-NOTE: Docker must have access to 6GB RAM minimum or the Instruments Service will not function. 
+Tested on Macos ( Tested on Mac M1/M2, Intel Macs should be OK ! )
 
-Option 1: Install Multipass
+## IMPORTANT: Docker must have access to 6-GB RAM minimum for this workshop.
 
-Multipass - follow instructions here https://github.com/signalfx/observability-workshop/tree/main/multipass
+### Option 1: Install Multipass
+
+Multipass Installation - follow instructions here https://github.com/signalfx/observability-workshop/tree/main/multipass
 
 Multipass Docker should consume memory as available, so please have 6GB RAM free to run successfully.
 
-Option 2: Install Colima
+### Option 2: Install Colima
 
 Colima - Colima is a docker daemon that does not require Docker Desktop. This is used to avoid any docker license issues with Docker Desktop.
-
-Macos ( Tested on Mac M1/M2, Intel Macs should be OK ! )
-
 
 Colima Full details are here ( setup commands below) : https://github.com/abiosoft/colima
 
@@ -93,13 +92,22 @@ Translated, Developers are High Cost resources, with high opportunity cost. Less
 # Let's define a few terms for those new to APM / Software Development or Java
 
 1. **What Are Custom Attributes / Custom Tags in Splunk APM ?**
-	A First, you will hear poeple refer to Custom Attributes in the context of Splunk Enterprise, however in Splunk APM, Custom Attributes are called 	    		Custom Tags in Opentelemetry and the Splunk Tag Splotlight.
+	
+	First, you will hear poeple refer to Custom Attributes in the context of Splunk Enterprise, however in Splunk APM, Custom Attributes are called 	    	  	Custom Tags in Opentelemetry and the Splunk Tag Splotlight.
+	
 2. **What is a Function in Java?**
-	A Function  in most languages includeing Java, is a logical chunk of code when executed solves a repeatable task. This is basically what our 		customers Dev teams spend thier time building and where software issues will most commonly be.
+
+	A Function  in most languages includeing Java, is a logical chunk of code when executed solves a repeatable task. This is basically what development teams 		spend thier time building and where software issues will most commonly be.
+	
 3. **What is a Method in Java?**
+
  	See What's a function -> Function and method are synonomous.
+	
 5. **What is an Exception in Java?**
+
 	An Exceptional error condition that indicates abonormal or unhandled condition, that interrupts program execution abnormally.
+	
+	
 
 # View Service Map
 
@@ -108,7 +116,6 @@ Please note it may take 3-4 minutes for traces to show up and you will see full 
 It is recommended to use a -15m look back during this lab. You may need to change it from time to time (for example to -5m or a custom -10m) to make sure you are only looking at the newer traces after your changes.
 
 <img width="731" alt="Screen Shot 2023-02-14 at 8 25 19 PM" src="https://user-images.githubusercontent.com/32849847/219972238-36a91449-119b-4ce9-ba3c-d5ea354a8aeb.png">
-
 
 
 NOTE: Typically, to identify root cause and route an issue, an SRE or alert responder would check metrics and logs to determine if it is a software or hardware related issue, and thus route to the correct party. In this excercise we are ONLY handling software issues, so we are skipping the metrics and logs parts of normal triage. 
