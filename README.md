@@ -136,7 +136,7 @@ Translated, Developers are High Cost resources, with high opportunity cost. Less
 
 1. **What Are Custom Attributes / Custom Tags in Splunk APM ?**
 	
-	First, you will hear poeple refer to Custom Attributes in the context of Splunk Enterprise, however in Splunk APM, Custom Attributes are called 	    	  	Custom Tags in Opentelemetry and the Splunk Tag Splotlight.
+	First, you will hear poeple refer to Custom Attributes in the context of Splunk Enterprise, however in Splunk APM Custom Attributes are called 	    	  	Custom Tags as defined in Opentelemetry and shown in Splunk APM Tag Splotlight. 
 	
 2. **What is a Function in Java?**
 
