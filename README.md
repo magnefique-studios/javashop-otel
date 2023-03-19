@@ -3,28 +3,36 @@
 
 Here at Buttercup Instruments, our business is expanding!
 
-We have recently added 3 new locations: two locations in the USA (Colorado and Chicago) and one international location in Sri Lanka. 
+We have recently added 3 new locations: Two locations in the USA (Colorado and Chicago) and one international location in Sri Lanka. 
 
-Our technical staff has already on-boarded the data from these new locations and incorporated them into our inventory application, and it is our job to review these improvements and send any issues back to our developers for repairs.
+Our technical staff has already on-boarded the data from these new locations and incorporated them into our inventory application and it is our job to review these improvements and send any issues back to our developers for repairs.
 
-We now have a total of 6 locations.
+We now have a total of 6 locations !
 
-# EC2 Access
+# Environment Setup
 
-Select an ec2 on the Spreadsheet provided
+NOTE: Option 1 or Option 2 require Docker to have access to 6GB RAM minimum or the Instruments Service will not function. 
 
-```
-ssh ubuntu@your.ec2.ip.address
-```
+Option 1:
 
-For the rest of the lab we are going to be assuming you are starting from the project's root directory.
+Multipass - follow instructions here https://github.com/signalfx/observability-workshop/tree/main/multipass
 
-Let's go there now:
+Multipass Docker should consume memory as available, so please have 6GB RAM free to run successfully.
 
-```
-cd ~/javashop-otel-TKO-23
-```
+Option 2:
 
+Macos ( Tested on Mac M1/M2, Intel Macs should be OK ! )
+Download docker desktop https://www.docker.com/products/docker-desktop
+
+NOTE: You must configure Docker Desktop for 6GB memory Consumption as follows:
+
+
+
+Install Homebrew https://docs.brew.sh/Installation
+
+brew install git
+
+brew install maven
 # Set Environment Variables
 
 
