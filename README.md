@@ -126,11 +126,11 @@ Of course, we are not requiring 2 people for this workshop as each participant w
 
 # Today we will learn 
 
-Today we will learn the type of data ( In the form of a trace ) that an SRE or alert responder would send to a developer to then repair/fix software. We will do this with both Auto-Instrumentation data and Custom attributes, via Manual Instrumentation data.
+Today we will learn how Splunk APM with Full Fidelity tracing can accelerate the time to repair for Development teams. We will focus on the full fidelity data ( In the form of traces ) that an SRE or alert responder would send to a developer to then repair/fix software. We will do this with both Auto-Instrumentation data and Custom attributes or Custom Tags, via Manual Instrumentation data.
 
-While we will be spending time Debugging code, .... Don't worry, ...there is no programming experience necessary, as our goal here is for everyone in the audience to understand how using Custom Attributes in Splunk APM @ Full Fidelity can accelerate Mean Time to Repair Software problems for our customers. 
+While we will be spending time Debugging code, .... Don't worry, ...there is no programming experience necessary, as our goal here is for every participant to understand how using Custom Attributes/Tags in Splunk APM @ Full Fidelity accelerates Mean Time to Repair Software problems for Development Teams.
 
-Translated, Developers are High Cost resources, with high opportunity cost. Less time on fixing problems = Less Developer Time/Cost spent on repairs and more time for building new features.  
+Translated: Developers are High Cost resources, with high opportunity cost. Less time on fixing problems = Less Developer Time/Cost spent on repairs and more time for building new features.  
 
 # Let's define a few terms for those new to APM / Software Development or Java
 
@@ -150,8 +150,6 @@ Translated, Developers are High Cost resources, with high opportunity cost. Less
 
 	An Exceptional error condition that indicates abonormal or unhandled condition, that interrupts program execution abnormally.
 	
-	
-
 # View Service Map
 
 Please note it may take 3-4 minutes for traces to show up and you will see full map "form" as traces are coming in, so you may have to refresh the page a few times each time we Build and Deploy. 
