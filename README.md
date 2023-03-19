@@ -26,7 +26,7 @@ Colima - Colima is a docker daemon that does not require Docker Desktop. This is
 Macos ( Tested on Mac M1/M2, Intel Macs should be OK ! )
 
 
-Full details are here: https://github.com/abiosoft/colima
+Colima Full details are here ( setup commands below) : https://github.com/abiosoft/colima
 
 Setup Instructions:
 
