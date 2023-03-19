@@ -32,6 +32,14 @@ Setup Instructions:
 Install Homebrew https://docs.brew.sh/Installation
 
 ```
+git clone https://github.com/Homebrew/brew homebrew
+
+eval "$(homebrew/bin/brew shellenv)"
+
+brew update --force --quiet
+
+chmod -R go-w "$(brew --prefix)/share/zsh"
+
 brew uninstall docker docker-compose colima
 
 brew install docker docker-compose colima 
