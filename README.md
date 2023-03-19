@@ -111,7 +111,7 @@ SPLUNK_REALM=<your_realm>
 	
 # Build and Deploy Application
 
-Let's get started by building and deploying our Application, the Buttercup Instrument Shop. Run the commands below to begin and start reading ahead as your traces are coming up !
+Let's get started by building and deploying our Application, the Splunk Instrument Shop. Run the commands below to begin and start reading ahead as your traces are coming up !
 
 - Build the app
 ```
