@@ -11,9 +11,9 @@ We now have a total of 6 locations !
 
 # Environment Setup MACOS
 
-Tested on Macos ( Tested on Mac M1/M2, Intel Macs should be OK ! )
+Tested on Macos Ventura 13.2.1 ( Tested on Mac M1/M2 , Intel Macs should be OK. )
 
-## IMPORTANT: Docker must have access to 6-GB RAM minimum for this workshop.
+## IMPORTANT: Docker must have access to 6-GB RAM.
 
 ### Option 1: Install Multipass
 
@@ -27,20 +27,25 @@ Colima - Colima is a docker daemon that does not require Docker Desktop. This is
 
 Colima Full details are here ( setup commands below) : https://github.com/abiosoft/colima
 
-***Setup Instructions:***
+*** Colima Setup Instructions:***
 
+Open Terrminal App on your Mac
 Install Homebrew full Details: https://docs.brew.sh/Installation
+Install ***Colima***
 
-Macos Commands Below:
+Macos Homebrew Install:
 ```
-git clone https://github.com/Homebrew/brew homebrew
+mkdir homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
 
 eval "$(homebrew/bin/brew shellenv)"
 
 brew update --force --quiet
 
 chmod -R go-w "$(brew --prefix)/share/zsh"
+```
 
+Colima Install :
+```
 brew uninstall docker docker-compose colima
 
 brew install docker docker-compose colima 
@@ -48,15 +53,18 @@ brew install docker docker-compose colima
 colima stop
 
 colima start --cpu 4 --memory 6
+```
 
+Java Tools Install:
+```
 brew install git
 
 brew install maven
 ```
 
+#
+
 # Set Environment Variables
-
-
 - Using nano edit the `.env` file.
   - **Important Note**: Do not put any spaces in your name
 ```
