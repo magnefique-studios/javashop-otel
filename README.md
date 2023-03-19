@@ -11,28 +11,41 @@ We now have a total of 6 locations !
 
 # Environment Setup
 
-NOTE: Option 1 or Option 2 require Docker to have access to 6GB RAM minimum or the Instruments Service will not function. 
+NOTE: Docker must have access to 6GB RAM minimum or the Instruments Service will not function. 
 
-Option 1:
+Option 1: Install Multipass
 
 Multipass - follow instructions here https://github.com/signalfx/observability-workshop/tree/main/multipass
 
 Multipass Docker should consume memory as available, so please have 6GB RAM free to run successfully.
 
-Option 2:
+Option 2: Install Colima
+
+Colima - Colima is a docker daemon that does not require Docker Desktop. This is used to avoid any docker license issues with Docker Desktop.
 
 Macos ( Tested on Mac M1/M2, Intel Macs should be OK ! )
-Download docker desktop https://www.docker.com/products/docker-desktop
-
-NOTE: You must configure Docker Desktop for 6GB memory Consumption as follows:
 
 
+Full details are here: https://github.com/abiosoft/colima
+
+Setup Instructions:
 
 Install Homebrew https://docs.brew.sh/Installation
+
+```
+brew uninstall docker docker-compose colima
+
+brew install docker docker-compose colima 
+
+colima stop
+
+colima start --cpu 4 --memory 6
 
 brew install git
 
 brew install maven
+```
+
 # Set Environment Variables
 
 
