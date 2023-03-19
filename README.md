@@ -27,10 +27,11 @@ Colima - Colima is a docker daemon that does not require Docker Desktop. This is
 
 Colima Full details are here ( setup commands below) : https://github.com/abiosoft/colima
 
-Setup Instructions:
+***Setup Instructions:***
 
-Install Homebrew https://docs.brew.sh/Installation
+Install Homebrew full Details: https://docs.brew.sh/Installation
 
+Macos Commands Below:
 ```
 git clone https://github.com/Homebrew/brew homebrew
 
