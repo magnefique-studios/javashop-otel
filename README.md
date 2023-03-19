@@ -259,7 +259,7 @@ Ok exit your editor:
 - Exit nano: `[CTRL]-X`
   - **Optional**: If it asks you to save, hit `N`
 
-# Custom Attribution
+# Custom Attribution ( Custom Tags )
 
 To take a deeper look at this issue and make this much easier to debug we will implement Custom Attributes via Opentelemetry Manual Instrumentation.
 
