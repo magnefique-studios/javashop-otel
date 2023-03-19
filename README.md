@@ -35,7 +35,6 @@ Colima Full details are here ( setup commands below) : https://github.com/abioso
 
 *** Colima Setup Instructions:***
 
-Open Terrminal App on your Mac
 Install Homebrew full Details: https://docs.brew.sh/Installation
 Install ***Colima***
 
