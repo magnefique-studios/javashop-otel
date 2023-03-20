@@ -19,25 +19,7 @@ Tested on Macos Ventura 13.2.1 ( Tested on Mac M1/M2 , Intel Macs should be OK. 
 
 ## IMPORTANT: Docker must have access to 6-GB RAM.
 
-### Option 1: Macos - Install Multipass
-
-Multipass Installation - follow instructions here https://github.com/signalfx/observability-workshop/tree/main/multipass
-
-Multipass Docker should consume memory as available, so please have 6GB RAM free to run successfully.
-
-Skip below to "Install All Platforms"
-
-### Option 2: Macos- Install Colima
-
-Colima - Colima is a docker daemon that does not require Docker Desktop. This is used to avoid any docker license issues with Docker Desktop.
-
-Colima Full details are here ( setup commands below) : https://github.com/abiosoft/colima
-
-*** Colima Setup Instructions:***
-
 Install Homebrew full Details: https://docs.brew.sh/Installation
-
-Install ***Colima***
 
 Macos Homebrew Install:
 ```
@@ -49,6 +31,14 @@ brew update --force --quiet
 
 chmod -R go-w "$(brew --prefix)/share/zsh"
 ```
+
+### Option 1: Macos - Install Colima
+
+Colima - Colima is a docker daemon that does not require Docker Desktop. This is used to avoid any docker license issues with Docker Desktop.
+
+Colima Full details are here ( setup commands below) : https://github.com/abiosoft/colima
+
+*** Colima Setup Instructions:***
 
 Colima Install :
 ```
@@ -68,16 +58,21 @@ brew install git
 brew install maven
 ```
 
+### Option 2: Macos- Install Multipass
+
+Multipass Installation Full Details - follow instructions here https://github.com/signalfx/observability-workshop/tree/main/multipass
+
+Multipass Docker should consume memory as available, so please have 6GB RAM free to run successfully.
+
 # Environment Setup Linux
 
 You can run this on any linux VM minimum 8GB Ram. 4CPU min recommended.
 
-Software Requirements:
-docker, docker-compose, git, maven
+Software Requirements: docker, docker-compose, git, maven
 
 ### Install All Platforms
 
-	Confirm git / maven / docker / docker-compose Installed.
+	Confirm git / maven / docker / docker-compose are Installed.
 	
 Clone the workshop repository:
 ```
