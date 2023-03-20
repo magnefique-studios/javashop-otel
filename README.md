@@ -125,8 +125,6 @@ Today we will learn how Splunk APM with Full Fidelity tracing can accelerate the
 
 While we will be spending time Debugging code, .... Don't worry, ...there is no programming experience necessary, as our goal here is for every participant to understand how using Custom Attributes/Tags in Splunk APM @ Full Fidelity accelerates Mean Time to Repair Software problems for Development Teams.
 
-Translated: Developers are High Cost resources, with high opportunity cost. Less time on fixing problems = Less Developer Time/Cost spent on repairs and more time for building new features.  
-
 # Let's define a few terms for those new to APM / Software Development or Java
 
 1. **What Are Custom Attributes / Custom Tags in Splunk APM ?**
