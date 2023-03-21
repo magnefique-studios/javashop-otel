@@ -19,6 +19,8 @@ Tested on Macos Ventura 13.2.1 ( Tested on Mac M1/M2 , Intel Macs should be OK. 
 
 ## IMPORTANT: Docker must have access to 6-GB RAM.
 
+## Prerequisites XCode Command line tools  Details here - https://mac.install.guide/commandlinetools/index.html
+
 Install Homebrew full Details: https://docs.brew.sh/Installation
 
 Macos Homebrew Install:
