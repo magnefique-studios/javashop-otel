@@ -13,7 +13,7 @@ Our technical staff has already on-boarded the data from these new locations and
 
 We now have a total of 6 locations !
 
-# Environment Setup MACOS
+# Environment Setup MACos
 
 Tested on Macos Ventura 13.2.1 ( Tested on Mac M1/M2 , Intel Macs should be OK. )
 
