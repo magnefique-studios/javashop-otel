@@ -18,7 +18,10 @@ We now have a total of 6 locations !
 
 
 # Environment Setup Linux ( RECOMMENDED !!!! )
+
 I have succesfully run everything on an EC2 with Following properties:
+
+
 
 ubuntu 22.04
 
@@ -30,8 +33,12 @@ ubuntu 22.04
 ![image](https://user-images.githubusercontent.com/32849847/229912583-2b54bd85-c69d-4996-8de5-06471d88c346.png)
 
 
-
 ![image](https://user-images.githubusercontent.com/32849847/229912522-af049dc8-fc7d-4637-8eb9-a023e2762d46.png)
+
+Security Group Security Settings
+HTTP inbound open on 8010
+All Traffic open outbound.
+
 
 Software Requirements: docker, docker-compose, git, maven
 
