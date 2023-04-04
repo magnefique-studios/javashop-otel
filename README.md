@@ -13,9 +13,15 @@ Our technical staff has already on-boarded the data from these new locations and
 
 We now have a total of 6 locations !
 
+
+## DO NOT USE SFDEMO FOR THIS, YOU MUST USE AN ORG YOU CAN SEND TRACES TO.
+
 # Environment Setup MACos
 
-Tested on Macos Ventura 13.2.1 ( Tested on Mac M1/M2 , Intel Macs should be OK. )
+### Tested on Macos Ventura 13.2.1 
+
+### Tested on Mac M1/M2  and Ubuntu Linux 22.04 EC2 ( Recommending EC2 ! )  
+Intel Macs and EC2s should be OK However if they are slower you may require adding to **start_period: 20s** ( try 25s or more ) for **instruments** and **stock** and **products** services in **docker-compose.yml**
 
 ### IMPORTANT: Docker must have access to 6-GB RAM.
 
@@ -60,17 +66,29 @@ brew install git
 brew install maven
 ```
 
-### Option 2: Macos- Install Multipass
+# Environment Setup Linux ( RECOMMENDED !!!! )
+I have succesfully run everything on an EC2 with Following properties:
 
-Multipass Installation Full Details - follow instructions here https://github.com/signalfx/observability-workshop/tree/main/multipass
+ubuntu 22.04
 
-Multipass Docker should consume memory as available, so please have 6GB RAM free to run successfully.
+![Screenshot 2023-04-04 at 12 01 40 PM](https://user-images.githubusercontent.com/32849847/229912404-e1cdf30f-c6fb-486e-997f-a0b84c9420da.png)
 
-# Environment Setup Linux
 
-You can run this on any linux VM minimum 8GB Ram. 4CPU min recommended.
+
+![image](https://user-images.githubusercontent.com/32849847/229912583-2b54bd85-c69d-4996-8de5-06471d88c346.png)
+
+
+
+![image](https://user-images.githubusercontent.com/32849847/229912522-af049dc8-fc7d-4637-8eb9-a023e2762d46.png)
 
 Software Requirements: docker, docker-compose, git, maven
+
+```
+sudo apt update
+sudo apt upgrade
+sudo apt install docker docker-compose maven
+```
+
 
 ### Install All Platforms
 
@@ -96,7 +114,7 @@ nano .env
 - Set the following values:
 ```
 SHOP_USER=<your_name>
-
+# Note:  NO spaces in <your_name>
 SPLUNK_ACCESS_TOKEN=<your_token>
 
 SPLUNK_REALM=<your_realm>
