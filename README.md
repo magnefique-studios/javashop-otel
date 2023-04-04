@@ -73,6 +73,7 @@ ubuntu 22.04
 
 ![Screenshot 2023-04-04 at 12 01 40 PM](https://user-images.githubusercontent.com/32849847/229912404-e1cdf30f-c6fb-486e-997f-a0b84c9420da.png)
 
+![image](https://user-images.githubusercontent.com/32849847/229942861-251fee1a-2d50-4a70-815a-3d88ae584f7a.png)
 
 
 ![image](https://user-images.githubusercontent.com/32849847/229912583-2b54bd85-c69d-4996-8de5-06471d88c346.png)
