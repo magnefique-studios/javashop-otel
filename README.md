@@ -168,7 +168,12 @@ While we will be spending time Debugging code, .... Don't worry, ...there is no 
 	
 # View Service Map
 
-Please note it may take 3-4 minutes for traces to show up and you will see full map "form" as traces are coming in, so you may have to refresh the page a few times each time we Build and Deploy. 
+Next step is open your Observability UI, accessing the proper org ( where you sent the traces to ) and click APM and Access the Environemnnt that matches the username you put in .env
+
+![image](https://user-images.githubusercontent.com/32849847/229945586-bd379517-8381-410a-9f70-36542fe0b03d.png)
+
+
+Please note it may take 3-4 minutes or more for traces to show up and you will see full map "form" as traces are coming in, so you may have to refresh the page a few times each time we Build and Deploy. 
  
 It is recommended to use a -15m look back during this lab. You may need to change it from time to time (for example to -5m or a custom -10m) to make sure you are only looking at the newer traces after your changes.
 
