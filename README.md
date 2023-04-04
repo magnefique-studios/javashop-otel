@@ -16,6 +16,31 @@ We now have a total of 6 locations !
 
 ## DO NOT USE SFDEMO FOR THIS, YOU MUST USE AN ORG YOU CAN SEND TRACES TO.
 
+
+# Environment Setup Linux ( RECOMMENDED !!!! )
+I have succesfully run everything on an EC2 with Following properties:
+
+ubuntu 22.04
+
+![Screenshot 2023-04-04 at 12 01 40 PM](https://user-images.githubusercontent.com/32849847/229912404-e1cdf30f-c6fb-486e-997f-a0b84c9420da.png)
+
+![image](https://user-images.githubusercontent.com/32849847/229942861-251fee1a-2d50-4a70-815a-3d88ae584f7a.png)
+
+
+![image](https://user-images.githubusercontent.com/32849847/229912583-2b54bd85-c69d-4996-8de5-06471d88c346.png)
+
+
+
+![image](https://user-images.githubusercontent.com/32849847/229912522-af049dc8-fc7d-4637-8eb9-a023e2762d46.png)
+
+Software Requirements: docker, docker-compose, git, maven
+
+```
+sudo apt update
+sudo apt upgrade
+sudo apt install docker docker-compose maven
+```
+
 # Environment Setup MACos
 
 ### Tested on Macos Ventura 13.2.1 
@@ -64,30 +89,6 @@ Java Tools Install:
 brew install git
 
 brew install maven
-```
-
-# Environment Setup Linux ( RECOMMENDED !!!! )
-I have succesfully run everything on an EC2 with Following properties:
-
-ubuntu 22.04
-
-![Screenshot 2023-04-04 at 12 01 40 PM](https://user-images.githubusercontent.com/32849847/229912404-e1cdf30f-c6fb-486e-997f-a0b84c9420da.png)
-
-![image](https://user-images.githubusercontent.com/32849847/229942861-251fee1a-2d50-4a70-815a-3d88ae584f7a.png)
-
-
-![image](https://user-images.githubusercontent.com/32849847/229912583-2b54bd85-c69d-4996-8de5-06471d88c346.png)
-
-
-
-![image](https://user-images.githubusercontent.com/32849847/229912522-af049dc8-fc7d-4637-8eb9-a023e2762d46.png)
-
-Software Requirements: docker, docker-compose, git, maven
-
-```
-sudo apt update
-sudo apt upgrade
-sudo apt install docker docker-compose maven
 ```
 
 
