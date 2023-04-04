@@ -90,11 +90,6 @@ brew install git
 
 brew install maven
 ```
-
-
-### Install All Platforms
-
-	Confirm git / maven / docker / docker-compose are Installed.
 	
 Clone the workshop repository:
 ```
