@@ -20,8 +20,8 @@ We now have a total of 6 locations !
 
 ### Tested on Macos Ventura 13.2.1 
 
-### Tested on Mac M1/M2 , 
-Intel Macs and EC2s should be OK However if they are slower you may require adding to **start_period: 10s** ( try 15s) for **instruments** and **stock** services in **docker-compose.yml**
+### Tested on Mac M1/M2  and Ubuntu Linux 22.04 EC2 ( Recommending EC2 ! )  
+Intel Macs and EC2s should be OK However if they are slower you may require adding to **start_period: 10s** ( try 15s) for **instruments** and **stock** and **products** services in **docker-compose.yml**
 
 ### IMPORTANT: Docker must have access to 6-GB RAM.
 
@@ -66,13 +66,7 @@ brew install git
 brew install maven
 ```
 
-### Option 2: Macos- Install Multipass
-
-Multipass Installation Full Details - follow instructions here https://github.com/signalfx/observability-workshop/tree/main/multipass
-
-Multipass Docker should consume memory as available, so please have 6GB RAM free to run successfully.
-
-# Environment Setup Linux
+# Environment Setup Linux ( RECOMMENDED !!!! )
 I have succesfully run everything on an EC2 with Following properties:
 
 ubuntu 22.04
