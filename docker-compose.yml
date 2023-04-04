@@ -81,7 +81,7 @@ services:
       test: curl -sS http://localhost:8030/healthcheck | grep -c 200 > /dev/null
       interval: 3s
       retries: 5
-      start_period: 5s
+      start_period: 10s
       timeout: 5s
     links:
       - splunk-otel-collector
@@ -111,15 +111,7 @@ services:
       - USERNAME=${SHOP_USER}
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://splunk-otel-collector:4317
     depends_on:
-      splunk-otel-collector:
-        condition: service_started
       shop: 
-        condition: service_healthy
-      products:
-        condition: service_healthy
-      stock:
-        condition: service_healthy
-      instruments:
         condition: service_healthy
   instruments:
     image:  shabushabu/javashop.instruments:latest
@@ -132,7 +124,7 @@ services:
       #curl --fail http://localhost:8040//healthcheck  || exit 1
       interval: 3s
       retries: 5
-      start_period: 5s
+      start_period: 10s
       timeout: 5s
     links:
       - splunk-otel-collector
