@@ -13,6 +13,9 @@ Our technical staff has already on-boarded the data from these new locations and
 
 We now have a total of 6 locations !
 
+
+## DO NOT USE SFDEMO FOR THIS, YOU MUST USE AN ORG YOU CAN SEND TRACES TO.
+
 # Environment Setup MACos
 
 ### Tested on Macos Ventura 13.2.1 
@@ -117,7 +120,7 @@ nano .env
 - Set the following values:
 ```
 SHOP_USER=<your_name>
-
+# Note:  NO spaces in <your_name>
 SPLUNK_ACCESS_TOKEN=<your_token>
 
 SPLUNK_REALM=<your_realm>
