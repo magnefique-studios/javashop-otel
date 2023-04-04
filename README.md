@@ -21,7 +21,14 @@ We now have a total of 6 locations !
 
 I have succesfully run everything on an EC2 with Following properties:
 
+### Ports the following ports must be open on your EC2
 
+Inbound:
+
+Port 8010 
+
+Outbound:
+All
 
 ubuntu 22.04
 
