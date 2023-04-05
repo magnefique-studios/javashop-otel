@@ -20,7 +20,7 @@ services:
       test: curl -sS http://localhost:13133 | grep -c "status":"Server available"
       interval: 3s
       retries: 5
-      start_period: 5s
+      start_period: 15s
       timeout: 3s
   shop:
     image: shabushabu/javashop.shop:latest
@@ -40,8 +40,8 @@ services:
       test: curl -sS http://localhost:8010/healthcheck | grep -c 200 > /dev/null
       interval: 3s
       retries: 5
-      start_period: 5s
-      timeout: 5s
+      start_period: 20s
+      timeout: 2s
     depends_on:
       splunk-otel-collector:
         condition: service_started
@@ -62,7 +62,7 @@ services:
       interval: 3s
       retries: 5
       start_period: 20s
-      timeout: 5s
+      timeout: 2s
     links:
       - splunk-otel-collector
     environment:
@@ -82,7 +82,7 @@ services:
       interval: 3s
       retries: 5
       start_period: 20s
-      timeout: 5s
+      timeout: 2s 
     links:
       - splunk-otel-collector
       - instruments
@@ -96,8 +96,8 @@ services:
     depends_on:
      # - splunk-otel-collector
       splunk-otel-collector:
-         condition: service_started
-      #  condition: service_healthy
+        condition: service_started
+        #condition: service_healthy
       instruments:
         condition: service_healthy
   shoptester:
@@ -125,7 +125,7 @@ services:
       interval: 3s
       retries: 5
       start_period: 20s
-      timeout: 5s
+      timeout: 2s
     links:
       - splunk-otel-collector
       - postgresDB
