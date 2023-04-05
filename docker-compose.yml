@@ -16,11 +16,13 @@ services:
       - "9411:9411"
       - "9943:9943" 
     healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:13133"]
+      #test: wget --no-verbose --tries=1 --spider http://localhost:13133 || exit 1
       #test: curl --fail http://localhost:13133 || exit 1
-      test: curl -sS http://localhost:13133 | grep -c "status":"Server available"
+      #test: curl -sS http://localhost:13133 | grep -c "status":"Server available"
       interval: 3s
       retries: 5
-      start_period: 15s
+      start_period: 10s
       timeout: 3s
   shop:
     image: shabushabu/javashop.shop:latest
@@ -40,11 +42,11 @@ services:
       test: curl -sS http://localhost:8010/healthcheck | grep -c 200 > /dev/null
       interval: 3s
       retries: 5
-      start_period: 20s
+      start_period: 10s
       timeout: 2s
     depends_on:
       splunk-otel-collector:
-        condition: service_started
+        condition: service_healthy
       products:
         condition: service_healthy
       stock:
@@ -61,7 +63,7 @@ services:
       test: curl -sS http://localhost:8020/products/healthcheck | grep -c 200 > /dev/null
       interval: 3s
       retries: 5
-      start_period: 20s
+      start_period: 10s
       timeout: 2s
     links:
       - splunk-otel-collector
@@ -70,7 +72,7 @@ services:
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://splunk-otel-collector:4317
     depends_on:
       splunk-otel-collector:
-        condition: service_started
+        condition: service_healthy
   stock:
     image: shabushabu/javashop.stock:latest
     build:
@@ -81,7 +83,7 @@ services:
       test: curl -sS http://localhost:8030/healthcheck | grep -c 200 > /dev/null
       interval: 3s
       retries: 5
-      start_period: 20s
+      start_period: 10s
       timeout: 2s 
     links:
       - splunk-otel-collector
@@ -96,8 +98,8 @@ services:
     depends_on:
      # - splunk-otel-collector
       splunk-otel-collector:
-        condition: service_started
-        #condition: service_healthy
+        #condition: service_started
+        condition: service_healthy
       instruments:
         condition: service_healthy
   shoptester:
@@ -124,7 +126,7 @@ services:
       #curl --fail http://localhost:8040//healthcheck  || exit 1
       interval: 3s
       retries: 5
-      start_period: 20s
+      start_period: 10s
       timeout: 2s
     links:
       - splunk-otel-collector
@@ -138,7 +140,7 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     depends_on:
       splunk-otel-collector:
-        condition: service_started
+        condition: service_healthy
       postgresDB:
         condition: service_healthy
   postgresDB:
@@ -151,8 +153,8 @@ services:
       - "5432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready"]
-      interval: 5s
-      timeout: 3s
+      interval: 3s
+      timeout: 2s
       retries: 10
     volumes:
       - ./db/sql/instruments-latest.sql:/docker-entrypoint-initdb.d/instruments-latest.sql
