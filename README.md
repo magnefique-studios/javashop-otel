@@ -93,7 +93,7 @@ brew install git
 brew install maven
 ```
 
-ALL Platforms:
+# Environment Setup ALL Platforms ( Required !!! )
 
 Clone the workshop repository:
 ```
