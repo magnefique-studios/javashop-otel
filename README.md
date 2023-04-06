@@ -67,13 +67,13 @@ brew update --force --quiet
 chmod -R go-w "$(brew --prefix)/share/zsh"
 ```
 
-### Macos - Install Colima
+### Macos - Install Colima ( Optional )
 
 Colima - Colima is a docker daemon that does not require Docker Desktop. This is used to avoid any docker license issues with Docker Desktop.
 
 Colima Full details are here ( setup commands below) : https://github.com/abiosoft/colima
 
-*** Colima Setup Instructions:***
+*** Colima Setup Instructions:*** ( Optional )
 
 Colima Install :
 ```
@@ -92,7 +92,9 @@ brew install git
 
 brew install maven
 ```
-	
+
+ALL Platforms:
+
 Clone the workshop repository:
 ```
 git clone -b tko-fy24-distributed-tracing https://github.com/shabuhabs/javashop-otel.git
