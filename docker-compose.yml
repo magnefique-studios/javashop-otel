@@ -20,10 +20,10 @@ services:
       #test: wget --no-verbose --tries=1 --spider http://localhost:13133 || exit 1
       #test: curl --fail http://localhost:13133 || exit 1
       #test: curl -sS http://localhost:13133 | grep -c "status":"Server available"
-      interval: 3s
+      interval: 2s
       retries: 5
       start_period: 10s
-      timeout: 3s
+      timeout: 1s
   shop:
     image: shabushabu/javashop.shop:latest
     build:
@@ -40,10 +40,10 @@ services:
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://splunk-otel-collector:4317
     healthcheck:
       test: curl -sS http://localhost:8010/healthcheck | grep -c 200 > /dev/null
-      interval: 3s
+      interval: 2s
       retries: 5
       start_period: 10s
-      timeout: 2s
+      timeout: 1s
     depends_on:
       splunk-otel-collector:
         condition: service_healthy
@@ -61,10 +61,10 @@ services:
       - "8020:8020"
     healthcheck:
       test: curl -sS http://localhost:8020/products/healthcheck | grep -c 200 > /dev/null
-      interval: 3s
+      interval: 2s
       retries: 5
       start_period: 10s
-      timeout: 2s
+      timeout: 1s
     links:
       - splunk-otel-collector
     environment:
@@ -81,10 +81,10 @@ services:
       - "8030:8030"
     healthcheck:
       test: curl -sS http://localhost:8030/healthcheck | grep -c 200 > /dev/null
-      interval: 3s
+      interval: 2s
       retries: 5
       start_period: 10s
-      timeout: 2s 
+      timeout: 1s 
     links:
       - splunk-otel-collector
       - instruments
@@ -124,10 +124,10 @@ services:
     healthcheck:
       test: curl -sS http://localhost:8040/healthcheck | grep -c 200 > /dev/null
       #curl --fail http://localhost:8040//healthcheck  || exit 1
-      interval: 3s
+      interval: 2s
       retries: 5
       start_period: 10s
-      timeout: 2s
+      timeout: 1s
     links:
       - splunk-otel-collector
       - postgresDB
@@ -153,9 +153,9 @@ services:
       - "5432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready"]
-      interval: 3s
-      timeout: 2s
-      retries: 10
+      interval: 2s
+      timeout: 1s
+      retries: 5
     volumes:
       - ./db/sql/instruments-latest.sql:/docker-entrypoint-initdb.d/instruments-latest.sql
       - ./db/sql/instruments-chicago.sql:/docker-entrypoint-initdb.d/instruments-chicago.sql
