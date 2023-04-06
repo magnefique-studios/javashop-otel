@@ -14,9 +14,6 @@ Our technical staff has already on-boarded the data from these new locations and
 We now have a total of 6 locations !
 
 
-## DO NOT USE SFDEMO FOR THIS, YOU MUST USE AN ORG YOU CAN SEND TRACES TO.
-
-
 # Environment Setup Linux ( RECOMMENDED !!!! )
 
 ubuntu 22.04
