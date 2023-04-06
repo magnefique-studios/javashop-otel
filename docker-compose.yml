@@ -12,7 +12,8 @@ services:
       - instruments
     environment:
       - USERNAME=${SHOP_USER}
-        #- OTEL_EXPORTER_OTLP_ENDPOINT=http://splunk-otel-collector:4317
+      - TOKEN=${SPLUNK_ACCESS_TOKEN}
+      - REALM=${SPLUNK_REALM}
     healthcheck:
       test: curl -sS http://localhost:8010/healthcheck | grep -c 200 > /dev/null
       interval: 2s
@@ -20,10 +21,6 @@ services:
       start_period: 10s
       timeout: 2s
     depends_on:
-      #products:
-        #condition: service_healthy
-          #stock:
-          #condition: service_healthy
       instruments:
         condition: service_healthy
   products:
@@ -40,7 +37,7 @@ services:
       timeout: 2s
     environment:
       - USERNAME=${SHOP_USER}
-        #- OTEL_EXPORTER_OTLP_ENDPOINT=http://splunk-otel-collector:4317
+      - TOKEN=${SPLUNK_ACCESS_TOKEN}
   stock:
     image: shabushabu/javashop.stock:latest
     build:
@@ -55,7 +52,8 @@ services:
       timeout: 2s 
     environment:
       - USERNAME=${SHOP_USER}
-      #- OTEL_EXPORTER_OTLP_ENDPOINT=http://splunk-otel-collector:4317
+      - TOKEN=${SPLUNK_ACCESS_TOKEN}
+      - REALM=${SPLUNK_REALM}
       #- SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/compose-postgres
       #- SPRING_DATASOURCE_USERNAME=compose-postgres
       #- SPRING_DATASOURCE_PASSWORD=compose-postgres
@@ -68,7 +66,8 @@ services:
       - shop
     environment:
       - USERNAME=${SHOP_USER}
-        #- OTEL_EXPORTER_OTLP_ENDPOINT=http://splunk-otel-collector:4317
+      - TOKEN=${SPLUNK_ACCESS_TOKEN}
+      - REALM=${SPLUNK_REALM}
     depends_on:
       shop: 
         condition: service_healthy
@@ -89,7 +88,8 @@ services:
       - postgresDB
     environment:
       - USERNAME=${SHOP_USER}
-        #- OTEL_EXPORTER_OTLP_ENDPOINT=http://splunk-otel-collector:4317
+      - TOKEN=${SPLUNK_ACCESS_TOKEN}
+      - REALM=${SPLUNK_REALM}
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresDB:5432/instruments
       - SPRING_DATASOURCE_USERNAME=instruments
       - SPRING_DATASOURCE_PASSWORD=instruments
