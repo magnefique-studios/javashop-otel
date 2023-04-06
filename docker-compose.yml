@@ -63,7 +63,7 @@ services:
       test: curl -sS http://localhost:8020/products/healthcheck | grep -c 200 > /dev/null
       interval: 2s
       retries: 5
-      start_period: 10s
+      start_period: 20s
       timeout: 1s
     links:
       - splunk-otel-collector
@@ -83,7 +83,7 @@ services:
       test: curl -sS http://localhost:8030/healthcheck | grep -c 200 > /dev/null
       interval: 2s
       retries: 5
-      start_period: 10s
+      start_period: 20s
       timeout: 1s 
     links:
       - splunk-otel-collector
@@ -126,7 +126,7 @@ services:
       #curl --fail http://localhost:8040//healthcheck  || exit 1
       interval: 2s
       retries: 5
-      start_period: 10s
+      start_period: 20s
       timeout: 1s
     links:
       - splunk-otel-collector
