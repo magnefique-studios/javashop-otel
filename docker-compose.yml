@@ -1,29 +1,5 @@
 version: '3'
 services:
-  splunk-otel-collector:
-    image: quay.io/signalfx/splunk-otel-collector:latest
-    environment:
-      - SPLUNK_ACCESS_TOKEN=${SPLUNK_ACCESS_TOKEN}
-      - SPLUNK_REALM=${SPLUNK_REALM}
-    ports:
-      - "13133:13133"
-      - "14250:14250"
-      - "14268:14268"
-      - "4317:4317"
-      - "6060:6060"
-      - "8888:8888"
-      - "9080:9080"
-      - "9411:9411"
-      - "9943:9943" 
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:13133"]
-      #test: wget --no-verbose --tries=1 --spider http://localhost:13133 || exit 1
-      #test: curl --fail http://localhost:13133 || exit 1
-      #test: curl -sS http://localhost:13133 | grep -c "status":"Server available"
-      interval: 2s
-      retries: 5
-      start_period: 10s
-      timeout: 1s
   shop:
     image: shabushabu/javashop.shop:latest
     build:
@@ -31,26 +7,23 @@ services:
     ports:
       - "8010:8010"
     links:
-      - splunk-otel-collector
       - products
       - stock
       - instruments
     environment:
       - USERNAME=${SHOP_USER}
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://splunk-otel-collector:4317
+        #- OTEL_EXPORTER_OTLP_ENDPOINT=http://splunk-otel-collector:4317
     healthcheck:
       test: curl -sS http://localhost:8010/healthcheck | grep -c 200 > /dev/null
       interval: 2s
       retries: 5
       start_period: 10s
-      timeout: 1s
+      timeout: 2s
     depends_on:
-      splunk-otel-collector:
-        condition: service_healthy
-      products:
-        condition: service_healthy
-      stock:
-        condition: service_healthy
+      #products:
+        #condition: service_healthy
+          #stock:
+          #condition: service_healthy
       instruments:
         condition: service_healthy
   products:
@@ -63,16 +36,11 @@ services:
       test: curl -sS http://localhost:8020/products/healthcheck | grep -c 200 > /dev/null
       interval: 2s
       retries: 5
-      start_period: 20s
-      timeout: 1s
-    links:
-      - splunk-otel-collector
+      start_period: 10s
+      timeout: 2s
     environment:
       - USERNAME=${SHOP_USER}
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://splunk-otel-collector:4317
-    depends_on:
-      splunk-otel-collector:
-        condition: service_healthy
+        #- OTEL_EXPORTER_OTLP_ENDPOINT=http://splunk-otel-collector:4317
   stock:
     image: shabushabu/javashop.stock:latest
     build:
@@ -83,35 +51,24 @@ services:
       test: curl -sS http://localhost:8030/healthcheck | grep -c 200 > /dev/null
       interval: 2s
       retries: 5
-      start_period: 20s
-      timeout: 1s 
-    links:
-      - splunk-otel-collector
-      - instruments
+      start_period: 10s
+      timeout: 2s 
     environment:
       - USERNAME=${SHOP_USER}
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://splunk-otel-collector:4317
+      #- OTEL_EXPORTER_OTLP_ENDPOINT=http://splunk-otel-collector:4317
       #- SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/compose-postgres
       #- SPRING_DATASOURCE_USERNAME=compose-postgres
       #- SPRING_DATASOURCE_PASSWORD=compose-postgres
       #- SPRING_JPA_HIBERNATE_DDL_AUTO=update
-    depends_on:
-     # - splunk-otel-collector
-      splunk-otel-collector:
-        #condition: service_started
-        condition: service_healthy
-      instruments:
-        condition: service_healthy
   shoptester:
     image: shabushabu/javashop.tester:latest
     build:
       ./test
     links:
       - shop
-      - splunk-otel-collector
     environment:
       - USERNAME=${SHOP_USER}
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://splunk-otel-collector:4317
+        #- OTEL_EXPORTER_OTLP_ENDPOINT=http://splunk-otel-collector:4317
     depends_on:
       shop: 
         condition: service_healthy
@@ -125,22 +82,19 @@ services:
       test: curl -sS http://localhost:8040/healthcheck | grep -c 200 > /dev/null
       #curl --fail http://localhost:8040//healthcheck  || exit 1
       interval: 2s
-      retries: 5
-      start_period: 20s
-      timeout: 1s
+      retries: 10
+      start_period: 45s
+      timeout: 2s
     links:
-      - splunk-otel-collector
       - postgresDB
     environment:
       - USERNAME=${SHOP_USER}
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://splunk-otel-collector:4317
+        #- OTEL_EXPORTER_OTLP_ENDPOINT=http://splunk-otel-collector:4317
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresDB:5432/instruments
       - SPRING_DATASOURCE_USERNAME=instruments
       - SPRING_DATASOURCE_PASSWORD=instruments
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     depends_on:
-      splunk-otel-collector:
-        condition: service_healthy
       postgresDB:
         condition: service_healthy
   postgresDB:
@@ -154,7 +108,7 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "pg_isready"]
       interval: 2s
-      timeout: 1s
+      timeout: 2s
       retries: 5
     volumes:
       - ./db/sql/instruments-latest.sql:/docker-entrypoint-initdb.d/instruments-latest.sql
