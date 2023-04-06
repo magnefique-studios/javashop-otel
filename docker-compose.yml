@@ -38,6 +38,7 @@ services:
     environment:
       - USERNAME=${SHOP_USER}
       - TOKEN=${SPLUNK_ACCESS_TOKEN}
+      - REALM=${SPLUNK_REALM}
   stock:
     image: shabushabu/javashop.stock:latest
     build:
