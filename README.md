@@ -115,7 +115,7 @@ nano .env
 
 
 #### Note: NO spaces in <your_name>
-#### Note: The username provides us an Environment Tag.
+#### Note: The shop_user provides us an Environment Tag.
 #### Note: To get your access token, go to your Splunk O11y UI -> Settings ->Access Tokens. 
 #### Note: It is assumed in this workshop that you can send traces to the org and token you are using.
 
@@ -160,15 +160,11 @@ While we will be spending time Debugging code, .... Don't worry, ...there is no 
 	
 	First, you will hear poeple refer to Custom Attributes in the context of Splunk Enterprise, however in Splunk APM Custom Attributes are called 	    	  	Custom Tags as defined in Opentelemetry and shown in Splunk APM Tag Splotlight. 
 	
-2. **What is a Function in Java?**
+2. **What is a Function  or a method in Java?**
 
 	A Function  in most languages includeing Java, is a logical chunk of code when executed solves a repeatable task. This is basically what development teams 		spend thier time building and where software issues will most commonly be.
 	
-3. **What is a Method in Java?**
-
- 	See What's a function -> Function and method are synonomous.
-	
-5. **What is an Exception in Java?**
+3. **What is an Exception in Java?**
 
 	An Exceptional error condition that indicates abonormal or unhandled condition, that interrupts program execution abnormally.
 	
