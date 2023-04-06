@@ -19,8 +19,6 @@ We now have a total of 6 locations !
 
 # Environment Setup Linux ( RECOMMENDED !!!! )
 
-I have succesfully run everything on an EC2 with Following properties:
-
 ubuntu 22.04
 
 ![Screenshot 2023-04-04 at 12 01 40 PM](https://user-images.githubusercontent.com/32849847/229912404-e1cdf30f-c6fb-486e-997f-a0b84c9420da.png)
