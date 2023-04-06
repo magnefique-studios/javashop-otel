@@ -67,7 +67,7 @@ brew update --force --quiet
 chmod -R go-w "$(brew --prefix)/share/zsh"
 ```
 
-### Macos - Install Colima ( Optional )
+### Macos - Install Colima 
 
 Colima - Colima is a docker daemon that does not require Docker Desktop. This is used to avoid any docker license issues with Docker Desktop.
 
