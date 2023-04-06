@@ -115,12 +115,14 @@ cd javashop-otel
 ```
 nano .env
 ```
-- Set the following values:
+
 
 #### Note: NO spaces in <your_name>
 #### Note: The username provides us an Environment Tag.
 #### Note: To get your access token, go to your Splunk O11y UI -> Settings ->Access Tokens. 
 #### Note: It is assumed in this workshop that you can send traces to the org and token you are using.
+
+- Set the following values:
 
 ```
 SHOP_USER=<your_name>
