@@ -46,7 +46,7 @@ sudo apt upgrade
 sudo apt install docker docker-compose maven
 ```
 
-# Environment Setup MACos
+# Environment Setup MACos ( OPTIONAL )
 
 ### Tested on Macos Ventura 13.2.1 
 
