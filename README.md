@@ -21,15 +21,6 @@ We now have a total of 6 locations !
 
 I have succesfully run everything on an EC2 with Following properties:
 
-### Ports the following ports must be open on your EC2
-
-Inbound:
-
-Port 8010 
-
-Outbound:
-All
-
 ubuntu 22.04
 
 ![Screenshot 2023-04-04 at 12 01 40 PM](https://user-images.githubusercontent.com/32849847/229912404-e1cdf30f-c6fb-486e-997f-a0b84c9420da.png)
@@ -45,6 +36,8 @@ ubuntu 22.04
 Security Group Security Settings
 HTTP inbound open on 8010
 All Traffic open outbound.
+
+![image](https://user-images.githubusercontent.com/32849847/230416155-3ad80809-f8c3-45ad-afb6-f4422a6575dd.png)
 
 
 Software Requirements: docker, docker-compose, git, maven
