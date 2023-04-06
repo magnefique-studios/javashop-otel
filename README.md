@@ -117,10 +117,10 @@ nano .env
 ```
 - Set the following values:
 
-### Note:  NO spaces in <your_name>
-### Note: There is NO connection between Token and username above The username is just for an Environment Tag.
-### Note: to get your access token, go to your Splunk O11y UI, Settings, Access Tokens and copy the token from there. 
-### Note: It is assumed in this workshop that you can send traces to the org and token you are using.
+#### Note: NO spaces in <your_name>
+#### Note: The username provides us an Environment Tag.
+#### Note: To get your access token, go to your Splunk O11y UI -> Settings ->Access Tokens. 
+#### Note: It is assumed in this workshop that you can send traces to the org and token you are using.
 
 ```
 SHOP_USER=<your_name>
