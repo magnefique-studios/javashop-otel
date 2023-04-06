@@ -13,6 +13,10 @@ Our technical staff has already on-boarded the data from these new locations and
 
 We now have a total of 6 locations !
 
+# Splunk Observability Cloud 
+
+You must have the ability to send traces to Splunk Observability Cloud. If you do not have an account already, please start a trial here: https://www.splunk.com/en_us/download/apm-free-trial.html
+
 
 # Environment Setup Linux ( RECOMMENDED !!!! )
 
