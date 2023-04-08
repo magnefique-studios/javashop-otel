@@ -18,11 +18,8 @@ services:
       test: curl -sS http://localhost:8010/healthcheck | grep -c 200 > /dev/null
       interval: 2s
       retries: 5
-      start_period: 20s
+      start_period: 5s
       timeout: 2s
-    depends_on:
-      instruments:
-        condition: service_healthy
   products:
     image: shabushabu/javashop.products:latest
     build:
@@ -33,7 +30,7 @@ services:
       test: curl -sS http://localhost:8020/products/healthcheck | grep -c 200 > /dev/null
       interval: 2s
       retries: 5
-      start_period: 10s
+      start_period: 5s
       timeout: 2s
     environment:
       - USERNAME=${SHOP_USER}
@@ -49,16 +46,12 @@ services:
       test: curl -sS http://localhost:8030/healthcheck | grep -c 200 > /dev/null
       interval: 2s
       retries: 5
-      start_period: 10s
+      start_period: 5s
       timeout: 2s 
     environment:
       - USERNAME=${SHOP_USER}
       - TOKEN=${SPLUNK_ACCESS_TOKEN}
       - REALM=${SPLUNK_REALM}
-      #- SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/compose-postgres
-      #- SPRING_DATASOURCE_USERNAME=compose-postgres
-      #- SPRING_DATASOURCE_PASSWORD=compose-postgres
-      #- SPRING_JPA_HIBERNATE_DDL_AUTO=update
   shoptester:
     image: shabushabu/javashop.tester:latest
     build:
@@ -69,9 +62,9 @@ services:
       - USERNAME=${SHOP_USER}
       - TOKEN=${SPLUNK_ACCESS_TOKEN}
       - REALM=${SPLUNK_REALM}
-    depends_on:
-      shop: 
-        condition: service_healthy
+        # depends_on:
+        # iinstruments: 
+        # condition: service_healthy
   instruments:
     image:  shabushabu/javashop.instruments:latest
     build:
@@ -82,8 +75,8 @@ services:
       test: curl -sS http://localhost:8040/healthcheck | grep -c 200 > /dev/null
       #curl --fail http://localhost:8040//healthcheck  || exit 1
       interval: 2s
-      retries: 10
-      start_period: 45s
+      retries: 5
+      start_period: 5s
       timeout: 2s
     links:
       - postgresDB

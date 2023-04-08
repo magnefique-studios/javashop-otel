@@ -10,8 +10,12 @@ public class GenerateTraffic {
 
 	
 	public static void main(String[] args) {
-	
-		String url ="http://shop:8010";
+                try {	
+		  Thread.sleep(60000);
+		}catch(Exception e){
+		}
+		  
+	        String url ="http://shop:8010";
 		boolean chicago = false;
 		
 		if (null != args && args.length >0 ) {
