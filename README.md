@@ -1,9 +1,9 @@
 
-# Java Instrumentation Shop 
+## Java Instrumentation Shop 
 
-### Learn how Splunk APM reduces Repair Times for development teams with Custom Tags.
+# Learn how Splunk APM reduces Repair Times for development teams with Custom Tags.
 
-# Hands on Workshop Scenario
+## Hands on Workshop Scenario
 
 Here at Splunk Instruments, our business is expanding!
 
