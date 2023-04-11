@@ -179,9 +179,12 @@ Next step is open your Observability UI, accessing the proper org ( where you se
 ![image](https://user-images.githubusercontent.com/32849847/229945586-bd379517-8381-410a-9f70-36542fe0b03d.png)
 
 
-Please note it may take 3-4 minutes or more for traces to show up and you will see full map "form" as traces are coming in, so you may have to refresh the page a few times each time we Build and Deploy. 
+Please note it may take 4-5 minutes or more for traces to show up and you will see full map "form" as traces are coming in, so you may have to refresh the page a few times each time we Build and Deploy. 
  
 It is recommended to use a -15m look back during this lab. You may need to change it from time to time (for example to -5m or a custom -10m) to make sure you are only looking at the newer traces after your changes.
+
+NOTE: You may have to refresh the page several times to see your Environment Tag in the UI. The prefix of the Environment tag should match what you entered for SHOP_USER in the .env file.
+
 
 <img width="731" alt="Screen Shot 2023-02-14 at 8 25 19 PM" src="https://user-images.githubusercontent.com/32849847/219972238-36a91449-119b-4ce9-ba3c-d5ea354a8aeb.png">
 
@@ -189,8 +192,6 @@ It is recommended to use a -15m look back during this lab. You may need to chang
 NOTE: Typically, to identify root cause and route an issue, an SRE or alert responder would check metrics and logs to determine if it is a software or hardware related issue, and thus route to the correct party. In this excercise we are ONLY handling software issues, so we are skipping the metrics and logs parts of normal triage. 
 
 If your instrumentation was successful, the service-map will show latency from the shop service to the products service. 
-
-NOTE: You may have to refresh the page several times to see your Environment Tag in the UI. The prefix of the Environment tag should match what you entered for SHOP_USER in the .env file.
 
 ![Screen Shot 2022-12-08 at 11 48 58 AM](https://user-images.githubusercontent.com/32849847/206541846-7f0e6462-7659-44bc-bc48-3621c2872fc4.png)
 
