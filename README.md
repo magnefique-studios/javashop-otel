@@ -190,6 +190,8 @@ NOTE: Typically, to identify root cause and route an issue, an SRE or alert resp
 
 If your instrumentation was successful, the service-map will show latency from the shop service to the products service. 
 
+NOTE: You may have to refresh the page several times to see your Environment Tag in the UI. The prefix of the Environment tag should match what you entered for SHOP_USER in the .env file.
+
 ![Screen Shot 2022-12-08 at 11 48 58 AM](https://user-images.githubusercontent.com/32849847/206541846-7f0e6462-7659-44bc-bc48-3621c2872fc4.png)
 
 Ok let's triage this SOFTWARE ISSUE and skip directly to the traces.
