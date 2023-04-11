@@ -18,7 +18,7 @@ We now have a total of 6 locations !
 You must have the ability to send traces to Splunk Observability Cloud. If you do not have an account already, please start a trial here: https://www.splunk.com/en_us/download/apm-free-trial.html
 
 
-# Environment Setup Linux ( RECOMMENDED !!!! )
+# Environment Setup Linux ( skip past the EC2 configuration if you already have an EC2) !!!!
 
 ubuntu 22.04
 
