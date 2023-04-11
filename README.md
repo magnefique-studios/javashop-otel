@@ -54,7 +54,7 @@ sudo apt install docker docker-compose maven
 ### Tested on Macos Ventura 13.2.1 
 
 ### Tested on Mac M1/M2  
-Intel Macs should be OK However if they are slower you may require adding to **start_period: 20s** ( try 25s or more ) for **instruments** and **stock** and **products** and **shop** services in **docker-compose.yml**
+Intel Macs should be OK However if they are slower you may require running the ./BuildAndDeploy multiple times.
 
 ### IMPORTANT: Docker must have access to 6-GB RAM.
 
