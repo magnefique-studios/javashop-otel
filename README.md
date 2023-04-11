@@ -41,7 +41,7 @@ All Traffic open outbound.
 ![image](https://user-images.githubusercontent.com/32849847/230416155-3ad80809-f8c3-45ad-afb6-f4422a6575dd.png)
 
 
-Software Requirements: docker, docker-compose, git, maven
+### Linux Software Requirements: docker, docker-compose, git, maven
 
 ```
 sudo apt update
