@@ -32,7 +32,7 @@ jobs:
     - name: Build And Deploy
       run: ./BuildAndDeploy.sh
     - name: Sleep for 300 seconds
-      run: sleep 300s
+      run: sleep 100s
       shell: bash    
 # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
 #    - name: Update dependency graph
