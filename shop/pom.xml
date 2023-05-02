@@ -14,8 +14,11 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.19.RELEASE</version>
+        <!-- <version>1.5.19.RELEASE</version> -->
+       <version>3.0.6</version>
         <relativePath></relativePath>
+
+      
     </parent>
 
     <properties>
@@ -25,13 +28,25 @@
     
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
+             
+             <dependency>
+			    <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>Dalston.SR5</version>
                 <type>pom</type>
                 <scope>import</scope>
 	        </dependency>
+	       
+	        
+	        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
+			<!-- <dependency>
+    			<groupId>org.springframework.cloud</groupId>
+    				<artifactId>spring-cloud-dependencies</artifactId>
+    				<version>2022.0.2</version>
+    					<type>pom</type>
+    					<scope>import</scope>
+			</dependency>
+-->
 	
 	     <!--   <dependency>
                 <groupId>io.opentelemetry</groupId>
@@ -67,6 +82,8 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+       
+       
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-hystrix</artifactId>
@@ -75,6 +92,7 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-eureka</artifactId>
     	</dependency>
+    	
 
 <!-- https://mvnrepository.com/artifact/net.sourceforge.nekohtml/nekohtml -->
 <dependency>
@@ -96,7 +114,7 @@
 		<plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-jar-plugin</artifactId>
-    <version>3.0.0</version>
+    <version>3.3.0</version>
 </plugin>
         </plugins>
     </build>
