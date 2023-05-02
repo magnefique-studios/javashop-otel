@@ -11,7 +11,7 @@ name:  JavaShopOtel All-containers 50 Test
 
 on:
   schedule:
-   - cron: "*/10 * * * *"
+   - cron: "*/20 * * * *"
 
 jobs:
   build:
@@ -30,7 +30,7 @@ jobs:
   #  - name: Build and Deploy
   #    run: mvn -B package --file pom.xml
     - name: Build And Deploy
-      run: ./BuildAndDeploy.sh
+      run: for i in {1..2}; do ./BuildAndDeploy.sh; sleep 300; done  > results.txt
     - name: Sleep for 300 seconds
       run: sleep 300s
       shell: bash    
