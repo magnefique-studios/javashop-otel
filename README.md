@@ -103,7 +103,7 @@ brew install maven
 
 Clone the workshop repository:
 ```
-git clone -b tko-fy24-distributed-tracing https://github.com/shabuhabs/javashop-otel.git
+git clone -b distributed-tracing-for-development-teams https://github.com/shabuhabs/javashop-otel.git
 ```
 
 Access the workshop directory:
