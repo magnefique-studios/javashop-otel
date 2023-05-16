@@ -3,7 +3,6 @@ package com.shabushabu.javashop.instruments.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shabushabu.javashop.instruments.exceptions.InstrumentNotFoundException;
 import com.shabushabu.javashop.instruments.model.Instrument;
 import com.shabushabu.javashop.instruments.repositories.InstrumentRepository;
 
@@ -11,9 +10,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
 @Service
 public class InstrumentService {
 
+	 private static Logger s_logger = LogManager.getLogger(InstrumentService.class);
+	 
     private InstrumentRepository instrumentRepo;
 
     @Autowired
@@ -29,6 +34,8 @@ public class InstrumentService {
     @SuppressWarnings("unchecked")
 	public List<Instrument> getInstruments(String location) {
         
+    	s_logger.info("Entering InstrumentService::getInstruments: Location= " + location);
+    	
     	if (location.equalsIgnoreCase("Chicago")) {
     	
     		Object obj = instrumentRepo.findInstruments() ;

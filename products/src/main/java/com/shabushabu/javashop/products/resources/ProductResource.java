@@ -1,30 +1,35 @@
 package com.shabushabu.javashop.products.resources;
 
-import com.google.inject.Inject;
-import com.shabushabu.javashop.products.services.ProductService;
-import com.shabushabu.javashop.products.model.Product;
+import java.util.Optional;
+import java.util.Random;
 
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import javax.ws.rs.QueryParam;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.Optional;
-import java.util.Random;
-
-
+import com.google.inject.Inject;
+import com.shabushabu.javashop.products.model.Product;
+import com.shabushabu.javashop.products.services.ProductService;
 
 
 
 @Path("/products")
 @Produces(MediaType.APPLICATION_JSON)
 public class ProductResource {
+	
 
+    private static Logger s_logger = LogManager.getLogger(ProductResource.class);
+    
+
+    
     private ProductService productService;
 
     @Inject
@@ -34,7 +39,7 @@ public class ProductResource {
 
     @GET
     public Response getAllProducts(@DefaultValue("California") @QueryParam("location") String location) {
-    	  
+    	s_logger.info("Enteriing ProductResource::getAllProducts() location = " + location);
     	// STEP X: All we know right now is somewhere in this function, latency was introduced.
   
     	myCoolFunction1(location);
@@ -423,35 +428,35 @@ public class ProductResource {
       }
     
     private void myCoolFunction23(String loc, String location, int index){
-    	System.out.println("Location Index is ... " + index);
+    	s_logger.info("Location Index is ... " + index);
         // Generate a FAST sleep of 0 time !
         int sleepy = 0;
         try{
-        	System.out.println("Location Index is ... " + index);
+        	s_logger.info("Location Index is ... " + index);
         Thread.sleep(sleepy);
         } catch (Exception e){
       	  
         }
       }
     private void myCoolFunction24(String loc, String location, int index){
-    	System.out.println("Location Index is ... " + index);
+    	s_logger.info("Location Index is ... " + index);
         // Generate a FAST sleep of 0 time !
         int sleepy = 0;
         try{
-        	System.out.println("Location Index is ... " + index);
+        	s_logger.info("Location Index is ... " + index);
         Thread.sleep(sleepy);
         } catch (Exception e){
       	  
         }
       }
     private void myCoolFunction25(String loc, String location, int index){
-		System.out.println("Location Index is ... ");
+		s_logger.info("Location Index is ... ");
 
-    	System.out.println("Location Index is ... " + index);
+		s_logger.info("Location Index is ... " + index);
         // Generate a FAST sleep of 0 time !
         int sleepy = 0;
         try{
-        	System.out.println("Location Index is ... " + index);
+        	s_logger.info("Location Index is ... " + index);
         	Thread.sleep(sleepy);
         } catch (Exception e){
       	  
@@ -459,7 +464,7 @@ public class ProductResource {
       }
     
     private void myCoolFunction() {
-		System.out.println("Location Index is ... ");
+    	s_logger.info("Location Index is ... ");
 		int sleepy1 =3;
     	  Random random = new Random();
 
@@ -473,7 +478,7 @@ public class ProductResource {
       }
     private void myCoolFunction33() {
         // Generate a FAST sleep of 0 time !
-		System.out.println("Location Index is ... ");
+    	s_logger.info("Location Index is ... ");
 		int sleepy1 =3;
     	  Random random = new Random();
 
@@ -485,7 +490,7 @@ public class ProductResource {
         }
       }
     private void myCoolFunction34(String location) {
-		System.out.println("Location Index is ... ");
+    	s_logger.info("Location Index is ... ");
 		int sleepy1 =3;
     	  Random random = new Random();
     	 
@@ -512,7 +517,7 @@ public class ProductResource {
 	}
     
     private int locationLookup21(String location) {
-    	System.out.println("Location Index is ... ");
+    	s_logger.info("Location Index is ... ");
     	int sleepy1 =3;
     	 // Generate a FAST sleep of 0 time !
         int sleepy = 1;
@@ -524,7 +529,7 @@ public class ProductResource {
 		return 0;
 	}
     private int locationLookup22(String location) {
-    	System.out.println("Location Index is ... ");
+    	s_logger.info("Location Index is ... ");
     	int sleepy1 =3;
     	 // Generate a FAST sleep of 0 time !
         int sleepy = 1;
@@ -536,7 +541,7 @@ public class ProductResource {
 		return 0;
 	}
     private int locationLookup23(String location) {
-    	System.out.println("Location Index is ... ");
+    	s_logger.info("Location Index is ... ");
 		int sleepy1 =3;
     	 // Generate a FAST sleep of 0 time !
         int sleepy = 1;
@@ -549,7 +554,7 @@ public class ProductResource {
 	}
 
 	private int locationLookup11(String location) { 
-		System.out.println("Location Index is ... ");
+		s_logger.info("Location Index is ... ");
 		int sleepy = 1;
     	if (location.equalsIgnoreCase("Colorado")) {
       	  // Generate a FAST sleep of 0 time !
@@ -566,7 +571,7 @@ public class ProductResource {
       }
 	
 	 private int locationLookup15(String location) {
-    	System.out.println("Location Index is ... ");
+		 s_logger.info("Location Index is ... ");
 		
     	 // Generate a FAST sleep of 0 time !
         int sleepy = 1;
@@ -597,7 +602,7 @@ public class ProductResource {
 	        }
 	 
     private int locationLookup16(String location) {
-    	System.out.println("Location Index is ... ");
+    	s_logger.info("Location Index is ... ");
 		
     	 // Generate a FAST sleep of 0 time !
         int sleepy = 1;
@@ -638,8 +643,6 @@ public class ProductResource {
     private int getMyInt(String location ) {
     	return 999;
     }
-
-    
     
     @GET
     @Path("/healthcheck")
