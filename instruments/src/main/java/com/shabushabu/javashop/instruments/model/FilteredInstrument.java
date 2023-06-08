@@ -4,8 +4,10 @@ package com.shabushabu.javashop.instruments.model;
 
 
 import java.util.List;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.shabushabu.javashop.instruments.InstrumentsApplication;
 
 //import org.springframework.web.reactive.function.client.WebClient;
 //import reactor.core.publisher.Flux;
@@ -19,7 +21,7 @@ public class FilteredInstrument {
 	
    private static final boolean  s_disabled = false; 
 	
-   private static Logger s_logger = LogManager.getLogger(FilteredInstrument.class);
+   private final Logger s_logger = LoggerFactory.getLogger(FilteredInstrument.class);
 	
 @WithSpan
 	public Object filterInstruments( Object obj) throws InvalidLocaleException {
