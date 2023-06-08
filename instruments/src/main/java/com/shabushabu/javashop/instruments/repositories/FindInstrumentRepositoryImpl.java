@@ -41,9 +41,18 @@ public class FindInstrumentRepositoryImpl implements FindInstrumentRepository {
     }
 	@Override
     public Object findInstruments() {
-    	s_logger.info("findInstruments Called (All)");
+    	s_logger.info("findInstruments Called (Chicago)");
     	
     	Object obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale, instruments_for_sale_chicago").getResultList(); 
+	 
+		return obj;
+    }
+	
+	@Override
+    public Object findInstrumentsAll() {
+    	s_logger.info("findInstruments Called (All)");
+    	
+    	Object obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale").getResultList(); 
 	 
 		return obj;
     }

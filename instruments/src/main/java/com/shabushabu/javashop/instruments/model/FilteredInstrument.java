@@ -2,16 +2,11 @@ package com.shabushabu.javashop.instruments.model;
 
 
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 
+import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 //import org.springframework.web.reactive.function.client.WebClient;
 //import reactor.core.publisher.Flux;
 
@@ -27,18 +22,39 @@ public class FilteredInstrument {
 
 	public Object filterInstruments( Object obj) throws InvalidLocaleException {
 		
-		
 		if (s_disabled) {
 			
 			// See src/main/resources/application.properties ..
 			s_logger.error("Trying to filter to disabled Region: Oregon");
 			
 			throw new InvalidLocaleException("Trying to filter to disabled Region: Oregon");
+		} else {		  		
+	    		@SuppressWarnings("unchecked")
+				List<Instrument> list = (List<Instrument>) obj;
+	            for (Instrument i : list) {		     
+	            	System.out.println(i.getTitle());
+	            }
+	            for (Instrument i : list) {		     
+	            	System.out.println(i.getSubTitle());
+	            }
+	            for (Instrument i : list) {		     
+	            	System.out.println(i.getInstrumentType());
+	            }
+	            for (Instrument i : list) {		     
+	            	System.out.println(i.getPublishedDate());
+	            }
+	            for (Instrument i : list) {		     
+	            	System.out.println(i.getSellerType());
+	            }
+	            for (Instrument i : list) {		     
+	            	System.out.println(i.getPrice());
+	            }
+	            for (Instrument i : list) {		     
+	            	System.out.println(i.getId());
+	            }
+	            
 		}
-		
-		
-		
-		return null;	
+		return obj;	
 	}
 }
 
