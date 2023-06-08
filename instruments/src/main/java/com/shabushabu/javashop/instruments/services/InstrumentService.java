@@ -17,7 +17,7 @@ import org.apache.logging.log4j.Logger;
 @Service
 public class InstrumentService {
 
-	 private static Logger s_logger = LogManager.getLogger(InstrumentService.class);
+	private static Logger s_logger = LogManager.getLogger(InstrumentService.class);
 	 
     private InstrumentRepository instrumentRepo;
 
@@ -34,11 +34,20 @@ public class InstrumentService {
     @SuppressWarnings("unchecked")
 	public List<Instrument> getInstruments(String location) {
         
-    	s_logger.info("Entering InstrumentService::getInstruments: Location= " + location);
+    //	if (location.equalsIgnoreCase("Oregon")) {
+    //		s_logger.error("Entering InstrumentService::getInstruments: Location= " + location);
+    //	}
     	
-    	if (location.equalsIgnoreCase("Chicago")) {
+    	Object obj = null;
     	
-    		Object obj = instrumentRepo.findInstruments() ;
+    	if (location.equalsIgnoreCase( "Oregon" )) {
+    		obj = instrumentRepo.findInstrumentsOregon();
+    		return  StreamSupport.stream(instrumentRepo.findAll().spliterator(), false)
+					.collect(Collectors.toList());
+    	}
+    	else if (location.equalsIgnoreCase("Chicago")) {
+    	
+    		obj = instrumentRepo.findInstruments();
     		
     		if ( null == obj || !( obj instanceof List<?>) ) {
     			return null;

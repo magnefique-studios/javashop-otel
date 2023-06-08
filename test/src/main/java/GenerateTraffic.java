@@ -11,7 +11,7 @@ public class GenerateTraffic {
 	
 	public static void main(String[] args) {
                 try {	
-		  Thread.sleep(60000);
+		  Thread.sleep(10000);
 		}catch(Exception e){
 		}
 		  
@@ -20,6 +20,26 @@ public class GenerateTraffic {
 		
 		if (null != args && args.length >0 ) {
 				chicago = args[0].equalsIgnoreCase("-chicago");
+		}
+		
+		System.out.println("Oregon Location");
+		for (int j=0; j<40; j++) {
+			try {
+		
+				HttpClient client = HttpClient.newHttpClient();
+				String theURL = url + "?name=Guest&location=Oregon";
+			
+				HttpRequest request = HttpRequest.newBuilder().uri(URI.create(theURL)).build();
+				
+				HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+			
+				@SuppressWarnings("unused")
+				String sResult = response.body().toString();
+			 
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			
 		}
 	
 		System.out.println("Utah Location");

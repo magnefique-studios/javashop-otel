@@ -1,6 +1,7 @@
 package com.shabushabu.javashop.shop.model;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.shabushabu.javashop.shop.exceptions.InvalidLocaleException;
 
 public class Instrument {
@@ -19,6 +20,8 @@ public class Instrument {
     //public String published_date;
     
     private static final String IS_ENGLISH_REGEX = "^[ \\w \\d \\s \\. \\& \\+ \\- \\, \\! \\@ \\# \\$ \\% \\^ \\* \\( \\) \\; \\\\ \\/ \\| \\< \\> \\\" \\' \\? \\= \\: \\[ \\] ]*$";
+    private static final Logger s_logger = LoggerFactory.getLogger(Instrument.class);
+
 
 	private static boolean isEnglish(String text) {
 			if (text == null) {
@@ -62,29 +65,30 @@ public class Instrument {
     }
     
     public Instrument buildForLocale(
-        	long id, String title, /*String sub_title,*/ String price, String instrument_type, String condition, 
-    		String seller_type, String location /* String published_date String quantity */ ) throws InvalidLocaleException {
-    	 	this.id= id;
-    	 	
-    	    if (!isEnglish(title)) {
-    	    	throw new InvalidLocaleException("Non English Characters found in Instrument Data");
-    	    } else {
-    	    	
-    	    	System.out.println("Characters OK ");
-    	    }
-
-    	 	this.title = title;
-    	    //sub_title = sub_title;
-    	 	this.price = price;
-    	 	this.condition = condition;
-    	 	this.instrument_type = instrument_type;
-    	 	this.seller_type = seller_type;
-    	   // postURL = post_URL;
-    	 	this.location = location;
-    	 	//this.quantity = quantity;
-    	 	
-    	 	return this;
+        long id, String title, /*String sub_title,*/ String price, String instrument_type, String condition, 
+        String seller_type, String location /* String published_date String quantity */ ) throws InvalidLocaleException {
+        this.id= id;
+        
+     /*   if (!isEnglish(title)) {
+            s_logger.error("Invalid Locale Provided - Non English Characters");
+            throw new InvalidLocaleException("Non English Characters found in Instrument Data");
+        } else {
+            
+            // System.out.println("Characters OK ");
         }
+*/
+        this.title = title;
+        //sub_title = sub_title;
+        this.price = price;
+        this.condition = condition;
+        this.instrument_type = instrument_type;
+        this.seller_type = seller_type;
+        // postURL = post_URL;
+        this.location = location;
+        //this.quantity = quantity;
+        
+        return this;
+    }
     
     public long getID() {
         return id;

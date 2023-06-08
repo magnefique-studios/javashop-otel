@@ -7,6 +7,6 @@ ADD https://github.com/signalfx/splunk-otel-java/releases/latest/download/splunk
 
 ENV JAVA_OPTS="-Xms2048M -Xmx2048M"
 
-ENTRYPOINT java $JAVA_OPTS -javaagent:splunk-otel-javaagent-all.jar -Dsplunk.access.token=${TOKEN} -Dsplunk.realm=${REALM}  -Dotel.resource.attributes=service.name=instruments,deployment.environment=${USERNAME}_xApm_Instrumentation_Shop -jar app.jar
+ENTRYPOINT java $JAVA_OPTS -javaagent:splunk-otel-javaagent-all.jar -Dsplunk.profiler.enabled=true -Dsplunk.profiler.memory.enabled=true -Dsplunk.access.token=${TOKEN} -Dsplunk.realm=${REALM}  -Dotel.resource.attributes=service.name=instruments,deployment.environment=${USERNAME}_xApm_Instrumentation_Shop -jar app.jar
 
 
