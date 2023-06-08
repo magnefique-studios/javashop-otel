@@ -23,25 +23,7 @@ public class GenerateTraffic {
 				chicago = args[0].equalsIgnoreCase("-chicago");
 		}
 		
-		System.out.println("Oregon Location");
-		for (int j=0; j<40; j++) {
-			try {
 		
-				HttpClient client = HttpClient.newHttpClient();
-				String theURL = url + "?name=Guest&location=Oregon";
-			
-				HttpRequest request = HttpRequest.newBuilder().uri(URI.create(theURL)).build();
-				
-				HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-			
-				@SuppressWarnings("unused")
-				String sResult = response.body().toString();
-			 
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-			
-		}
 	
 		System.out.println("Utah Location");
 		for (int j=0; j<40; j++) {
@@ -80,6 +62,26 @@ public class GenerateTraffic {
 				HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 			
 				//String sResult = response.body().toString();
+			 
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		System.out.println("Oregon Location");
+		for (int j=0;  j<80; j++) {
+			try {
+		
+				HttpClient client = HttpClient.newHttpClient();
+				String theURL = url + "?name=Guest&location=Oregon";
+			
+				HttpRequest request = HttpRequest.newBuilder().uri(URI.create(theURL)).build();
+				
+				HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+			
+				@SuppressWarnings("unused")
+				String sResult = response.body().toString();
 			 
 			} catch(Exception e) {
 				e.printStackTrace();

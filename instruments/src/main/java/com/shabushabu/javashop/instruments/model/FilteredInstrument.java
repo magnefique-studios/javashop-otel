@@ -12,6 +12,8 @@ import org.apache.logging.log4j.Logger;
 
 import com.shabushabu.javashop.instruments.exceptions.InvalidLocaleException;
 
+import io.opentelemetry.instrumentation.annotations.WithSpan;
+
 
 public class FilteredInstrument {
 	
@@ -19,7 +21,7 @@ public class FilteredInstrument {
 	
    private static Logger s_logger = LogManager.getLogger(FilteredInstrument.class);
 	
-
+@WithSpan
 	public Object filterInstruments( Object obj) throws InvalidLocaleException {
 		
 		if (s_disabled) {
