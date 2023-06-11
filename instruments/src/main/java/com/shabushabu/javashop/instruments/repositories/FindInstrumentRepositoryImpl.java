@@ -32,7 +32,7 @@ public class FindInstrumentRepositoryImpl implements FindInstrumentRepository {
     	
     	Object obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale").getResultList(); 
     	try {
-    		Object results = new FilteredInstrument().filterInstruments(obj);
+    		Object results = new FilteredInstrument().filterInstruments(entityManager, obj);
     		return results;
     	} catch( Exception e) {
 		}
@@ -67,6 +67,7 @@ public class FindInstrumentRepositoryImpl implements FindInstrumentRepository {
     public void postConstruct() {
         Objects.requireNonNull(entityManager);
     }
+    
 	
 }
  

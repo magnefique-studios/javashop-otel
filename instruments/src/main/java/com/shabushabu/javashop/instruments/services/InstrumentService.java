@@ -3,6 +3,7 @@ package com.shabushabu.javashop.instruments.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shabushabu.javashop.instruments.model.FilteredInstrument;
 import com.shabushabu.javashop.instruments.model.Instrument;
 import com.shabushabu.javashop.instruments.repositories.InstrumentRepository;
 
@@ -26,18 +27,10 @@ public class InstrumentService {
         this.instrumentRepo = instrumentRepo;
     }
 
-  /*  public List<Instrument> getInstruments() {
-        return StreamSupport.stream(instrumentRepo.findAll().spliterator(), false)
-                .collect(Collectors.toList());
-    }
-*/
+
     @SuppressWarnings("unchecked")
 	public List<Instrument> getInstruments(String location) {
-        
-    //	if (location.equalsIgnoreCase("Oregon")) {
-    //		s_logger.error("Entering InstrumentService::getInstruments: Location= " + location);
-    //	}
-    	
+        	
     	Object obj = null;
     	
     	if (location.equalsIgnoreCase( "Oregon" )) {
@@ -62,5 +55,15 @@ public class InstrumentService {
     		
     	}
     }
+    
+   /*
+	public static Object findInstrumentsOregon(EntityManager entityManager) {
+		
+		Object obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale, instruments-oregon").getResultList();  
+    	
+		return obj;
+    	
+    }*/
+    
 
 }

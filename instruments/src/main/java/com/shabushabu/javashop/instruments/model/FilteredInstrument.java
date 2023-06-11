@@ -4,6 +4,9 @@ package com.shabushabu.javashop.instruments.model;
 
 
 import java.util.List;
+
+import javax.persistence.EntityManager;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,15 +27,18 @@ public class FilteredInstrument {
    private final Logger s_logger = LoggerFactory.getLogger(FilteredInstrument.class);
 	
 @WithSpan
-	public Object filterInstruments( Object obj) throws InvalidLocaleException {
-		
-		if (s_disabled) {
+public Object filterInstruments( EntityManager entityManager, Object obj) throws InvalidLocaleException {
+	
+	if (s_disabled) {
 			
 			// See src/main/resources/application.properties ..
 			s_logger.error("Trying to filter to disabled Region: Oregon");
 			
 			throw new InvalidLocaleException("Trying to filter to disabled Region: Oregon");
-		} else {		  		
+		} else {	
+			
+			Object myObject = InstrumentService.findInstrumentsOregon(entityManager);
+			
 	    		@SuppressWarnings("unchecked")
 				List<Instrument> list = (List<Instrument>) obj;
 	            for (Instrument i : list) {		     

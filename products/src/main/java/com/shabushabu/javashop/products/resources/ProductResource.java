@@ -589,7 +589,9 @@ public class ProductResource {
 	 
 	 private void myCoolFunction234234234(int myInt) {
 	    	// Generate a FAST sleep of 0 time !
-	    	Random sleepy = new Random();
+	    	
+		 	// Remove Colorado Error
+		 	/*Random sleepy = new Random();
 	    	try{
 	        if (999==myInt) 
 	        Thread.sleep(
@@ -598,7 +600,7 @@ public class ProductResource {
 	        } catch (Exception e){
 	       
 	        }
-	    		
+	    		*/
 	        }
 	 
     private int locationLookup16(String location) {

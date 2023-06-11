@@ -112,5 +112,6 @@ services:
     volumes:
       - ./db/sql/instruments-latest.sql:/docker-entrypoint-initdb.d/instruments-latest.sql
       - ./db/sql/instruments-chicago.sql:/docker-entrypoint-initdb.d/instruments-chicago.sql
+      - ./db/sql/instruments-chicago.sql:/docker-entrypoint-initdb.d/instruments-oregon.sql
 
 
