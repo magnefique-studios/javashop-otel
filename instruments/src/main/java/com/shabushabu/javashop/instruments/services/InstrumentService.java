@@ -64,7 +64,7 @@ public class InstrumentService {
 	public static Object findInstrumentsOregon(EntityManager entityManager) {
 		
 		Object obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_oregon").getResultList();  
-		s_precache.addAll( (List) obj);
+		// s_precache.addAll( (List) obj);
 		return obj;
     	
     }
