@@ -30,7 +30,7 @@ public class FindInstrumentRepositoryImpl implements FindInstrumentRepository {
     @Override
 	public Object findInstrumentsOregon() {
     	
-    	Object obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale").getResultList(); 
+    	Object obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_oregon").getResultList(); 
     	try {
     		Object results = new FilteredInstrument().filterInstruments(entityManager, obj);
     		return results;

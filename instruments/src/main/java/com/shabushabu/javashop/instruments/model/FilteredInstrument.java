@@ -16,6 +16,7 @@ import com.shabushabu.javashop.instruments.InstrumentsApplication;
 //import reactor.core.publisher.Flux;
 
 import com.shabushabu.javashop.instruments.exceptions.InvalidLocaleException;
+import com.shabushabu.javashop.instruments.services.InstrumentService;
 
 import io.opentelemetry.instrumentation.annotations.WithSpan;
 
@@ -29,6 +30,8 @@ public class FilteredInstrument {
 @WithSpan
 public Object filterInstruments( EntityManager entityManager, Object obj) throws InvalidLocaleException {
 	
+	Object result = obj;
+	
 	if (s_disabled) {
 			
 			// See src/main/resources/application.properties ..
@@ -37,34 +40,37 @@ public Object filterInstruments( EntityManager entityManager, Object obj) throws
 			throw new InvalidLocaleException("Trying to filter to disabled Region: Oregon");
 		} else {	
 			
-			Object myObject = InstrumentService.findInstrumentsOregon(entityManager);
 			
-	    		@SuppressWarnings("unchecked")
-				List<Instrument> list = (List<Instrument>) obj;
-	            for (Instrument i : list) {		     
-	            	System.out.println(i.getTitle());
-	            }
-	            for (Instrument i : list) {		     
-	            	System.out.println(i.getSubTitle());
-	            }
-	            for (Instrument i : list) {		     
-	            	System.out.println(i.getInstrumentType());
-	            }
-	            for (Instrument i : list) {		     
-	            	System.out.println(i.getPublishedDate());
-	            }
-	            for (Instrument i : list) {		     
-	            	System.out.println(i.getSellerType());
-	            }
-	            for (Instrument i : list) {		     
-	            	System.out.println(i.getPrice());
-	            }
-	            for (Instrument i : list) {		     
-	            	System.out.println(i.getId());
-	            }
-	            
+			result = InstrumentService.findInstrumentsOregon(entityManager);	
+			//System.out.println("Orgegon Location Enabled.");
+			//System.out.println(obj.getClass().getName());
+		/*
+    		@SuppressWarnings("unchecked")
+			List<Instrument> list = (List<Instrument>) obj;
+            for (Instrument i : list) {		     
+            	System.out.println(i.getTitle());
+            }
+            for (Instrument i : list) {		     
+            	System.out.println(i.getSubTitle());
+            }
+            for (Instrument i : list) {		     
+            	System.out.println(i.getInstrumentType());
+            }
+            for (Instrument i : list) {		     
+            	System.out.println(i.getPublishedDate());
+            }
+            for (Instrument i : list) {		     
+            	System.out.println(i.getSellerType());
+            }
+            for (Instrument i : list) {		     
+            	System.out.println(i.getPrice());
+            }
+            for (Instrument i : list) {		     
+            	System.out.println(i.getId());
+            }
+	      */      
 		}
-		return obj;	
+		return result;	
 	}
 }
 

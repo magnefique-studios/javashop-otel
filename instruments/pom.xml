@@ -97,7 +97,12 @@
     <artifactId>opentelemetry-instrumentation-annotations</artifactId>
     <version>1.19.2-alpha</version>
   </dependency>
-        
+
+        <dependency>
+        	<groupId>com.splunk.otel</groupId>
+        	<artifactId>annotator</artifactId>
+        	<version>latest</version>
+        </dependency>
     </dependencies>
 
     <build>
