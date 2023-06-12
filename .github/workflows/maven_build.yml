@@ -10,9 +10,9 @@ name: Buid and Deploy - Commit
 
 on:
   push:
-    branches: [ "github-actions", "conf_2023" ]
+    branches: [ "github-actions"]
   pull_request:
-    branches: [ "github-actions",  "conf_2023"  ]
+    branches: [ "github-actions"]
 
 jobs:
   build:
