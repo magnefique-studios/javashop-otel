@@ -17,6 +17,7 @@
     <module>products</module> 
     <module>instruments</module>
     <module>annotator</module>
+    <module>conductors</module>	
 </modules>
 
   <dependencies>

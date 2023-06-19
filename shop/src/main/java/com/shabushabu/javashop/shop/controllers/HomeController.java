@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
+import com.shabushabu.javashop.shop.services.ConductorsService;
 import com.shabushabu.javashop.shop.services.InstrumentService;
 import com.shabushabu.javashop.shop.services.ProductService;
 
@@ -22,10 +22,16 @@ public class HomeController {
 
     @Autowired
     private InstrumentService instrumentService;
+    
+    @Autowired
+    private ConductorsService conductorsService;
+   
    
     
     @RequestMapping(value="/")
-    public String getProductsAllLocations(Model model, @RequestParam(value="name", required=false) String theName, @RequestParam(value="location", required=false) String theLocation) {
+    public String getProductsAllLocations(Model model, @RequestParam(value="name",required=false) String theName, 
+    													@RequestParam(value="location", required=false) String theLocation,
+    													@RequestParam(value="vipLevel", required=false) String vipLevel) {
 
      
 	if (null == theName ) {
@@ -47,6 +53,8 @@ public class HomeController {
 
 	model.addAttribute("instruments", instrumentService.getInstruments(theLocation));
 
+	
+	model.addAttribute("conductors", conductorsService.getConductorInstruments(theLocation, vipLevel ));
       	
 	return "index";
     

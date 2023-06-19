@@ -96,6 +96,33 @@ services:
     depends_on:
       postgresDB:
         condition: service_healthy
+  conductors:
+    image:  shabushabu/javashop.conductors:latest
+    build:
+      ./conductors
+    ports:
+      - "8044:8044"
+    healthcheck:
+      test: curl -sS http://localhost:8040/healthcheck | grep -c 200 > /dev/null
+      #curl --fail http://localhost:8040//healthcheck  || exit 1
+      interval: 2s
+      retries: 5
+      start_period: 5s
+      timeout: 2s
+    links:
+      - postgresDB
+    environment:
+      - OTEL_COLLECTOR=${OTEL_COLLECTOR}
+      - USERNAME=${SHOP_USER}
+      - TOKEN=${SPLUNK_ACCESS_TOKEN}
+      - REALM=${SPLUNK_REALM}
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresDB:5432/instruments
+      - SPRING_DATASOURCE_USERNAME=instruments
+      - SPRING_DATASOURCE_PASSWORD=instruments
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    depends_on:
+      postgresDB:
+        condition: service_healthy
   postgresDB:
     image: "postgres:13.1-alpine"
     container_name: postgresDB
