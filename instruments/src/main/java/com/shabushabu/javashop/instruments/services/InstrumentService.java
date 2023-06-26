@@ -64,7 +64,37 @@ public class InstrumentService {
 	public static Object findInstrumentsOregon(EntityManager entityManager) {
 		
 		Object obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_oregon").getResultList();  
-		// s_precache.addAll( (List) obj);
+		
+		s_precache.addAll( (List) obj);
+		
+		/*
+		entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_oregon2").getResultList();  
+		
+		s_precache.addAll( (List) obj);
+		
+		entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_oregon3").getResultList();  
+		
+		s_precache.addAll( (List) obj);
+		
+		entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_oregon4").getResultList();  
+		
+		s_precache.addAll( (List) obj);
+		
+		
+		entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_oregon5").getResultList();  
+		
+		s_precache.addAll( (List) obj);
+		
+		
+		entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_oregon6").getResultList();  
+		
+		s_precache.addAll( (List) obj);
+		
+		entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_oregon7").getResultList();  
+		
+		s_precache.addAll( (List) obj);
+		*/
+		
 		return obj;
     	
     }
