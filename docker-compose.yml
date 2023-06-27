@@ -18,9 +18,14 @@ services:
     healthcheck:
       test: curl -sS http://localhost:8010/healthcheck | grep -c 200 > /dev/null
       interval: 2s
-      retries: 5
+      retries: 15
       start_period: 5s
       timeout: 2s
+    depends_on:
+      instruments:
+        condition: service_healthy
+      conductors:
+        condition: service_healthy
   products:
     image: shabushabu/javashop.products:latest
     build:
@@ -66,9 +71,9 @@ services:
       - USERNAME=${SHOP_USER}
       - TOKEN=${SPLUNK_ACCESS_TOKEN}
       - REALM=${SPLUNK_REALM}
-        # depends_on:
-        # iinstruments: 
-        # condition: service_healthy
+    depends_on:  
+      shop:
+        condition: service_healthy 
   instruments:
     image:  shabushabu/javashop.instruments:latest
     build:
@@ -79,8 +84,8 @@ services:
       test: curl -sS http://localhost:8040/healthcheck | grep -c 200 > /dev/null
       #curl --fail http://localhost:8040//healthcheck  || exit 1
       interval: 2s
-      retries: 5
-      start_period: 5s
+      retries: 45
+      start_period: 45s
       timeout: 2s
     links:
       - postgresDB
@@ -103,11 +108,11 @@ services:
     ports:
       - "8044:8044"
     healthcheck:
-      test: curl -sS http://localhost:8040/healthcheck | grep -c 200 > /dev/null
+      test: curl -sS http://localhost:8044/healthcheck | grep -c 200 > /dev/null
       #curl --fail http://localhost:8040//healthcheck  || exit 1
       interval: 2s
-      retries: 5
-      start_period: 5s
+      retries: 45
+      start_period: 45s
       timeout: 2s
     links:
       - postgresDB
@@ -120,26 +125,32 @@ services:
       - SPRING_DATASOURCE_USERNAME=instruments
       - SPRING_DATASOURCE_PASSWORD=instruments
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      #- PGUSER=instruments
     depends_on:
       postgresDB:
         condition: service_healthy
   postgresDB:
     image: "postgres:13.1-alpine"
     container_name: postgresDB
+    restart: always
     environment:
       - POSTGRES_USER=instruments
       - POSTGRES_PASSWORD=instruments
+      - PGUSER=instruments 
     ports:
       - "5432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready"]
       interval: 2s
       timeout: 2s
-      retries: 5
+      start_period: 15s
+      retries: 50
     volumes:
       - ./db/sql/instruments-latest.sql:/docker-entrypoint-initdb.d/instruments-latest.sql
       - ./db/sql/instruments-chicago.sql:/docker-entrypoint-initdb.d/instruments-chicago.sql
       - ./db/sql/instruments-oregon.sql:/docker-entrypoint-initdb.d/instruments-oregon.sql
-      - ./db/sql/instruments-oregon2.sql:/docker-entrypoint-initdb.d/instruments-oregon2.sql
-
-
+      # - ./db/sql/instruments_usa_all.sql:/docker-entrypoint-initdb.d/instruments_usa_all.sql
+      - ./db/sql/instruments-us-east.sql:/docker-entrypoint-initdb.d/instruments-us-east.sql
+      - ./db/sql/instruments-us-west.sql:/docker-entrypoint-initdb.d/instruments-us-west.sql
+      #- ./db/sql/instruments-us-south.sql:/docker-entrypoint-initdb.d/instruments-us-south.sql
+      - ./db/sql/instruments-us-central.sql:/docker-entrypoint-initdb.d/instruments-us-central.sql

@@ -12,7 +12,7 @@ public class GenerateTraffic {
 	
 	public static void main(String[] args) {
                 try {	
-		  Thread.sleep(80000);
+		  Thread.sleep(44000);
 		}catch(Exception e){
 		}
 		  
@@ -75,6 +75,66 @@ public class GenerateTraffic {
 		
 				HttpClient client = HttpClient.newHttpClient();
 				String theURL = url + "?name=Guest&location=Oregon";
+			
+				HttpRequest request = HttpRequest.newBuilder().uri(URI.create(theURL)).build();
+				
+				HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+			
+				@SuppressWarnings("unused")
+				String sResult = response.body().toString();
+			 
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		System.out.println("Utah Location SILVER");
+		for (int j=0; j<10; j++) {
+			try {
+		
+				HttpClient client = HttpClient.newHttpClient();
+				String theURL = url + "?name=Guest&location=Utah&vipLevel=Silver";
+			
+				HttpRequest request = HttpRequest.newBuilder().uri(URI.create(theURL)).build();
+				
+				HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+			
+				@SuppressWarnings("unused")
+				String sResult = response.body().toString();
+			 
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		System.out.println("Utah Location GOLD");
+		for (int j=0; j<10; j++) {
+			try {
+		
+				HttpClient client = HttpClient.newHttpClient();
+				String theURL = url + "?name=Guest&location=Utah&vipLevel=Gold";
+			
+				HttpRequest request = HttpRequest.newBuilder().uri(URI.create(theURL)).build();
+				
+				HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+			
+				@SuppressWarnings("unused")
+				String sResult = response.body().toString();
+			 
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		System.out.println("Utah Location PLATINUM");
+		for (int j=0; j<10; j++) {
+			try {
+		
+				HttpClient client = HttpClient.newHttpClient();
+				String theURL = url + "?name=Guest&location=Utah&vipLevel=Platinum";
 			
 				HttpRequest request = HttpRequest.newBuilder().uri(URI.create(theURL)).build();
 				

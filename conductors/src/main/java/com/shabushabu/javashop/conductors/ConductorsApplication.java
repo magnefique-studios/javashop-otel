@@ -14,26 +14,20 @@ import com.shabushabu.javashop.conductors.model.Instrument;
 import com.shabushabu.javashop.conductors.repositories.InstrumentRepository;
 
 @SpringBootApplication
-public class InstrumentsApplication {
+public class ConductorsApplication {
 	 
 	@Autowired private InstrumentRepository repository; 
-	 private final Logger logger = LoggerFactory.getLogger(InstrumentsApplication.class);
+	 private final Logger logger = LoggerFactory.getLogger(ConductorsApplication.class);
 	 
     @EventListener(ApplicationReadyEvent.class)
     public void runAfterStartup() {
         Iterable<Instrument> instruments = this.repository.findAll(); 
-        logger.info("Number of instruments: " + ((Collection<?>) instruments).size());
-        logger.info("Number of instruments: " + ((Collection<?>) instruments).size());
-        logger.info("Number of instruments: " + ((Collection<?>) instruments).size());
-        logger.info("Number of instruments: " + ((Collection<?>) instruments).size());
-        logger.info("Number of instruments: " + ((Collection<?>) instruments).size());
-        logger.info("Number of instruments: " + ((Collection<?>) instruments).size());
-        logger.info("Number of instruments: " + ((Collection<?>) instruments).size());
-        
-        
+        logger.error("Number of instruments: " + ((Collection<?>) instruments).size());
+        logger.error("Number of instruments: " + ((Collection<?>) instruments).size());
+        logger.info("Number of instruments: " + ((Collection<?>) instruments).size());   
     }
 	    
     public static void main(String[] args) {
-        SpringApplication.run( InstrumentsApplication.class, args);
+        SpringApplication.run( ConductorsApplication.class, args);
     }
 }

@@ -26,6 +26,7 @@ public class HomeController {
     @Autowired
     private ConductorsService conductorsService;
    
+    boolean bEnableConductors = true;
    
     
     @RequestMapping(value="/")
@@ -34,29 +35,30 @@ public class HomeController {
     													@RequestParam(value="vipLevel", required=false) String vipLevel) {
 
      
-	if (null == theName ) {
+		if (null == theName ) {
+		
+			theName = "Guest";
+		}	
+		
+		if (null == theLocation ) {
+			theLocation="California";
+		}
+		
+		User user = new User();
+		user.setLocation(theLocation);
+		user.setName(theName);
+		model.addAttribute("user", user);
+		
+		
+		model.addAttribute("products", productService.getProducts(theLocation));
 	
-		theName = "Guest";
-	}	
+		model.addAttribute("instruments", instrumentService.getInstruments(theLocation));
 	
-	if (null == theLocation ) {
-		theLocation="California";
-	}
-	
-	User user = new User();
-	user.setLocation(theLocation);
-	user.setName(theName);
-	model.addAttribute("user", user);
-	
-	
-	model.addAttribute("products", productService.getProducts(theLocation));
-
-	model.addAttribute("instruments", instrumentService.getInstruments(theLocation));
-
-	
-	model.addAttribute("conductors", conductorsService.getConductorInstruments(theLocation, vipLevel ));
-      	
-	return "index";
+		if (bEnableConductors && vipLevel != null) {
+			 model.addAttribute("conductors", conductorsService.getConductorInstruments(theLocation, vipLevel ));
+		} 
+		
+		return "index";
     
     } 
     

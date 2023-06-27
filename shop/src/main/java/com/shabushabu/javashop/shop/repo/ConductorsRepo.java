@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,10 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+
+
+
+
 @Component
 public class ConductorsRepo {
 
@@ -28,9 +34,16 @@ public class ConductorsRepo {
     @Value("${conductorsUri}")
     private String instrumentsUri;
 
+    
+    @Bean 
+    public RestTemplate restTemplate(RestTemplateBuilder builder){
+    return builder.build();
+    }
+    
     @Autowired
-    @Qualifier(value = "stdRestTemplate")
     private RestTemplate restTemplate;
+    
+    
 
     @HystrixCommand(fallbackMethod = "instrumentsNotFound") 
     public Map<Long, InstrumentDTO> getinstrumentDTOs() { 

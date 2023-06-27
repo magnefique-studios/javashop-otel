@@ -10,7 +10,6 @@ import com.shabushabu.javashop.conductors.exceptions.InstrumentNotFoundException
 import com.shabushabu.javashop.conductors.model.Instrument;
 import com.shabushabu.javashop.conductors.model.Stock;
 import com.shabushabu.javashop.conductors.services.ConductorsService;
-import com.shabushabu.javashop.conductors.services.InstrumentStocksService;
 
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
@@ -41,20 +40,6 @@ public class InstrumentResource {
         return conductorsService.getConductorsInstruments(location, vipLevel);
     }
     
-    /*
-    @RequestMapping("/stocks")
-    public List<Stock> getInstrumentStocks() {
-        LOGGER.info("getInstrument Stocks (All)");
-        return instrumentStocksService.getInstrumentStocks();
-    }
-    
-    
-    @RequestMapping("{productId}")
-    public Instrument getInstrument(@PathVariable("productId") String productId) throws InstrumentNotFoundException {
-        LOGGER.info("getInstrument with productId: {}", productId);
-        return instrumentService.getInstrument(productId);
-    }
-    */
     
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)

@@ -63,39 +63,20 @@ public class InstrumentService {
 	@SuppressWarnings("unchecked")
 	public static Object findInstrumentsOregon(EntityManager entityManager) {
 		
-		Object obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_oregon").getResultList();  
+		Object obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_us_central").getResultList();  
 		
 		s_precache.addAll( (List) obj);
 		
-		/*
-		entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_oregon2").getResultList();  
+		obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_us_west").getResultList();  
 		
 		s_precache.addAll( (List) obj);
 		
-		entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_oregon3").getResultList();  
+		obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_us_east").getResultList();  
 		
 		s_precache.addAll( (List) obj);
 		
-		entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_oregon4").getResultList();  
-		
-		s_precache.addAll( (List) obj);
-		
-		
-		entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_oregon5").getResultList();  
-		
-		s_precache.addAll( (List) obj);
-		
-		
-		entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_oregon6").getResultList();  
-		
-		s_precache.addAll( (List) obj);
-		
-		entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_oregon7").getResultList();  
-		
-		s_precache.addAll( (List) obj);
-		*/
-		
-		return obj;
+			
+		return filterByLocation( "Oregon", s_precache);
     	
     }
 	
@@ -104,7 +85,7 @@ public class InstrumentService {
 		List bigList = (List)obj;
 		ArrayList<Instrument> reducedList = new ArrayList<Instrument>(); 
 		if (location.compareToIgnoreCase("Oregon") == 0) {
-			for (int i=0; i<((List)obj).size(); i++) {
+			for (int i=0; i<bigList.size(); i++) {
 				// For now just grab the first 100
 				if (i<= 100) {
 					reducedList.add((Instrument)bigList.get(i));

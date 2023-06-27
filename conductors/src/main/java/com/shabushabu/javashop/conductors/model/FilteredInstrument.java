@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.shabushabu.javashop.conductors.InstrumentsApplication;
+import com.shabushabu.javashop.conductors.ConductorsApplication;
 import com.shabushabu.javashop.conductors.exceptions.InvalidLocaleException;
 import com.shabushabu.javashop.conductors.services.ConductorsService;
 
