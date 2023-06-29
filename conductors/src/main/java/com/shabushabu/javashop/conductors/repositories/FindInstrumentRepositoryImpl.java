@@ -16,9 +16,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+
+/*
+ * 
+ *  Object findConductorInstruments( String location);
+	 Object findVipInstruments(Object obj);
+	 Object findInstrumentsAll();
+	 Instrument findInstrumentByID(String id);
+}
+ * */
+
 public class FindInstrumentRepositoryImpl implements FindInstrumentRepository {
 
-	private static Logger s_logger = LogManager.getLogger(ConductorsService.class);
+	private static Logger s_logger = LogManager.getLogger(FindInstrumentRepositoryImpl.class);
 	
 	private static Object s_bigQueryResult = null;
 	
@@ -28,24 +38,16 @@ public class FindInstrumentRepositoryImpl implements FindInstrumentRepository {
     @SuppressWarnings("unchecked")
     
     @Override
-	public Object findInstrumentsOregon() {
+    public Object findConductorInstruments(String location) {
+     	return entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale").getResultList(); 	
+     }
+
+    
+    @Override
+	public Object findVipInstruments(Object obj, String vipLevel) {
     	
-    	Object obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_oregon").getResultList(); 
-    	try {
-    		Object results = new FilteredInstrument().filterInstruments(entityManager, obj);
-    		return results;
-    	} catch( Exception e) {
-		}
-    	return null;
+    	return entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_conductors").getResultList(); 	
     	
-    }
-	@Override
-    public Object findInstruments() {
-    	s_logger.info("findInstruments Called (Chicago)");
-    	
-    	Object obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale, instruments_for_sale_chicago").getResultList(); 
-	 
-		return obj;
     }
 	
 	@Override
@@ -59,7 +61,7 @@ public class FindInstrumentRepositoryImpl implements FindInstrumentRepository {
     
     @Override
     public Instrument findInstrumentByID(String id) {
-	    Instrument result = (Instrument) entityManager.createQuery("FROM instruments i WHERE i.ID = " + id.toString()).getSingleResult(); 
+	    Instrument result = (Instrument) entityManager.createQuery("FROM instruments_for_sale i WHERE i.ID = " + id.toString()).getSingleResult(); 
     	return result;
     }
 

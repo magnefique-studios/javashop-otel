@@ -5,9 +5,9 @@ import java.util.List;
 import com.shabushabu.javashop.conductors.model.Instrument;
 
 public interface FindInstrumentRepository {
-	 Object findInstrumentsOregon();
+	 Object findConductorInstruments( String location);
+	 Object findVipInstruments(Object obj, String vipLevel);
 	 Object findInstrumentsAll();
-	 Object findInstruments();
 	 Instrument findInstrumentByID(String id);
 }
 

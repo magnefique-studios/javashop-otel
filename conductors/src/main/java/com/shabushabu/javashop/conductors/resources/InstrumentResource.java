@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import com.shabushabu.javashop.conductors.exceptions.InstrumentNotFoundException;
 import com.shabushabu.javashop.conductors.model.Instrument;
-import com.shabushabu.javashop.conductors.model.Stock;
 import com.shabushabu.javashop.conductors.services.ConductorsService;
+
+import io.opentelemetry.instrumentation.annotations.WithSpan;
 
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
@@ -33,11 +34,18 @@ public class InstrumentResource {
     }    
     
     @RequestMapping("/conductors")
+    @WithSpan()
     public List<Instrument> getInstruments(@DefaultValue("California") @RequestParam("location") String location, 
     									   @DefaultValue("NONE") @RequestParam("vipLevel") String vipLevel) {
     	LOGGER.info("Conductors (All) at location: " + location);
     	LOGGER.info("Conductors (All) at level "+ vipLevel );
-        return conductorsService.getConductorsInstruments(location, vipLevel);
+    	
+    	if ( vipLevel.compareToIgnoreCase("NONE") == 0 ) {
+    		
+    		return conductorsService.getConductorsInstrumentsForLocation( location );
+    	} else {
+    		return conductorsService.getConductorsInstruments(location, vipLevel);
+    	}
     }
     
     

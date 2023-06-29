@@ -19,7 +19,7 @@ import io.opentelemetry.instrumentation.annotations.WithSpan;
 
 public class FilteredInstrument {
 	
-   private static final boolean  s_disabled = false; 
+   private static final boolean  s_OregonDataEnabled = false; 
 	
    private final Logger s_logger = LoggerFactory.getLogger(FilteredInstrument.class);
 	
@@ -28,7 +28,7 @@ public Object filterInstruments( EntityManager entityManager, Object obj) throws
 	
 	Object result = obj;
 	
-	if (s_disabled) {
+	if (!s_OregonDataEnabled) {
 			
 			// See src/main/resources/application.properties ..
 			s_logger.error("Trying to filter to disabled Region: Oregon");

@@ -16,15 +16,15 @@ import com.shabushabu.javashop.conductors.repositories.InstrumentRepository;
 @SpringBootApplication
 public class ConductorsApplication {
 	 
-	@Autowired private InstrumentRepository repository; 
 	 private final Logger logger = LoggerFactory.getLogger(ConductorsApplication.class);
 	 
     @EventListener(ApplicationReadyEvent.class)
     public void runAfterStartup() {
-        Iterable<Instrument> instruments = this.repository.findAll(); 
+      /*  Iterable<Instrument> instruments = this.repository.findAll(); 
         logger.error("Number of instruments: " + ((Collection<?>) instruments).size());
         logger.error("Number of instruments: " + ((Collection<?>) instruments).size());
         logger.info("Number of instruments: " + ((Collection<?>) instruments).size());   
+     */
     }
 	    
     public static void main(String[] args) {

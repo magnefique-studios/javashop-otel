@@ -30,7 +30,8 @@ public class HomeController {
    
     
     @RequestMapping(value="/")
-    public String getProductsAllLocations(Model model, @RequestParam(value="name",required=false) String theName, 
+    public String getProductsAllLocations(Model model,  @RequestParam(value="conductors",required=false) String conductors, 
+    													@RequestParam(value="name",required=false) String theName, 
     													@RequestParam(value="location", required=false) String theLocation,
     													@RequestParam(value="vipLevel", required=false) String vipLevel) {
 
@@ -44,6 +45,14 @@ public class HomeController {
 			theLocation="California";
 		}
 		
+		if (null == conductors ) {
+			conductors = "false";
+		}
+		
+		if (null == vipLevel) {
+			vipLevel = "NONE";
+		}
+		
 		User user = new User();
 		user.setLocation(theLocation);
 		user.setName(theName);
@@ -53,13 +62,48 @@ public class HomeController {
 		model.addAttribute("products", productService.getProducts(theLocation));
 	
 		model.addAttribute("instruments", instrumentService.getInstruments(theLocation));
-	
-		if (bEnableConductors && vipLevel != null) {
+	/*
+		if (bEnableConductors && conductors.compareToIgnoreCase("true") == 0 ) {
 			 model.addAttribute("conductors", conductorsService.getConductorInstruments(theLocation, vipLevel ));
 		} 
-		
+	*/	
 		return "index";
     
+    } 
+    
+    @RequestMapping(value="/conductors")
+    public String getProductsConductorsAllLocations(Model model, @RequestParam(value="name",required=false) String theName, 
+			@RequestParam(value="location", required=false) String theLocation,
+			@RequestParam(value="vipLevel", required=false) String vipLevel) {
+
+
+			if (null == theName ) {
+			
+			theName = "Guest";
+			}	
+			
+			if (null == theLocation ) {
+			theLocation="California";
+			}
+			
+			User user = new User();
+			user.setLocation(theLocation);
+			user.setName(theName);
+			model.addAttribute("user", user);
+			
+			
+			//model.addAttribute("products", productService.getProducts(theLocation));
+			
+			//model.addAttribute("instruments", instrumentService.getInstruments(theLocation));
+			
+			if (null == vipLevel ) {
+				vipLevel = "NONE";
+			}
+			if (bEnableConductors) {
+				System.out.println(" WE ARE SENDING TRAFFIC TO CONDUCTORS !!!!!! -- ONE TIME");
+				model.addAttribute("conductors", conductorsService.getConductorInstruments(theLocation, vipLevel ));
+			}
+			return "index";
     } 
     
     @RequestMapping("/healthcheck")

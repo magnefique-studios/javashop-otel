@@ -32,7 +32,7 @@ public class ConductorsRepo {
     private static final Logger LOGGER = LoggerFactory.getLogger(ConductorsRepo.class);
 
     @Value("${conductorsUri}")
-    private String instrumentsUri;
+    private String conductorsUri;
 
     
     @Bean 
@@ -49,7 +49,7 @@ public class ConductorsRepo {
     public Map<Long, InstrumentDTO> getinstrumentDTOs() { 
         LOGGER.info("getInstrument DTOS");
         ResponseEntity<List<InstrumentDTO>> instrumentsResponse =
-                restTemplate.exchange(instrumentsUri + "/conductors",
+                restTemplate.exchange(conductorsUri + "/conductors",
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<InstrumentDTO>>() {
                         });
         List<InstrumentDTO> instrumentDTOs = instrumentsResponse.getBody();
@@ -62,7 +62,7 @@ public class ConductorsRepo {
     public Map<Long, InstrumentDTO> getConductorInstrumentsByLocationAndLevel(String location, String vipLevel) {
         LOGGER.info("getConductor Instrument  by location ");
         ResponseEntity<List<InstrumentDTO>> conductorsResponse =
-                restTemplate.exchange(instrumentsUri + "/conductors?" + "location=" + location + "&vipLevel=" + vipLevel, 
+                restTemplate.exchange(conductorsUri + "/conductors?" + "location=" + location + "&vipLevel=" + vipLevel, 
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<InstrumentDTO>>() {
                         });
         List<InstrumentDTO> instrumentDTOs = conductorsResponse.getBody();

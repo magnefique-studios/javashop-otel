@@ -15,25 +15,28 @@ import io.opentelemetry.instrumentation.annotations.WithSpan;
 import io.opentelemetry.instrumentation.annotations.SpanAttribute;
 
 import java.util.List;
-
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import java.util.ArrayList;
 
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javax.persistence.EntityManager;
+import javax.swing.Spring;
 
 
 @Service
 public class ConductorsService {
 	
-	public enum Loc_ation {
-		California, Utah, Oregon 
+	/*public enum Loc_ation {
+		California, Utah, Oregon, vip
 	}
 
 	public enum VIP_Level {
-	     Silver, Gold, Platinum
+	     Silver, Gold, Platinum, NONE
 	}
+	*/
 	
 	private static ArrayList<Instrument> s_precache = new ArrayList<Instrument>();
 
@@ -59,37 +62,66 @@ public class ConductorsService {
     public ConductorsService(InstrumentRepository instrumentRepo) {
         this.instrumentRepo = instrumentRepo;
     }
-
-    // VIP Level = silver, gold, platinum
     
-
-    @SuppressWarnings("unchecked")
-    @WithSpan()
-	public List<Instrument> getConductorsInstruments(String location, String vipLevel) {
+    // Location plus a 
+    
+    /*
+     *  Location-> call Instruments Location Functions with String
+     *  
+     *  */
+    
+    
+    /*@WithSpan()*/
+	//public List<Instrument> getConductorsInstruments(/* @SpanAttribute("location")*/ String location) {
         
     	// CONVERT LOCATION TO ENUM.
     	
-    	//Object fullSalesList =  StreamSupport.stream(instrumentRepo.findAll().spliterator(), false).collect(Collectors.toList());
-    	//return filterConductorsOrdersByLocation(fullSalesList, location, convertVipLevel(vipLevel));
+    //	Object fullSalesList =  StreamSupport.stream(instrumentRepo.findAll().spliterator(), false).collect(Collectors.toList());
+   // 	return (List<Instrument>) fullSalesList;
+   // }
+
+   @SuppressWarnings("unchecked")
+   @WithSpan()
+	public List<Instrument> getConductorsInstruments( @SpanAttribute("location") String location,   @SpanAttribute("vipLevel")  String vipLevel) {
+        
+    	// CONVERT LOCATION TO ENUM.
     	
     	// Call Get By Location
     	// Pass Result to Get By VIP LEVEL
     	
-    	Loc_ation loc = convertLocation(location);
+    	//Loc_ation loc = convertLocation(location);
     	
-    	Object locationList = getConductorsInstrumentsForLocation( loc );
+    	Object locationList = getConductorsInstrumentsForLocation( location );
     	
-    	VIP_Level vip_level = this.convertVipLevel(vipLevel);
+    	//VIP_Level vip_level = this.convertVipLevel(vipLevel);
     	
-    	return getConductorsOrdersByVipLevel(loc, locationList, vip_level );
+    	return (List<Instrument>) locationList; // getConductorsOrdersByVipLevel(location, locationList, vipLevel );
     	
     	// return (List<Instrument>) locationList; //  getConductorsOrdersByVipLevel(loc, locationList, vip_level );
     }
-    
-    public List<Instrument> getConductorsInstrumentsForLocation(Loc_ation location) {
-    	// DO calls to Instruments by Location. 
+   
+   @SuppressWarnings("unchecked")
+@WithSpan()
+   public List<Instrument> getConductorsInstrumentsForLocation(  @SpanAttribute("location")  String location) {
+	   
+	   
+       	s_logger.info("getConductorInstrument  by location ");
+       //    ResponseEntity<List<Instrument>> instrumentsResponse =
+           		// conductorsUri+ "/instruments?"
+       //            restTemplate.exchange(instrumentsUri + "/instruments?" + "location=" + location.toString(),
+       //                    HttpMethod.GET, null, new ParameterizedTypeReference<List<Instrument>>() {
+       //                    });
+       ///    List<Instrument> instruments = instrumentsResponse.getBody();
+
+           return (List<Instrument>) instrumentRepo.findConductorInstruments(location);
+   }
+   
+    /*  /* @SpanAttribute("location") */ /*
+    @WithSpan()
+    public List<Instrument> getConductorsInstrumentsForLocation( String location) {
         	s_logger.info("getConductorInstrument  by location ");
             ResponseEntity<List<Instrument>> instrumentsResponse =
+            		// conductorsUri+ "/instruments?"
                     restTemplate.exchange(instrumentsUri + "/instruments?" + "location=" + location.toString(),
                             HttpMethod.GET, null, new ParameterizedTypeReference<List<Instrument>>() {
                             });
@@ -97,12 +129,14 @@ public class ConductorsService {
 
             return instruments;
     }
+    */
     
-    public List<Instrument> getConductorsOrdersByVipLevel(Loc_ation location, Object location_based_results, VIP_Level vipLevel) {
-    	
-    	s_logger.info("getConductor Instrument  by VipLevel and location ");
-            ResponseEntity<List<Instrument>> conductorsResponse =
-                    restTemplate.exchange(conductorsUri + "/conductors?" + "location=" + location.toString() + "&vipLevel=" + vipLevel.toString(), 
+    //@WithSpan()
+    //public List<Instrument> getConductorsOrdersByVipLevel(/* @SpanAttribute("location") */ String location, Object location_based_results,  /*@SpanAttribute("vipLevel")*/ String vipLevel) {
+    	/*
+   // 	s_logger.info("getConductor Instrument  by VipLevel and location ");
+    //        ResponseEntity<List<Instrument>> conductorsResponse =
+                    restTemplate.exchange(conductorsUri + "/conductors?" + "location=" + "vip" + "&vipLevel=" + vipLevel.toString(), 
                             HttpMethod.GET, null, new ParameterizedTypeReference<List<Instrument>>() {
                             });
             List<Instrument> instruments = conductorsResponse.getBody();
@@ -111,9 +145,9 @@ public class ConductorsService {
             
         }
     
-    
-    
-    public  List<Instrument> filterConductorsOrdersByLocation(Object obj, String location, /*@SpanAttribute("vipLevel")*/  VIP_Level vipLevel) {
+    */
+   /*
+    public  List<Instrument> filterConductorsOrdersByLocation(Object obj, String location, String vipLevel) {
 		Object result = obj;
 		List bigList = (List)obj;
 		ArrayList<Instrument> reducedList = new ArrayList<Instrument>(); 
@@ -140,7 +174,7 @@ public class ConductorsService {
 	}
     
     
-    public  List<Instrument> filterConductorsOrdersByLocationAndTheLevel(Object obj, String location, /*@SpanAttribute("vipLevel")*/ String vipLevel) {
+    public  List<Instrument> filterConductorsOrdersByLocationAndTheLevel(Object obj, String location,  String vipLevel) {
 		Object result = obj;
 		List bigList = (List)obj;
 		ArrayList<Instrument> reducedList = new ArrayList<Instrument>(); 
@@ -167,7 +201,7 @@ public class ConductorsService {
 	}
     
     
-	public  List<Instrument> filterConductorsOrdersByLocation(Object obj, String location, /*@SpanAttribute("vipLevel")*/ String vipLevel) {
+	public  List<Instrument> filterConductorsOrdersByLocation(Object obj, String location, String vipLevel) {
 		Object result = obj;
 		List bigList = (List)obj;
 		ArrayList<Instrument> reducedList = new ArrayList<Instrument>(); 
@@ -200,4 +234,6 @@ public class ConductorsService {
 	public Loc_ation convertLocation(String location) {
 		return Loc_ation.valueOf(location);
 	}
+	*/
+	
 }
