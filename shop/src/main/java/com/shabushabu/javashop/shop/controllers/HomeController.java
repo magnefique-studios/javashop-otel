@@ -62,15 +62,15 @@ public class HomeController {
 		model.addAttribute("products", productService.getProducts(theLocation));
 	
 		model.addAttribute("instruments", instrumentService.getInstruments(theLocation));
-	/*
+	
 		if (bEnableConductors && conductors.compareToIgnoreCase("true") == 0 ) {
 			 model.addAttribute("conductors", conductorsService.getConductorInstruments(theLocation, vipLevel ));
 		} 
-	*/	
+		
 		return "index";
     
     } 
-    
+    /*
     @RequestMapping(value="/conductors")
     public String getProductsConductorsAllLocations(Model model, @RequestParam(value="name",required=false) String theName, 
 			@RequestParam(value="location", required=false) String theLocation,
@@ -104,7 +104,7 @@ public class HomeController {
 				model.addAttribute("conductors", conductorsService.getConductorInstruments(theLocation, vipLevel ));
 			}
 			return "index";
-    } 
+    } */
     
     @RequestMapping("/healthcheck")
     @ResponseStatus(code = HttpStatus.OK, reason = "OK")

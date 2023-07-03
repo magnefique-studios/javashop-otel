@@ -12,7 +12,7 @@ public class GenerateTraffic {
 	
 	public static void main(String[] args) {
                 try {	
-		  Thread.sleep(25000);
+		  Thread.sleep(45000);
 		}catch(Exception e){
 		}
 		  
@@ -90,128 +90,72 @@ public class GenerateTraffic {
 		}
 		*/
 		
-		System.out.println("Utah Location SILVER");
-		for (int j=0; j<10; j++) {
-			try {
-				
-				System.out.println("Trying Location SILVER");
 		
-				HttpClient client = HttpClient.newHttpClient();
-				String theURL = url + "?conductors=true&name=Guest&location=Utah&vipLevel=Silver";
-			
-				HttpRequest request = HttpRequest.newBuilder().uri(URI.create(theURL)).build();
+		String location = "";
+		String vipLevel = "";
+		System.out.println("Test Locations and VipLevels");
+		
+			for (int zz=0; zz<=3; zz++ ) {
 				
-				HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-			
-				@SuppressWarnings("unused")
-				String sResult = response.body().toString();
-			 
-			} catch(Exception e) {
-				e.printStackTrace();
+				switch (zz) {
+					case 0:
+						 location = "usa";
+					break;
+					
+					case 1:
+						 location = "japan";
+					break;
+					
+					case 2:
+						 location = "italy";
+					break;
+					
+					case 3:
+						 location = "canada";
+					break;
+				}
+				
+				for (int jjj=0; jjj<=2; jjj++) {
+					
+					switch (jjj) {
+					case 0:
+						 vipLevel = "silver";
+					break;
+					
+					case 1:
+						 vipLevel = "gold";
+					break;
+					
+					case 2:
+						 vipLevel = "platinum";
+					break;
+					
+					}
+					
+					for (int zzz=0; zzz<=10; zzz++) {
+						try {
+							
+							System.out.println("conductors = true " + "Location= " + location + " vipLevel= "  + vipLevel);
+					
+							HttpClient client = HttpClient.newHttpClient();
+							String theURL = url + "?conductors=true&name=Guest&location=" + location + "&vipLevel=" + vipLevel;
+						
+							HttpRequest request = HttpRequest.newBuilder().uri(URI.create(theURL)).build();
+							
+							HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+						
+							@SuppressWarnings("unused")
+							String sResult = response.body().toString();
+						 
+						} catch(Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}
 			}
-			
-		}
-		
-		System.out.println("Utah Location GOLD");
-		for (int j=0; j<10; j++) {
-			try {
-		
-				HttpClient client = HttpClient.newHttpClient();
-				String theURL = url + "?conductors=true&name=Guest&location=Utah&vipLevel=Gold";
-			
-				HttpRequest request = HttpRequest.newBuilder().uri(URI.create(theURL)).build();
-				
-				HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-			
-				@SuppressWarnings("unused")
-				String sResult = response.body().toString();
-			 
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-			
-		}
-		
-		System.out.println("Utah Location PLATINUM");
-		for (int j=0; j<10; j++) {
-			try {
-		
-				HttpClient client = HttpClient.newHttpClient();
-				String theURL = url + "?conductors=true&name=Guest&location=Utah&vipLevel=Platinum";
-			
-				HttpRequest request = HttpRequest.newBuilder().uri(URI.create(theURL)).build();
-				
-				HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-			
-				@SuppressWarnings("unused")
-				String sResult = response.body().toString();
-			 
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-			
-		}
 		
 		
-		System.out.println("California Location SILVER");
-		for (int j=0; j<10; j++) {
-			try {
-		
-				HttpClient client = HttpClient.newHttpClient();
-				String theURL = url + "?conductors=true&name=Guest&location=Utah&vipLevel=Silver";
-			
-				HttpRequest request = HttpRequest.newBuilder().uri(URI.create(theURL)).build();
-				
-				HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-			
-				@SuppressWarnings("unused")
-				String sResult = response.body().toString();
-			 
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-			
-		}
-		
-		System.out.println("California Location GOLD");
-		for (int j=0; j<10; j++) {
-			try {
-		
-				HttpClient client = HttpClient.newHttpClient();
-				String theURL = url + "?conductors=true&name=Guest&location=Utah&vipLevel=Gold";
-			
-				HttpRequest request = HttpRequest.newBuilder().uri(URI.create(theURL)).build();
-				
-				HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-			
-				@SuppressWarnings("unused")
-				String sResult = response.body().toString();
-			 
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-			
-		}
-		
-		System.out.println("California Location PLATINUM");
-		for (int j=0; j<10; j++) {
-			try {
-		
-				HttpClient client = HttpClient.newHttpClient();
-				String theURL = url + "?conductors=true&name=Guest&location=Utah&vipLevel=Platinum";
-			
-				HttpRequest request = HttpRequest.newBuilder().uri(URI.create(theURL)).build();
-				
-				HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-			
-				@SuppressWarnings("unused")
-				String sResult = response.body().toString();
-			 
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-			
-		}
+	
 		
 		
 		long endTime = System.nanoTime();

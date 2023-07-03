@@ -22,14 +22,8 @@ public class InstrumentsApplication {
 	 
     @EventListener(ApplicationReadyEvent.class)
     public void runAfterStartup() {
-        Iterable<Instrument> instruments = this.repository.findAll(); 
-        logger.info("Number of instruments: " + ((Collection<?>) instruments).size());
-        logger.info("Number of instruments: " + ((Collection<?>) instruments).size());
-        logger.info("Number of instruments: " + ((Collection<?>) instruments).size());
-        logger.info("Number of instruments: " + ((Collection<?>) instruments).size());
-        logger.info("Number of instruments: " + ((Collection<?>) instruments).size());
-        logger.info("Number of instruments: " + ((Collection<?>) instruments).size());
-        logger.info("Number of instruments: " + ((Collection<?>) instruments).size());
+       // Iterable<Instrument> instruments = this.repository.findAll(); 
+       // logger.info("Number of instruments: " + ((Collection<?>) instruments).size());
         
         
     }

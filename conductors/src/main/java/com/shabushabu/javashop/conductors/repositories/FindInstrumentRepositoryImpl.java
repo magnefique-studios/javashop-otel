@@ -39,7 +39,40 @@ public class FindInstrumentRepositoryImpl implements FindInstrumentRepository {
     
     @Override
     public Object findConductorInstruments(String location) {
-     	return entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale").getResultList(); 	
+     	
+    	if (location.contains("usa")) {
+    		return entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_conductors_usa").getResultList(); 	
+    	} else if (location.contains("japan")) {
+    		return entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_conductors_japan").getResultList(); 	
+    	    
+    	} else if (location.contains("candada")) {
+    		return entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_conductors_canada").getResultList(); 	
+    	    
+    	} else if (location.contains("italy")) {
+    		return entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_conductors_italy").getResultList(); 	
+    	    
+    	} else {
+    		return null;
+    	}
+     }
+    
+    @Override
+    public Object findConductorInstrumentsByVipLevel(Object instruments, String location, String vipLevel) {
+     	
+    	if (location.contains("usa")) {
+    		return entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_conductors_usa" + vipLevel).getResultList(); 	
+    	} else if (location.contains("japan")) {
+    		return entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_conductors_japan" + vipLevel).getResultList(); 	
+    	    
+    	} else if (location.contains("canada")) {
+    		return entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_conductors_canada" + vipLevel).getResultList(); 	
+    	        	    
+    	} else if (location.contains("italy")) {
+    		return entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_conductors_italy" + vipLevel).getResultList(); 	
+    	    
+    	} else {
+    		return null;
+    	}
      }
 
     

@@ -9,6 +9,7 @@ public interface FindInstrumentRepository {
 	 Object findVipInstruments(Object obj, String vipLevel);
 	 Object findInstrumentsAll();
 	 Instrument findInstrumentByID(String id);
+	Object findConductorInstrumentsByVipLevel(Object instruments, String location, String vipLevel);
 }
 
 

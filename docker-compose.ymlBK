@@ -102,7 +102,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresDB:5432/instruments
       - SPRING_DATASOURCE_USERNAME=instruments
       - SPRING_DATASOURCE_PASSWORD=instruments
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=none
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     depends_on:
       postgresDB:
         condition: service_healthy
@@ -118,27 +118,27 @@ services:
       #curl --fail http://localhost:8040//healthcheck  || exit 1
       interval: 2s
       retries: 45
-      start_period: 25s
+      start_period: 45s
       timeout: 2s
     links:
-      - conductorsDB
+      - postgresDB
     environment:
       - OTEL_COLLECTOR=${OTEL_COLLECTOR}
       - USERNAME=${SHOP_USER}
       - TOKEN=${SPLUNK_ACCESS_TOKEN}
       - REALM=${SPLUNK_REALM}
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://conductorsDB:5433/conductors
-      - SPRING_DATASOURCE_USERNAME=conductors
-      - SPRING_DATASOURCE_PASSWORD=conductors
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=none
-      - PGUSER=conductors
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresDB:5432/instruments
+      - SPRING_DATASOURCE_USERNAME=instruments
+      - SPRING_DATASOURCE_PASSWORD=instruments
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - PGUSER=instruments
     depends_on:
-      conductorsDB:
+      postgresDB:
         condition: service_healthy
   postgresDB:
     image: "postgres:13.1-alpine"
     container_name: postgresDB
-#    restart: always
+    restart: always
     environment:
       - POSTGRES_USER=instruments
       - POSTGRES_PASSWORD=instruments
@@ -149,39 +149,14 @@ services:
       test: ["CMD-SHELL", "pg_isready"]
       interval: 2s
       timeout: 2s
-      start_period: 35s
+      start_period: 15s
       retries: 50
     volumes:
       - ./db/sql/instruments-latest.sql:/docker-entrypoint-initdb.d/instruments-latest.sql
       - ./db/sql/instruments-chicago.sql:/docker-entrypoint-initdb.d/instruments-chicago.sql
       - ./db/sql/instruments-oregon.sql:/docker-entrypoint-initdb.d/instruments-oregon.sql
-      #- ./db/sql/instruments-conductors.sql:/docker-entrypoint-initdb.d/instruments-conductors.sql
+      - ./db/sql/instruments-conductors.sql:/docker-entrypoint-initdb.d/instruments-conductors.sql
       - ./db/sql/instruments-us-east.sql:/docker-entrypoint-initdb.d/instruments-us-east.sql
       - ./db/sql/instruments-us-west.sql:/docker-entrypoint-initdb.d/instruments-us-west.sql
       #- ./db/sql/instruments-us-south.sql:/docker-entrypoint-initdb.d/instruments-us-south.sql
       - ./db/sql/instruments-us-central.sql:/docker-entrypoint-initdb.d/instruments-us-central.sql
-      
-  conductorsDB:
-    image: "postgres:13.1-alpine"
-    container_name: conductorsDB
-#    restart: always
-    environment:
-      - POSTGRES_USER=conductors
-      - POSTGRES_PASSWORD=conductors
-      - PGUSER=conductors
-      - PGPORT=5433
-    ports:
-      - "5433:5433"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready"]
-      interval: 2s
-      timeout: 2s
-      start_period: 20s
-      retries: 50
-    volumes:
-      - ./db2/sql/instruments-latest.sql:/docker-entrypoint-initdb.d/instruments-latest.sql
-      - ./db2/sql/instruments-conductors-us.sql:/docker-entrypoint-initdb.d/instruments-conductors-us.sql
-      - ./db2/sql/instruments-conductors-japan.sql:/docker-entrypoint-initdb.d/instruments-conductors-japan.sql
-      - ./db2/sql/instruments-conductors-canada.sql:/docker-entrypoint-initdb.d/instruments-conductors-canada.sql
-      - ./db2/sql/instruments-conductors-italy.sql:/docker-entrypoint-initdb.d/instruments-conductors-italy.sql
-     

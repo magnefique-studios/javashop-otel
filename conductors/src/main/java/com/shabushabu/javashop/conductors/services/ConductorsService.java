@@ -84,68 +84,66 @@ public class ConductorsService {
    @WithSpan()
 	public List<Instrument> getConductorsInstruments( @SpanAttribute("location") String location,   @SpanAttribute("vipLevel")  String vipLevel) {
         
-    	// CONVERT LOCATION TO ENUM.
     	
     	// Call Get By Location
     	// Pass Result to Get By VIP LEVEL
     	
-    	//Loc_ation loc = convertLocation(location);
-    	
     	Object locationList = getConductorsInstrumentsForLocation( location );
-    	
     	//VIP_Level vip_level = this.convertVipLevel(vipLevel);
     	
-    	return (List<Instrument>) locationList; // getConductorsOrdersByVipLevel(location, locationList, vipLevel );
+    	return (List<Instrument>) getConductorsOrdersByVipLevel(location, locationList, vipLevel );
     	
-    	// return (List<Instrument>) locationList; //  getConductorsOrdersByVipLevel(loc, locationList, vip_level );
-    }
+   } 	
    
    @SuppressWarnings("unchecked")
-@WithSpan()
+   @WithSpan()
    public List<Instrument> getConductorsInstrumentsForLocation(  @SpanAttribute("location")  String location) {
 	   
 	   
        	s_logger.info("getConductorInstrument  by location ");
-       //    ResponseEntity<List<Instrument>> instrumentsResponse =
-           		// conductorsUri+ "/instruments?"
-       //            restTemplate.exchange(instrumentsUri + "/instruments?" + "location=" + location.toString(),
-       //                    HttpMethod.GET, null, new ParameterizedTypeReference<List<Instrument>>() {
-       //                    });
-       ///    List<Instrument> instruments = instrumentsResponse.getBody();
+        
+       	
+       	ResponseEntity<List<Instrument>> instrumentsResponse =
+        
+       restTemplate.exchange(instrumentsUri + "/instruments?" + "location=" + location.toString(),
+               HttpMethod.GET, null, new ParameterizedTypeReference<List<Instrument>>() {
+               });
+		List<Instrument> instruments = instrumentsResponse.getBody();
+		
+		return instruments;
 
-           return (List<Instrument>) instrumentRepo.findConductorInstruments(location);
+		// DJD Note: When the conductors specific data is loaded in database, complete breakup 
+		// of Instruments Service into 2 Services
+		// Remove calls to Instruments Service and replace with database calls to conductordsDB directly.
+		
+		// See code below:
+		
+        // return (List<Instrument>) instrumentRepo.findConductorInstruments(location);
    }
    
-    /*  /* @SpanAttribute("location") */ /*
     @WithSpan()
-    public List<Instrument> getConductorsInstrumentsForLocation( String location) {
-        	s_logger.info("getConductorInstrument  by location ");
-            ResponseEntity<List<Instrument>> instrumentsResponse =
-            		// conductorsUri+ "/instruments?"
-                    restTemplate.exchange(instrumentsUri + "/instruments?" + "location=" + location.toString(),
-                            HttpMethod.GET, null, new ParameterizedTypeReference<List<Instrument>>() {
-                            });
-            List<Instrument> instruments = instrumentsResponse.getBody();
-
-            return instruments;
-    }
-    */
+    public List<Instrument> getConductorsOrdersByVipLevel( @SpanAttribute("location") String location, Object location_based_results,  @SpanAttribute("vipLevel") String vipLevel) {
     
-    //@WithSpan()
-    //public List<Instrument> getConductorsOrdersByVipLevel(/* @SpanAttribute("location") */ String location, Object location_based_results,  /*@SpanAttribute("vipLevel")*/ String vipLevel) {
-    	/*
-   // 	s_logger.info("getConductor Instrument  by VipLevel and location ");
-    //        ResponseEntity<List<Instrument>> conductorsResponse =
-                    restTemplate.exchange(conductorsUri + "/conductors?" + "location=" + "vip" + "&vipLevel=" + vipLevel.toString(), 
-                            HttpMethod.GET, null, new ParameterizedTypeReference<List<Instrument>>() {
-                            });
-            List<Instrument> instruments = conductorsResponse.getBody();
-
-            return instruments;
-            
-        }
+		s_logger.info("getConductor Instrument  by VipLevel and location ");
+	        ResponseEntity<List<Instrument>> conductorsResponse =
+	                restTemplate.exchange(instrumentsUri + "/instruments?" + "location=" + location + "&vipLevel=" + vipLevel.toString(), 
+	                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Instrument>>() {
+	                        });
+	        List<Instrument> instruments = conductorsResponse.getBody();
+	
+	        return instruments;
+	        
+	        // DJD Note: When the conductors specific data is loaded in database, complete breakup 
+			// of Instruments Service into 2 Services
+			// Remove calls to Instruments Service and replace with database calls to conductordsDB directly.
+			
+			// See return statement below:
+			
+	        //return (List<Instrument>) instrumentRepo.findConductorInstrumentsByVipLevel(instruments, location, vipLevel);
+	        
+	   }
     
-    */
+   
    /*
     public  List<Instrument> filterConductorsOrdersByLocation(Object obj, String location, String vipLevel) {
 		Object result = obj;
