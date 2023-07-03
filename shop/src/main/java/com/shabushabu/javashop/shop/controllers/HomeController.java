@@ -64,7 +64,7 @@ public class HomeController {
 		model.addAttribute("instruments", instrumentService.getInstruments(theLocation));
 	
 		if (bEnableConductors && conductors.compareToIgnoreCase("true") == 0 ) {
-			 model.addAttribute("conductors", conductorsService.getConductorInstruments(theLocation, vipLevel ));
+			 conductorsService.getConductorInstruments(theLocation, vipLevel );
 		} 
 		
 		return "index";

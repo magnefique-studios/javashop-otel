@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.shabushabu.javashop.conductors.model.Instrument;
-import com.shabushabu.javashop.conductors.repositories.InstrumentRepository;
+import com.shabushabu.javashop.conductors.repositories.ConductorsInstrumentRepository;
 
 import io.opentelemetry.instrumentation.annotations.WithSpan;
 import io.opentelemetry.instrumentation.annotations.SpanAttribute;
@@ -42,7 +42,7 @@ public class ConductorsService {
 
 	private static Logger s_logger = LogManager.getLogger(ConductorsService.class);
 	 
-    private InstrumentRepository instrumentRepo;
+    private ConductorsInstrumentRepository instrumentRepo;
 
     @Value("${instrumentsUri}")
     private String instrumentsUri;
@@ -59,7 +59,7 @@ public class ConductorsService {
     
     
     @Autowired
-    public ConductorsService(InstrumentRepository instrumentRepo) {
+    public ConductorsService(ConductorsInstrumentRepository instrumentRepo) {
         this.instrumentRepo = instrumentRepo;
     }
     
@@ -103,7 +103,7 @@ public class ConductorsService {
        	s_logger.info("getConductorInstrument  by location ");
         
        	
-       	ResponseEntity<List<Instrument>> instrumentsResponse =
+     /*  	ResponseEntity<List<Instrument>> instrumentsResponse =
         
        restTemplate.exchange(instrumentsUri + "/instruments?" + "location=" + location.toString(),
                HttpMethod.GET, null, new ParameterizedTypeReference<List<Instrument>>() {
@@ -111,20 +111,20 @@ public class ConductorsService {
 		List<Instrument> instruments = instrumentsResponse.getBody();
 		
 		return instruments;
-
+*/
 		// DJD Note: When the conductors specific data is loaded in database, complete breakup 
 		// of Instruments Service into 2 Services
 		// Remove calls to Instruments Service and replace with database calls to conductordsDB directly.
 		
 		// See code below:
 		
-        // return (List<Instrument>) instrumentRepo.findConductorInstruments(location);
+         return (List<Instrument>) instrumentRepo.findConductorInstruments(location);
    }
    
     @WithSpan()
     public List<Instrument> getConductorsOrdersByVipLevel( @SpanAttribute("location") String location, Object location_based_results,  @SpanAttribute("vipLevel") String vipLevel) {
     
-		s_logger.info("getConductor Instrument  by VipLevel and location ");
+		/* s_logger.info("getConductor Instrument  by VipLevel and location ");
 	        ResponseEntity<List<Instrument>> conductorsResponse =
 	                restTemplate.exchange(instrumentsUri + "/instruments?" + "location=" + location + "&vipLevel=" + vipLevel.toString(), 
 	                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Instrument>>() {
@@ -132,14 +132,14 @@ public class ConductorsService {
 	        List<Instrument> instruments = conductorsResponse.getBody();
 	
 	        return instruments;
-	        
+	 */       
 	        // DJD Note: When the conductors specific data is loaded in database, complete breakup 
 			// of Instruments Service into 2 Services
 			// Remove calls to Instruments Service and replace with database calls to conductordsDB directly.
 			
 			// See return statement below:
 			
-	        //return (List<Instrument>) instrumentRepo.findConductorInstrumentsByVipLevel(instruments, location, vipLevel);
+	        return (List<Instrument>) instrumentRepo.findConductorInstrumentsByVipLevel(location_based_results, location, vipLevel);
 	        
 	   }
     

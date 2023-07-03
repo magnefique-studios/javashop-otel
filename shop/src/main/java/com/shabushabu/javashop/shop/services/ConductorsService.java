@@ -6,20 +6,13 @@ import org.springframework.stereotype.Service;
 
 import com.shabushabu.javashop.shop.model.Product;
 import com.shabushabu.javashop.shop.model.Instrument;
-import com.shabushabu.javashop.shop.repo.StockRepo;
 import com.shabushabu.javashop.shop.repo.ConductorsRepo;
-import com.shabushabu.javashop.shop.repo.InstrumentRepo;
-import com.shabushabu.javashop.shop.repo.ProductRepo;
-import com.shabushabu.javashop.shop.services.dto.ProductDTO;
-import com.shabushabu.javashop.shop.services.dto.StockDTO;
-import com.shabushabu.javashop.shop.services.dto.InstrumentDTO;
-import com.shabushabu.javashop.shop.exceptions.InvalidLocaleException;
 
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+
 
 @Service
 public class ConductorsService {
@@ -29,7 +22,12 @@ public class ConductorsService {
     private ConductorsRepo conductorsRepo;
 
     public List<Instrument> getConductorInstruments(String location, String vipLevel) {
-        Map<Long, InstrumentDTO> instrumentsDTO = conductorsRepo.getConductorInstrumentsByLocationAndLevel(location, vipLevel);
+         conductorsRepo.getConductorInstrumentsByLocationAndLevel(location, vipLevel);
+        
+         ArrayList<Instrument> results = new ArrayList<Instrument>(10);
+         return results;
+        
+        /*
         return instrumentsDTO.values().stream()
                 .map(instrumentDTO -> {
                 	  try {
@@ -44,6 +42,7 @@ public class ConductorsService {
   					}
                    })
                   .collect(Collectors.toList());
+                  */
     }
 
     public List<Product> productsNotFound() {

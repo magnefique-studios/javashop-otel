@@ -15,6 +15,8 @@ import io.opentelemetry.instrumentation.annotations.WithSpan;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @RestController
 @RequestMapping()
@@ -41,10 +43,11 @@ public class InstrumentResource {
     	LOGGER.info("Conductors (All) at level "+ vipLevel );
     	
     	if ( vipLevel.compareToIgnoreCase("NONE") == 0 ) {
-    		
-    		return conductorsService.getConductorsInstrumentsForLocation( location );
+    		// StreamSupport.stream(instrumentRepo.findAll().spliterator(), false)
+			// .collect(Collectors.toList());
+    		return StreamSupport.stream(conductorsService.getConductorsInstrumentsForLocation( location ).spliterator(), false).collect(Collectors.toList());
     	} else {
-    		return conductorsService.getConductorsInstruments(location, vipLevel);
+    		return StreamSupport.stream(conductorsService.getConductorsInstruments( location, vipLevel ).spliterator(), false).collect(Collectors.toList());
     	}
     }
     

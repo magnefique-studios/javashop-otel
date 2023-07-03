@@ -180,8 +180,21 @@ services:
       retries: 50
     volumes:
       - ./db2/sql/instruments-latest.sql:/docker-entrypoint-initdb.d/instruments-latest.sql
+      - ./db2/sql/instruments-conductors-us-gold.sql:/docker-entrypoint-initdb.d/instruments-conductors-us-gold.sql
+      - ./db2/sql/instruments-conductors-japan-gold.sql:/docker-entrypoint-initdb.d/instruments-conductors-japan-gold.sql
+      - ./db2/sql/instruments-conductors-canada-gold.sql:/docker-entrypoint-initdb.d/instruments-conductors-canada-gold.sql
+      - ./db2/sql/instruments-conductors-italy-gold.sql:/docker-entrypoint-initdb.d/instruments-conductors-italy-gold.sql
+      - ./db2/sql/instruments-conductors-us-silver.sql:/docker-entrypoint-initdb.d/instruments-conductors-us-silver.sql
+      - ./db2/sql/instruments-conductors-japan-silver.sql:/docker-entrypoint-initdb.d/instruments-conductors-japan-silver.sql
+      - ./db2/sql/instruments-conductors-canada-silver.sql:/docker-entrypoint-initdb.d/instruments-conductors-canada-silver.sql
+      - ./db2/sql/instruments-conductors-italy-silver.sql:/docker-entrypoint-initdb.d/instruments-conductors-italy-silver.sql
+      - ./db2/sql/instruments-conductors-us-platinum.sql:/docker-entrypoint-initdb.d/instruments-conductors-us-platinum.sql
+      - ./db2/sql/instruments-conductors-japan-platinum.sql:/docker-entrypoint-initdb.d/instruments-conductors-japan-platinum.sql
+      - ./db2/sql/instruments-conductors-canada-platinum.sql:/docker-entrypoint-initdb.d/instruments-conductors-canada-platinum.sql
+      - ./db2/sql/instruments-conductors-italy-platinum.sql:/docker-entrypoint-initdb.d/instruments-conductors-italy-platinum.sql
       - ./db2/sql/instruments-conductors-us.sql:/docker-entrypoint-initdb.d/instruments-conductors-us.sql
       - ./db2/sql/instruments-conductors-japan.sql:/docker-entrypoint-initdb.d/instruments-conductors-japan.sql
       - ./db2/sql/instruments-conductors-canada.sql:/docker-entrypoint-initdb.d/instruments-conductors-canada.sql
       - ./db2/sql/instruments-conductors-italy.sql:/docker-entrypoint-initdb.d/instruments-conductors-italy.sql
+     
      

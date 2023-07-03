@@ -65,10 +65,9 @@ public class ConductorsRepo {
                 restTemplate.exchange(conductorsUri + "/conductors?" + "location=" + location + "&vipLevel=" + vipLevel, 
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<InstrumentDTO>>() {
                         });
-        List<InstrumentDTO> instrumentDTOs = conductorsResponse.getBody();
+       // List<InstrumentDTO> instrumentDTOs = conductorsResponse.getBody();
 
-        return instrumentDTOs.stream()
-                .collect(Collectors.toMap(InstrumentDTO::getId, Function.identity()));
+        return null;
     }
 
     public Map<Long, InstrumentDTO> instrumentsNotFound() {

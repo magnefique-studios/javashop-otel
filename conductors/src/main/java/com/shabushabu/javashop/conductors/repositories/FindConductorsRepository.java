@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.shabushabu.javashop.conductors.model.Instrument;
 
-public interface FindInstrumentRepository {
+public interface FindConductorsRepository {
 	 Object findConductorInstruments( String location);
 	 Object findVipInstruments(Object obj, String vipLevel);
 	 Object findInstrumentsAll();

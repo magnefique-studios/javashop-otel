@@ -11,7 +11,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 
 import com.shabushabu.javashop.conductors.model.Instrument;
-import com.shabushabu.javashop.conductors.repositories.InstrumentRepository;
+import com.shabushabu.javashop.conductors.repositories.ConductorsInstrumentRepository;
 
 @SpringBootApplication
 public class ConductorsApplication {
