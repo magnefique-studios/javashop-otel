@@ -95,22 +95,35 @@ public class GenerateTraffic {
 		String vipLevel = "";
 		System.out.println("Test Locations and VipLevels");
 		
-			for (int zz=0; zz<=3; zz++ ) {
+			for (int zz=0; zz<=16; zz++ ) {
 				
 				switch (zz) {
 					case 0:
+					case 1:
+					case 2:
+					case 3:
 						 location = "us";
 					break;
 					
-					case 1:
+					
+					case 4:
+					case 5:
+					case 6:
+					case 7:
 						 location = "japan";
 					break;
 					
-					case 2:
-						 location = "canada";
+					case 8:
+					case 9:
+					case 10:
+					case 11:
+						 location = "italy";
 					break;
 					
-					case 3:
+					case 12:
+					case 13:
+					case 14:
+					case 15:
 						 location = "canada";
 					break;
 				}

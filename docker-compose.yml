@@ -180,7 +180,6 @@ services:
       retries: 50
     volumes:
       - ./db2/sql/instruments-latest.sql:/docker-entrypoint-initdb.d/instruments-latest.sql
-      - ./db2/sql/instruments-conductors-us-gold.sql:/docker-entrypoint-initdb.d/instruments-conductors-us-gold.sql
       - ./db2/sql/instruments-conductors-japan-gold.sql:/docker-entrypoint-initdb.d/instruments-conductors-japan-gold.sql
       - ./db2/sql/instruments-conductors-canada-gold.sql:/docker-entrypoint-initdb.d/instruments-conductors-canada-gold.sql
       - ./db2/sql/instruments-conductors-italy-gold.sql:/docker-entrypoint-initdb.d/instruments-conductors-italy-gold.sql

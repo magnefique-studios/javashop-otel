@@ -3,11 +3,15 @@ package com.shabushabu.javashop.conductors.repositories;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.shabushabu.javashop.conductors.VipTestData;
 import com.shabushabu.javashop.conductors.model.Instrument;
 
 import io.opentelemetry.instrumentation.annotations.SpanAttribute;
@@ -35,7 +39,7 @@ public class FindConductorsRepositoryImpl implements FindConductorsRepository {
 	
 	private static Object s_bigQueryResult = null;
 	
-    @PersistenceContext
+    @Autowired
     private EntityManager entityManager;
 
     @SuppressWarnings("unchecked")
@@ -46,9 +50,12 @@ public class FindConductorsRepositoryImpl implements FindConductorsRepository {
      	
     	List<Instrument> vipResults = new ArrayList<Instrument>();
     	
+    	String sTablename = "instruments_for_sale_conductors_";
+    	
+    
     	try {
-    		String queryString = "SELECT * FROM instruments_for_sale_conductors_" + location;
-    		vipResults = runQuery (queryString);
+    		sTablename += location;
+    		vipResults = runQuery (sTablename, location);
     	}catch ( Exception e ) {
     		
     	}
@@ -63,34 +70,58 @@ public class FindConductorsRepositoryImpl implements FindConductorsRepository {
      	
     	List<Instrument> vipResults = new ArrayList<Instrument>();
     	
-    	String queryString = "SELECT * FROM instruments_for_sale_conductors_" + location + "_" + vipLevel;
+    	//String queryString = "SELECT * FROM instruments_for_sale_conductors_" + location + "_" + vipLevel;
+    	
+    	String sTablename = "instruments_for_sale_conductors_";
+    	
     	try {
-    		vipResults = runQuery( queryString);   //entityManager.createNativeQuery( queryString ).getResultList();	
+    		sTablename += location + "_" + vipLevel;
+    		vipResults = runQuery (sTablename, location, vipLevel);
+    		//entityManager.createNativeQuery( queryString ).getResultList();	
     	}catch ( Exception e ) {
     		
     	}
     	return filterVipAndLocationData((List<Instrument>)instruments, vipResults);	
      }
     
-    protected List<Instrument> filterVipAndLocationData( List<Instrument> instruments, List<Instrument> vipLevel) {
+    protected List<Instrument> filterVipAndLocationData( List<Instrument> instruments, List<Instrument> vipList) {
     	// Filter and Merge based on Locale and VipLevel data.
     	
     	List<Instrument> results = new ArrayList<Instrument>();
     	
     	// Join lists 
-    	results.addAll(vipLevel);
+    	results.addAll(vipList);
     	results.addAll(instruments);
     	
     	return results;
     }
     
-    protected List<Instrument> runQuery(String queryString) {
-    	
+    @SuppressWarnings("unchecked")
+	protected List<Instrument> runQuery(String tableName, String location) {
     	List<Instrument> results = new ArrayList<Instrument>();
     	try  { 
-    		if (!this.bFirstTimeResults) {
-    			results = entityManager.createNativeQuery( queryString ).getResultList();
+    		if (bFirstTimeResults) {
+    			results = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_conductors_" + location ).getResultList();
     			bFirstTimeResults = true;
+    		} else {
+    			results =  VipTestData.s_istance.getInstrumentsByLocation(location);
+    		}
+    	} catch (Throwable t ) {
+    		
+    	}
+    	return results;
+    }
+	
+    
+    @SuppressWarnings("unchecked")
+	protected List<Instrument> runQuery(String tableName, String location, String vipLevel) {
+    	List<Instrument> results = new ArrayList<Instrument>();
+    	try  { 
+    		if (bFirstTimeResults) {
+    			results = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_conductors_" + location + "_" + "vipLevel").getResultList();
+    			bFirstTimeResults = true;
+    		} else {
+    			results =  VipTestData.s_istance.getInstrumentsByLocationAndLevel(location, vipLevel);
     		}
     	} catch (Throwable t ) {
     		

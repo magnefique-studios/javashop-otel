@@ -103,15 +103,18 @@ public class ConductorsService {
        	s_logger.info("getConductorInstrument  by location ");
         
        	
-     /*  	ResponseEntity<List<Instrument>> instrumentsResponse =
+       	if (location.contains("italy")) {
+       	
+       		ResponseEntity<List<Instrument>> instrumentsResponse =
         
-       restTemplate.exchange(instrumentsUri + "/instruments?" + "location=" + location.toString(),
-               HttpMethod.GET, null, new ParameterizedTypeReference<List<Instrument>>() {
-               });
-		List<Instrument> instruments = instrumentsResponse.getBody();
+       				restTemplate.exchange(instrumentsUri + "/instruments?" + "location=" + location.toString(),
+       						HttpMethod.GET, null, new ParameterizedTypeReference<List<Instrument>>() {
+       				});
+       				List<Instrument> instruments = instrumentsResponse.getBody();
 		
-		return instruments;
-*/
+       				return instruments;
+       	} else {
+
 		// DJD Note: When the conductors specific data is loaded in database, complete breakup 
 		// of Instruments Service into 2 Services
 		// Remove calls to Instruments Service and replace with database calls to conductordsDB directly.
@@ -119,6 +122,7 @@ public class ConductorsService {
 		// See code below:
 		
          return (List<Instrument>) instrumentRepo.findConductorInstruments(location);
+       	}
    }
    
     @WithSpan()
