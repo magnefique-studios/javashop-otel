@@ -15,6 +15,7 @@ import io.opentelemetry.instrumentation.annotations.WithSpan;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -42,15 +43,27 @@ public class InstrumentResource {
     	LOGGER.info("Conductors (All) at location: " + location);
     	LOGGER.info("Conductors (All) at level "+ vipLevel );
     	
-    	if ( vipLevel.compareToIgnoreCase("NONE") == 0 ) {
-    		// StreamSupport.stream(instrumentRepo.findAll().spliterator(), false)
-			// .collect(Collectors.toList());
-    		return StreamSupport.stream(conductorsService.getConductorsInstrumentsForLocation( location ).spliterator(), false).collect(Collectors.toList());
-    	} else {
-    		return StreamSupport.stream(conductorsService.getConductorsInstruments( location, vipLevel ).spliterator(), false).collect(Collectors.toList());
+    	ArrayList<Instrument> returnList = new ArrayList<Instrument>();
+    	
+    	
+    	try { 
+    		if ( vipLevel.compareToIgnoreCase("NONE") == 0 ) {
+    			returnList = (ArrayList<Instrument>) conductorsService.getConductorsInstrumentsForLocation(location);
+    		} else {
+    			returnList = (ArrayList<Instrument>) conductorsService.getConductorsInstruments( location, vipLevel );
+    		}
+    	} catch(Exception e) {
+    		
     	}
+    	
+    	return returnList;
+    	
     }
     
+    
+    protected List<Instrument> decorateInstruments( List<Instrument> incomingInstruments ) {
+    	return new ArrayList<Instrument>();
+    }
     
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)

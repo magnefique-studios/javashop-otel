@@ -99,7 +99,7 @@ public class GenerateTraffic {
 				
 				switch (zz) {
 					case 0:
-						 location = "usa";
+						 location = "us";
 					break;
 					
 					case 1:
@@ -107,7 +107,7 @@ public class GenerateTraffic {
 					break;
 					
 					case 2:
-						 location = "italy";
+						 location = "canada";
 					break;
 					
 					case 3:

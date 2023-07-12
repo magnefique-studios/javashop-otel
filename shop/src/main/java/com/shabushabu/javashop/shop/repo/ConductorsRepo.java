@@ -44,11 +44,11 @@ public class ConductorsRepo {
     private RestTemplate restTemplate;
     
     
-
+/*
     @HystrixCommand(fallbackMethod = "instrumentsNotFound") 
     public Map<Long, InstrumentDTO> getinstrumentDTOs() { 
         LOGGER.info("getInstrument DTOS");
-        ResponseEntity<List<InstrumentDTO>> instrumentsResponse =
+       /* ResponseEntity<List<InstrumentDTO>> instrumentsResponse =
                 restTemplate.exchange(conductorsUri + "/conductors",
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<InstrumentDTO>>() {
                         });
@@ -57,17 +57,26 @@ public class ConductorsRepo {
         return instrumentDTOs.stream()
                 .collect(Collectors.toMap(InstrumentDTO::getId, Function.identity()));
     }
-    
+  */  
     
     public Map<Long, InstrumentDTO> getConductorInstrumentsByLocationAndLevel(String location, String vipLevel) {
-        LOGGER.info("getConductor Instrument  by location ");
-        ResponseEntity<List<InstrumentDTO>> conductorsResponse =
+        LOGGER.error("getConductorInstrumentsByLocationAndLevel  by location = " + location + " vipLevel= " + vipLevel);
+       
+        try {
+        	ResponseEntity<List<InstrumentDTO>> conductorsResponse =
                 restTemplate.exchange(conductorsUri + "/conductors?" + "location=" + location + "&vipLevel=" + vipLevel, 
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<InstrumentDTO>>() {
                         });
-       // List<InstrumentDTO> instrumentDTOs = conductorsResponse.getBody();
-
+        	// List<InstrumentDTO> instrumentDTOs = conductorsResponse.getBody();
+       
+        	List<InstrumentDTO> instrumentDTOs = conductorsResponse.getBody();
+        	LOGGER.error(" AFTER CALL TO CONDUCTORS -- getConductorInstrumentsByLocationAndLevel  by location = " + location + " vipLevel= " + vipLevel);
+        }catch(Exception e) {
+        	
+        }
         return null;
+       //return instrumentDTOs.stream()
+       //         .collect(Collectors.toMap(InstrumentDTO::getId, Function.identity()));
     }
 
     public Map<Long, InstrumentDTO> instrumentsNotFound() {

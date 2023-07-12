@@ -29,6 +29,8 @@ import java.util.Objects;
 
 public class FindConductorsRepositoryImpl implements FindConductorsRepository {
 
+	private static boolean bFirstTimeResults = false;
+	
 	private static Logger s_logger = LogManager.getLogger(FindConductorsRepositoryImpl.class);
 	
 	private static Object s_bigQueryResult = null;
@@ -42,7 +44,15 @@ public class FindConductorsRepositoryImpl implements FindConductorsRepository {
     @WithSpan()
     public Object findConductorInstruments(@SpanAttribute("location") String location) {
      	
-    	return entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_conductors_" + location).getResultList(); 	
+    	List<Instrument> vipResults = new ArrayList<Instrument>();
+    	
+    	try {
+    		String queryString = "SELECT * FROM instruments_for_sale_conductors_" + location;
+    		vipResults = runQuery (queryString);
+    	}catch ( Exception e ) {
+    		
+    	}
+    	return 	vipResults;
     	
      }
     
@@ -54,8 +64,11 @@ public class FindConductorsRepositoryImpl implements FindConductorsRepository {
     	List<Instrument> vipResults = new ArrayList<Instrument>();
     	
     	String queryString = "SELECT * FROM instruments_for_sale_conductors_" + location + "_" + vipLevel;
-    	vipResults = entityManager.createNativeQuery( queryString ).getResultList();	
-	
+    	try {
+    		vipResults = runQuery( queryString);   //entityManager.createNativeQuery( queryString ).getResultList();	
+    	}catch ( Exception e ) {
+    		
+    	}
     	return filterVipAndLocationData((List<Instrument>)instruments, vipResults);	
      }
     
@@ -70,22 +83,28 @@ public class FindConductorsRepositoryImpl implements FindConductorsRepository {
     	
     	return results;
     }
-
     
-    @Override
-	public Object findVipInstruments(Object obj, String vipLevel) {
+    protected List<Instrument> runQuery(String queryString) {
     	
-    	return entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_conductors").getResultList(); 	
-    	
+    	List<Instrument> results = new ArrayList<Instrument>();
+    	try  { 
+    		if (!this.bFirstTimeResults) {
+    			results = entityManager.createNativeQuery( queryString ).getResultList();
+    			bFirstTimeResults = true;
+    		}
+    	} catch (Throwable t ) {
+    		
+    	}
+    	return results;
     }
 	
 	@Override
     public Object findInstrumentsAll() {
     	s_logger.info("findInstruments Called (All)");
     	
-    	Object obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale").getResultList(); 
+    	//Object obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale").getResultList(); 
 	 
-		return obj;
+		return null;
     }
     
     @Override
