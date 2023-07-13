@@ -10,6 +10,8 @@ import javax.persistence.PersistenceContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import com.shabushabu.javashop.conductors.VipTestData;
 import com.shabushabu.javashop.conductors.model.Instrument;
@@ -46,81 +48,81 @@ public class FindConductorsRepositoryImpl implements FindConductorsRepository {
     
     @Override
     @WithSpan()
-    public Object findConductorInstruments(@SpanAttribute("location") String location) {
+    public ResponseEntity<List<Instrument>> findConductorInstruments(@SpanAttribute("location") String location) throws Exception {
      	
     	List<Instrument> vipResults = new ArrayList<Instrument>();
     	
     	String sTablename = "instruments_for_sale_conductors_";
-    	
-    
-    	try {
+   
     		sTablename += location;
-    		vipResults = runQuery (sTablename, location);
-    	}catch ( Exception e ) {
-    		
-    	}
-    	return 	vipResults;
+    	
+    	return 	runQuery (sTablename, location);
     	
      }
     
     @SuppressWarnings("unchecked")
 	@Override
 	@WithSpan()
-    public Object findConductorInstrumentsByVipLevel(Object instruments, @SpanAttribute("location") String location, @SpanAttribute("vipLevel") String vipLevel) {
+    public ResponseEntity<List<Instrument>> findConductorInstrumentsByVipLevel(Object instruments, @SpanAttribute("location") String location, @SpanAttribute("vipLevel") String vipLevel) throws Exception  {
      	
-    	List<Instrument> vipResults = new ArrayList<Instrument>();
+    	
+    	List<Instrument> listInstruments = new ArrayList<Instrument> ();
+    	ResponseEntity<List<Instrument>> vipResults ;
+    	
+    	 ResponseEntity<List<Instrument>> incomingResults = ( ResponseEntity<List<Instrument>>) instruments;
     	
     	//String queryString = "SELECT * FROM instruments_for_sale_conductors_" + location + "_" + vipLevel;
     	
     	String sTablename = "instruments_for_sale_conductors_";
     	
-    	try {
+    	
     		sTablename += location + "_" + vipLevel;
     		vipResults = runQuery (sTablename, location, vipLevel);
-    		//entityManager.createNativeQuery( queryString ).getResultList();	
-    	}catch ( Exception e ) {
     		
-    	}
-    	return filterVipAndLocationData((List<Instrument>)instruments, vipResults);	
+    		return vipResults;
      }
     
-    protected List<Instrument> filterVipAndLocationData( List<Instrument> instruments, List<Instrument> vipList) {
+   /* @WithSpan()
+    protected ResponseEntity<List<Instrument>> filterVipAndLocationData(  List<Instrument> vipList) throws Exception {
     	// Filter and Merge based on Locale and VipLevel data.
     	
-    	List<Instrument> results = new ArrayList<Instrument>();
+    	ResponseEntity<List<Instrument>> results; 
+    	
+    	List<Instrument> theList = new ArrayList<Instrument>();
+    	
     	
     	// Join lists 
-    	results.addAll(vipList);
-    	results.addAll(instruments);
+    	theList.addAll(vipList);
     	
-    	return results;
+    	return new ResponseEntity<List<Instrument>> (theList, HttpStatus.OK);
     }
+    */
     
     @SuppressWarnings("unchecked")
-	protected List<Instrument> runQuery(String tableName, String location) {
-    	List<Instrument> results = new ArrayList<Instrument>();
-    	try  { 
-    		if (bFirstTimeResults) {
-    			results = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_conductors_" + location ).getResultList();
+	protected ResponseEntity<List<Instrument>> runQuery(String tableName, String location) throws Exception {
+    	ResponseEntity<List<Instrument>> results=null;
+    	
+    		if (!bFirstTimeResults) {
+    			 entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_conductors_" + location ).getResultList();
     			bFirstTimeResults = true;
     		} else {
     			results =  VipTestData.s_istance.getInstrumentsByLocation(location);
     		}
-    	} catch (Throwable t ) {
-    		
-    	}
+    	
     	return results;
     }
 	
     
     @SuppressWarnings("unchecked")
-	protected List<Instrument> runQuery(String tableName, String location, String vipLevel) {
-    	List<Instrument> results = new ArrayList<Instrument>();
+	protected ResponseEntity<List<Instrument>> runQuery(String tableName, String location, String vipLevel) throws Exception {
+    	ResponseEntity<List<Instrument>> results=null;
+    	
     	try  { 
-    		if (bFirstTimeResults) {
-    			results = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_conductors_" + location + "_" + "vipLevel").getResultList();
+    		if (!bFirstTimeResults) {
+    			entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_conductors_" + location + "_" + "vipLevel").getResultList();
     			bFirstTimeResults = true;
     		} else {
+    			System.out.println("Calling VipTestData.s_istance.getInstrumentsByLocationAndLevel");
     			results =  VipTestData.s_istance.getInstrumentsByLocationAndLevel(location, vipLevel);
     		}
     	} catch (Throwable t ) {

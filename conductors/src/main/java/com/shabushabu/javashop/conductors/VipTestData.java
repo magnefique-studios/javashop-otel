@@ -1,7 +1,16 @@
 package com.shabushabu.javashop.conductors;
 
 import java.util.ArrayList;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 import com.shabushabu.javashop.conductors.model.Instrument;
+
+import io.opentelemetry.instrumentation.annotations.WithSpan;
+
+import java.util.List;
+
 public class VipTestData {
 
 	public static final VipTestData s_istance = new VipTestData();
@@ -11,44 +20,53 @@ public class VipTestData {
 	ArrayList<Instrument> m_instrumentsCanada = new ArrayList<Instrument>(); 
 	ArrayList<Instrument> m_instrumentsItaly = new ArrayList<Instrument>(); 
 	
-	
-	public ArrayList<Instrument> getInstrumentsByLocationAndLevel(String location, String vipLevel) {
+	@WithSpan()
+	public ResponseEntity<List<Instrument>> getInstrumentsByLocationAndLevel(String location, String vipLevel) throws Exception {
 		ArrayList<Instrument> results = new ArrayList<Instrument>();
 		
+		
+		
+		HttpStatus httpStatus = HttpStatus.OK;
+		System.out.println("In VipTestData::getInstrumentsByLocationAndLevel");
 		if (location.contains("us")) {
 			results = m_instrumentsUsa;
 			
-		} else if (location.contains("Japan") ) {
+		} else if (location.contains("japan") ) {
 			results = m_instrumentsJapan;
-		}else if (location.contains("Canada") ) {
+		}else if (location.contains("canada") ) {
 			results = m_instrumentsCanada;
 			
 			if (vipLevel.contains("gold")) {
+				System.out.println(" THROWING EXCEPTION ");
 				// Remove anything over 10 items, this is MAX GOLD orders for Canada
-				results.remove(10);
+				//results.get(100);
+				
+				httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 			}
-		}else if (location.contains("Italy") ) {
+		}else if (location.contains("italy") ) {
 			
 			results = m_instrumentsItaly;
 		}
 		
-		return results;
+		return new ResponseEntity<List<Instrument>> (results, httpStatus );
 	}
 	
-	public ArrayList<Instrument> getInstrumentsByLocation(String location) {
+	public ResponseEntity<List<Instrument>> getInstrumentsByLocation(String location) throws Exception {
 		ArrayList<Instrument> results = new ArrayList<Instrument>();
+
+		HttpStatus httpStatus = HttpStatus.OK;
 		
 		if (location.contains("us")) {
 			results = m_instrumentsUsa;
-		} else if (location.contains("Japan") ) {
+		} else if (location.contains("japan") ) {
 			results = m_instrumentsJapan;
-		}else if (location.contains("Canada") ) {
+		}else if (location.contains("canada") ) {
 			results = m_instrumentsCanada;
-		}else if (location.contains("Italy") ) {
+		}else if (location.contains("italy") ) {
 			results = m_instrumentsItaly;
 		}
 		
-		return results;
+		return new ResponseEntity<List<Instrument>> (results, httpStatus );
 	}
 	protected VipTestData() {
 		// TODO Auto-generated constructor stub

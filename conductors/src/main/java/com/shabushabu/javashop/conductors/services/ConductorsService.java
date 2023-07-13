@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -82,37 +83,38 @@ public class ConductorsService {
 
    @SuppressWarnings("unchecked")
    @WithSpan()
-	public List<Instrument> getConductorsInstruments( @SpanAttribute("location") String location,   @SpanAttribute("vipLevel")  String vipLevel) {
+	public ResponseEntity<List<Instrument>> getConductorsInstruments( @SpanAttribute("location") String location,   @SpanAttribute("vipLevel")  String vipLevel) throws Exception {
         
-    	
+    	System.out.println("Enerting getConductorsInstruments : location=" + location + "vipLevel=" + vipLevel );
     	// Call Get By Location
     	// Pass Result to Get By VIP LEVEL
     	
     	Object locationList = getConductorsInstrumentsForLocation( location );
     	//VIP_Level vip_level = this.convertVipLevel(vipLevel);
     	
-    	return (List<Instrument>) getConductorsOrdersByVipLevel(location, locationList, vipLevel );
+    	return getConductorsOrdersByVipLevel(location, locationList, vipLevel );
     	
    } 	
    
    @SuppressWarnings("unchecked")
    @WithSpan()
-   public List<Instrument> getConductorsInstrumentsForLocation(  @SpanAttribute("location")  String location) {
+   public ResponseEntity<List<Instrument>> getConductorsInstrumentsForLocation(  @SpanAttribute("location")  String location) throws Exception {
 	   
 	   
        	s_logger.info("getConductorInstrument  by location ");
         
+        HttpStatus httpStatus = HttpStatus.OK;
        	
        	if (location.contains("italy")) {
        	
        		ResponseEntity<List<Instrument>> instrumentsResponse =
         
        				restTemplate.exchange(instrumentsUri + "/instruments?" + "location=" + location.toString(),
-       						HttpMethod.GET, null, new ParameterizedTypeReference<List<Instrument>>() {
+       					HttpMethod.GET, null, new ParameterizedTypeReference<List<Instrument>>() {
        				});
        				List<Instrument> instruments = instrumentsResponse.getBody();
-		
-       				return instruments;
+       				
+       				return instrumentsResponse;
        	} else {
 
 		// DJD Note: When the conductors specific data is loaded in database, complete breakup 
@@ -121,12 +123,13 @@ public class ConductorsService {
 		
 		// See code below:
 		
-         return (List<Instrument>) instrumentRepo.findConductorInstruments(location);
+         return instrumentRepo.findConductorInstruments(location);
        	}
    }
    
-    @WithSpan()
-    public List<Instrument> getConductorsOrdersByVipLevel( @SpanAttribute("location") String location, Object location_based_results,  @SpanAttribute("vipLevel") String vipLevel) {
+    @SuppressWarnings("unchecked")
+	@WithSpan()
+    public ResponseEntity<List<Instrument>> getConductorsOrdersByVipLevel( @SpanAttribute("location") String location, Object location_based_results,  @SpanAttribute("vipLevel") String vipLevel) throws Exception {
     
 		/* s_logger.info("getConductor Instrument  by VipLevel and location ");
 	        ResponseEntity<List<Instrument>> conductorsResponse =
@@ -143,7 +146,7 @@ public class ConductorsService {
 			
 			// See return statement below:
 			
-	        return (List<Instrument>) instrumentRepo.findConductorInstrumentsByVipLevel(location_based_results, location, vipLevel);
+	        return instrumentRepo.findConductorInstrumentsByVipLevel(location_based_results, location, vipLevel);
 	        
 	   }
     

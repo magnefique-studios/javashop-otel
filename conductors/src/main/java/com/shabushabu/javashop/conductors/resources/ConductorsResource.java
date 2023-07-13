@@ -4,7 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.shabushabu.javashop.conductors.exceptions.InstrumentNotFoundException;
 import com.shabushabu.javashop.conductors.model.Instrument;
@@ -21,9 +24,9 @@ import java.util.stream.StreamSupport;
 
 @RestController
 @RequestMapping()
-public class InstrumentResource {
+public class ConductorsResource {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(InstrumentResource.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConductorsResource.class);
 
   
     
@@ -38,25 +41,35 @@ public class InstrumentResource {
     
     @RequestMapping("/conductors")
     @WithSpan()
-    public List<Instrument> getInstruments(@DefaultValue("California") @RequestParam("location") String location, 
-    									   @DefaultValue("NONE") @RequestParam("vipLevel") String vipLevel) {
+    public ResponseEntity<List<Instrument>> getInstruments(@DefaultValue("California") @RequestParam("location") String location, 
+    									   @DefaultValue("NONE") @RequestParam("vipLevel") String vipLevel) throws Exception {
     	LOGGER.info("Conductors (All) at location: " + location);
     	LOGGER.info("Conductors (All) at level "+ vipLevel );
     	
+    	
+    	ResponseEntity<List<Instrument>> response;
     	ArrayList<Instrument> returnList = new ArrayList<Instrument>();
-    	
-    	
-    	try { 
+        HttpStatus httpStatus = HttpStatus.OK;
+
+    	try {
     		if ( vipLevel.compareToIgnoreCase("NONE") == 0 ) {
-    			returnList = (ArrayList<Instrument>) conductorsService.getConductorsInstrumentsForLocation(location);
+    			response =  conductorsService.getConductorsInstrumentsForLocation(location);
     		} else {
-    			returnList = (ArrayList<Instrument>) conductorsService.getConductorsInstruments( location, vipLevel );
+    			response = conductorsService.getConductorsInstruments( location, vipLevel );
     		}
-    	} catch(Exception e) {
     		
+    		if (response.getStatusCodeValue() != 200) {
+    			System.out.println("Code is NOT OK !!!!! : " + response.getStatusCodeValue());
+    		}
+    		
+    			
+    	} catch (Exception e) {
+    		System.out.println("EXCEPTION THROWN");
+    		httpStatus = HttpStatus.NOT_ACCEPTABLE;
+    		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
     	}
     	
-    	return returnList;
+    	return response;
     	
     }
     

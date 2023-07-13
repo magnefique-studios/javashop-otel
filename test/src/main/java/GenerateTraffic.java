@@ -120,10 +120,7 @@ public class GenerateTraffic {
 						 location = "italy";
 					break;
 					
-					case 12:
-					case 13:
-					case 14:
-					case 15:
+					default:
 						 location = "canada";
 					break;
 				}
