@@ -68,7 +68,7 @@ public class GenerateTraffic {
 			}
 			
 		}
-		/*
+		
 		System.out.println("Oregon Location");
 		for (int j=0;  j<80; j++) {
 			try {
@@ -88,7 +88,7 @@ public class GenerateTraffic {
 			}
 			
 		}
-		*/
+	
 		
 		
 		String location = "";
