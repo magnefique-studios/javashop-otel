@@ -25,6 +25,8 @@ public class ConductorsApplication {
         logger.error("Number of instruments: " + ((Collection<?>) instruments).size());
         logger.info("Number of instruments: " + ((Collection<?>) instruments).size());   
      */
+    	
+    	logger.error("Testing Logging services");
     }
 	    
     public static void main(String[] args) {

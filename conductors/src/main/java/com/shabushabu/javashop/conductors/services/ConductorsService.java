@@ -105,7 +105,7 @@ public class ConductorsService {
         
         HttpStatus httpStatus = HttpStatus.OK;
        	
-       	if (location.contains("italy")) {
+       	/*if (location.contains("italy")) {
        	
        		ResponseEntity<List<Instrument>> instrumentsResponse =
         
@@ -122,9 +122,9 @@ public class ConductorsService {
 		// Remove calls to Instruments Service and replace with database calls to conductordsDB directly.
 		
 		// See code below:
-		
+		*/
          return instrumentRepo.findConductorInstruments(location);
-       	}
+       	//}
    }
    
     @SuppressWarnings("unchecked")

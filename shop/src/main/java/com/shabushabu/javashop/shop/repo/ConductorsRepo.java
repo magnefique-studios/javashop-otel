@@ -70,7 +70,7 @@ public class ConductorsRepo {
         	// List<InstrumentDTO> instrumentDTOs = conductorsResponse.getBody();
        
         	List<InstrumentDTO> instrumentDTOs = conductorsResponse.getBody();
-        	LOGGER.error(" AFTER CALL TO CONDUCTORS -- getConductorInstrumentsByLocationAndLevel  by location = " + location + " vipLevel= " + vipLevel);
+        	LOGGER.info(" AFTER CALL TO CONDUCTORS -- getConductorInstrumentsByLocationAndLevel  by location = " + location + " vipLevel= " + vipLevel);
         }catch(Exception e) {
         	
         }

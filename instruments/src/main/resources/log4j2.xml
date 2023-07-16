@@ -12,12 +12,22 @@
             <KeyValuePair key="deployment.environment" value="${sys:otel.resource.deployment.environment}"/>
             <KeyValuePair key="trace_sampled" value="${ctx:trace_flags}"/>
          </JsonLayout>
+         
+   
       </Console>
+      
+            <PatternLayout>
+   <pattern>
+      service.name=${sys:otel.resource.service.name}, deployment.environment=${sys:otel.resource.deployment.environment} %m%n
+   </pattern>
+</PatternLayout>
   
 	</Appenders>
 	<Loggers>
-		<Root level="error">
+		<Root level="info">
 			<AppenderRef ref="Console"/>
 		</Root>
 	</Loggers>
+	
+	
 </Configuration>
