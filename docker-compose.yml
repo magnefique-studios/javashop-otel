@@ -11,7 +11,7 @@ services:
       - products
       - stock
       - instruments
-      - conductors
+        #      - conductors
     environment:
       - OTEL_COLLECTOR=${OTEL_COLLECTOR}
       - USERNAME=${SHOP_USER}
