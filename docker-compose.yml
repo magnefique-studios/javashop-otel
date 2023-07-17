@@ -160,6 +160,11 @@ services:
       - ./db/sql/instruments-us-west.sql:/docker-entrypoint-initdb.d/instruments-us-west.sql
       #- ./db/sql/instruments-us-south.sql:/docker-entrypoint-initdb.d/instruments-us-south.sql
       - ./db/sql/instruments-us-central.sql:/docker-entrypoint-initdb.d/instruments-us-central.sql
+      - ./db/sql/instruments-us-central2.sql:/docker-entrypoint-initdb.d/instruments-us-central2.sql
+      - ./db/sql/instruments-us-central3.sql:/docker-entrypoint-initdb.d/instruments-us-central3.sql
+      - ./db/sql/instruments-us-central4.sql:/docker-entrypoint-initdb.d/instruments-us-central4.sql
+      - ./db/sql/instruments-us-central5.sql:/docker-entrypoint-initdb.d/instruments-us-central5.sql
+      - ./db/sql/instruments-us-central6.sql:/docker-entrypoint-initdb.d/instruments-us-central6.sql
       
   conductorsDB:
     image: "postgres:13.1-alpine"

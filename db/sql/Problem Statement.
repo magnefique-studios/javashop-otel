@@ -1,0 +1,52 @@
+Problem Statement.
+
+Ask them about Where they are in the cloud journey?
+ARe they deploying Microservices ?
+
+What problems have you noticed in Microservices development, how are they different from traditional apps if at all ? 
+
+If NOT->
+
+The problem has changed, the problem used to be finding the line of offending code that causes latency or errors in a large many many line application.
+
+So now that you have broken out that application into small services, the problem becomes more about 
+the communication between services.
+
+
+1. Distributed Tracing built for this problem. 
+
+2. How are we different - We Ingest and Retain 100% of trace data
+	which allows us to analyze traces at a Trace Level.
+3. Why does this matter ? 
+    Reduce resources required to respond to an incident 
+    ( with 100% of trace data, we 100% know where the problem is which service !)
+    Never need to reproduce an issue in an environment.
+    TO take it a step further, we can tag complete traces which in Splunk Observability to allow your responders to understand the "Impact Radius" of an issue at the time of alert, rather than 
+    further down the investigation timeframe.
+
+Complete Trace Assembly is required
+
+Customer Stories.
+
+Why the needles matter ? 
+
+1. Slide: (Progressive) For example, the stakeholders at this insurance company who were responsible for delivering a new quoting system that needed to be reliable in all 50 states. They struggled to find needles in the haystack because the needles weren’t showing up on any dashboards.  
+
+In most customer monitoring scenarios, this is commonplace as we often monitor based on size of customer or traffic.
+
+While  company does business in all 50 states most of thier traffic comes from East Coast USA. Since with SPlunk APM you have ALL traces retained, the cusotmer was able to bucket their traffic by state, and find out that Hawaii was the state with issues at that time. 
+
+Flash Sale Shoes ! 
+
+2. Slide : Customer has flash sales that are very revenue generating and the architects owned the audit of complex checkout logic for these sales.
+
+Since the traffic was so large, the could not find individual issues. However with splunk,  Being able to filter down to the specific workflow relative to the new mobile release is how they got a clear 
+understanding of what was happening, why it was happening and therefore improve downtime. 
+
+The custom tag in this case was “app-checkout” but we see “customer ID” used for retailers as well, or “policy-type or quote-type” for insurance or even “card type” for Finserv.
+
+3. The Payment services at a large customer had very complex business logic.  Think: sales tax with multiple shipping addresses, gift cards, credit cards, etc.  Everytime someone would complain they weren’t charged the right price they spent over 90 minutes just stitching together logs to figure out how the business logic played out. 
+
+The solution was Full Fidelity Distributed tracing with Splunk, why  ? First, we gave them the ability to understand the business Logic and how it was executing, to ensure what was or wasnt charged.
+
+

@@ -68,9 +68,9 @@ public class GenerateTraffic {
 			}
 			
 		}
-		/*
+		
 		System.out.println("Oregon Location");
-		for (int j=0;  j<80; j++) {
+		for (int j=0;  j<30; j++) {
 			try {
 		
 				HttpClient client = HttpClient.newHttpClient();
@@ -88,7 +88,7 @@ public class GenerateTraffic {
 			}
 			
 		}
-		*/
+		
 		
 		
 		String location = "";

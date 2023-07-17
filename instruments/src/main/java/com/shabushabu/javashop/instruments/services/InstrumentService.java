@@ -7,6 +7,8 @@ import com.shabushabu.javashop.instruments.model.Instrument;
 import com.shabushabu.javashop.instruments.repositories.InstrumentRepository;
 
 import java.util.List;
+import java.nio.Buffer;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -21,6 +23,7 @@ public class InstrumentService {
 	
 	private static ArrayList<Instrument> s_precache = new ArrayList<Instrument>();
 
+	private static ArrayList<ByteBuffer> s_directBufs = new ArrayList<ByteBuffer>(); 
 	private static Logger s_logger = LogManager.getLogger(InstrumentService.class);
 	 
     private InstrumentRepository instrumentRepo;
@@ -59,21 +62,80 @@ public class InstrumentService {
     	}
     }
     
+    
+    //static ByteBuffer appendBuffers(ByteBuffer buffer, ByteBuffer buffer1, int incomingBufferSize,
+    //        int BUFFER_STEP_SIZE) 
    
 	@SuppressWarnings("unchecked")
 	public static Object findInstrumentsOregon(EntityManager entityManager) {
 		
-		Object obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_us_central").getResultList();  
+		// s_logger.error("OREGON INSTRUMENT SEARCH CALLED !!!!!");
+		
+		//System.out.println("OREGON INSTRUMENT SEARCH CALLED !!!!!");
+		//ByteBuffer directBuf = ByteBuffer.allocate(1000000000);
+		//s_directBufs.add(directBuf);
+		
+		List obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_us_central").getResultList();  
 		
 		s_precache.addAll( (List) obj);
+		
+		//directBuf = ByteBuffer.allocate(1000000000);
+		//s_directBufs.add(directBuf);
 		
 		obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_us_west").getResultList();  
 		
+		//s_precache.addAll(s_precache);
 		s_precache.addAll( (List) obj);
+		
+		//directBuf = ByteBuffer.allocate(1000000000);
+		//s_directBufs.add(directBuf);
 		
 		obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_us_east").getResultList();  
 		
+		//s_precache.addAll(s_precache);
 		s_precache.addAll( (List) obj);
+		
+		//directBuf = ByteBuffer.allocate(1000000000);
+		//s_directBufs.add(directBuf);
+		
+		obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_us_central3").getResultList();  
+		
+		//s_precache.addAll(s_precache);
+		s_precache.addAll( (List) obj);
+		
+		//directBuf = ByteBuffer.allocate(1000000000);
+		//s_directBufs.add(directBuf);
+		
+		obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_us_central2").getResultList();  
+		
+		//s_precache.addAll(s_precache);
+		s_precache.addAll( (List) obj);
+		
+		obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_us_central4").getResultList();  
+		
+		//s_precache.addAll(s_precache);
+		s_precache.addAll( (List) obj);
+		
+		//directBuf = ByteBuffer.allocateDirect(1000000000);
+		//s_directBufs.add(directBuf);
+		
+		///obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_us_central5").getResultList();  
+		//s_precache.addAll(s_precache);
+		//s_precache.addAll( (List) obj);
+		
+		///directBuf = ByteBuffer.allocateDirect(1000000000);
+		//s_directBufs.add(directBuf);
+		
+		//obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_us_central6").getResultList();  
+		//s_precache.addAll(s_precache);
+		//s_precache.addAll( (List) obj);
+		
+		//directBuf = ByteBuffer.allocateDirect(100000000);
+		//s_directBufs.add(directBuf);
+				
+		
+		
+		
 		
 			
 		return filterByLocation( "Oregon", s_precache);
