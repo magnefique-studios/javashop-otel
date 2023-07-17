@@ -31,6 +31,12 @@ jobs:
   #    run: mvn -B package --file pom.xml
     - name: Build
       run: ./build.sh
+     # Run if it was successful
+    #- name: The job has succeeded
+     # run: curl -X POST 'https://ingest.us1.signalfx.com/v2/event' \
+     # -H 'Content-Type: application/json' \
+     # -H 'X-SF-Token: S4mEj3vnr9ev3kAdM-9kBQ' \ 
+     # -d '[{ "category": "USER_DEFINED", "eventType": "testevent: PASS", "dimensions": { "environment": "production", "service": "API" }, "timestamp": ${{ env.EPOCH_TS }} }]'
   #  - name: Sleep for 100 seconds
   #    run: sleep 100s
   #    shell: bash    
