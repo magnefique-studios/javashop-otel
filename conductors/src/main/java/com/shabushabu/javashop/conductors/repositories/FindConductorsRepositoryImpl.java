@@ -63,16 +63,15 @@ public class FindConductorsRepositoryImpl implements FindConductorsRepository {
     @SuppressWarnings("unchecked")
 	@Override
 	@WithSpan()
-    public ResponseEntity<List<Instrument>> findConductorInstrumentsByVipLevel(Object instruments, @SpanAttribute("location") String location, @SpanAttribute("vipLevel") String vipLevel) throws Exception  {
+    public ResponseEntity<List<Instrument>> findConductorInstrumentsByVipLevel( Object instruments, @SpanAttribute("location") String location,
+    		@SpanAttribute("vipLevel") String vipLevel) throws Exception  {
      	
     	
     	List<Instrument> listInstruments = new ArrayList<Instrument> ();
     	ResponseEntity<List<Instrument>> vipResults ;
     	
     	 ResponseEntity<List<Instrument>> incomingResults = ( ResponseEntity<List<Instrument>>) instruments;
-    	
-    	//String queryString = "SELECT * FROM instruments_for_sale_conductors_" + location + "_" + vipLevel;
-    	
+    		
     	String sTablename = "instruments_for_sale_conductors_";
     	
     	
@@ -81,22 +80,6 @@ public class FindConductorsRepositoryImpl implements FindConductorsRepository {
     		
     		return vipResults;
      }
-    
-   /* @WithSpan()
-    protected ResponseEntity<List<Instrument>> filterVipAndLocationData(  List<Instrument> vipList) throws Exception {
-    	// Filter and Merge based on Locale and VipLevel data.
-    	
-    	ResponseEntity<List<Instrument>> results; 
-    	
-    	List<Instrument> theList = new ArrayList<Instrument>();
-    	
-    	
-    	// Join lists 
-    	theList.addAll(vipList);
-    	
-    	return new ResponseEntity<List<Instrument>> (theList, HttpStatus.OK);
-    }
-    */
     
     @SuppressWarnings("unchecked")
 	protected ResponseEntity<List<Instrument>> runQuery(String tableName, String location) throws Exception {

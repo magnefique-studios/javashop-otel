@@ -36,13 +36,11 @@ public class VipTestData {
 		}else if (location.contains("canada") ) {
 			results = m_instrumentsCanada;
 			
-			/*if (vipLevel.contains("gold")) {
+			if (vipLevel.contains("gold")) {
 				System.out.println(" THROWING EXCEPTION ");
-				// Remove anything over 10 items, this is MAX GOLD orders for Canada
-				//results.get(100);
 				
 				httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-			}*/
+			}
 		}else if (location.contains("italy") ) {
 			
 			results = m_instrumentsItaly;

@@ -68,7 +68,7 @@ public class GenerateTraffic {
 			}
 			
 		}
-		
+	/*	
 		System.out.println("Oregon Location");
 		for (int j=0;  j<30; j++) {
 			try {
@@ -88,12 +88,7 @@ public class GenerateTraffic {
 			}
 			
 		}
-<<<<<<< HEAD
-		
-=======
-	
->>>>>>> e80ddbaf0df4e6e0b729ac00c5b44c502dafc077
-		
+	*/
 		
 		String location = "";
 		String vipLevel = "";
