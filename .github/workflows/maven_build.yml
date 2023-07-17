@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Buid and Deploy - Commit
+name: Buid and Test - Commit
 
 on:
   push:
@@ -29,8 +29,8 @@ jobs:
         cache: maven
   #  - name: Build and Deploy
   #    run: mvn -B package --file pom.xml
-    - name: Build And Deploy
-      run: ./BuildAndDeploy.sh
+    - name: Build
+      run: ./build.sh
   #  - name: Sleep for 100 seconds
   #    run: sleep 100s
   #    shell: bash    
