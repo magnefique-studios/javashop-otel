@@ -68,7 +68,7 @@ public class GenerateTraffic {
 			}
 			
 		}
-	/*	
+		
 		System.out.println("Oregon Location");
 		for (int j=0;  j<30; j++) {
 			try {
@@ -88,7 +88,7 @@ public class GenerateTraffic {
 			}
 			
 		}
-	*/
+	/*
 		
 		String location = "";
 		String vipLevel = "";
@@ -174,7 +174,7 @@ public class GenerateTraffic {
 		System.out.println("CALIFORNIA DURATION IS: " + duration /  1000000000);
 
 		if (!chicago) {	
-			/* startTime = System.nanoTime();
+			 startTime = System.nanoTime();
 		
 			System.out.println("Colorado Location");
 		
@@ -201,7 +201,7 @@ public class GenerateTraffic {
 			duration = (endTime - startTime);
 		
 			System.out.println("COLORADO DURATION IS: " + duration/ 1000000000);
-	        */
+	        
 		} else {
 			startTime = System.nanoTime();
 			
@@ -229,6 +229,8 @@ public class GenerateTraffic {
 			 duration = (endTime - startTime);
 			
 			System.out.println("CHICAGO DURATION IS: " + duration/ 1000000000);
+			
+			*/
 	     }
 	}
-}
+
