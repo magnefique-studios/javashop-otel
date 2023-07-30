@@ -11,7 +11,7 @@ services:
       - products
       - stock
       - instruments
-        #      - conductors
+      - conductors
     environment:
       - OTEL_COLLECTOR=${OTEL_COLLECTOR}
       - USERNAME=${SHOP_USER}
@@ -137,5 +137,68 @@ services:
       - ./db/sql/instruments-us-central4.sql:/docker-entrypoint-initdb.d/instruments-us-central4.sql
       - ./db/sql/instruments-us-central5.sql:/docker-entrypoint-initdb.d/instruments-us-central5.sql
       - ./db/sql/instruments-us-central6.sql:/docker-entrypoint-initdb.d/instruments-us-central6.sql
-      
-  
+  conductors:
+    image:  shabushabu/javashop.conductors:latest
+    build:
+      ./conductors
+    ports:
+      - "8044:8044"
+      - "8004:8004"
+    healthcheck:
+      test: curl -sS http://localhost:8044/healthcheck | grep -c 200 > /dev/null
+      #curl --fail http://localhost:8040//healthcheck  || exit 1
+      interval: 2s
+      retries: 45
+      start_period: 45s
+      timeout: 2s
+    links:
+      - conductorsDB
+    environment:
+      - OTEL_COLLECTOR=${OTEL_COLLECTOR}
+      - USERNAME=${SHOP_USER}
+      - TOKEN=${SPLUNK_ACCESS_TOKEN}
+      - REALM=${SPLUNK_REALM}
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresDB:5432/instruments
+      - SPRING_DATASOURCE_USERNAME=instruments
+      - SPRING_DATASOURCE_PASSWORD=instruments
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - PGUSER=instruments
+    depends_on:
+      conductorsDB:
+        condition: service_healthy
+  conductorsDB:
+    image: "postgres:13.1-alpine"
+    container_name: conductorsDB
+#    restart: always
+    environment:
+      - POSTGRES_USER=conductors
+      - POSTGRES_PASSWORD=conductors
+      - PGUSER=conductors
+      - PGPORT=5433
+    ports:
+      - "5433:5433"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 2s
+      timeout: 2s
+      start_period: 20s
+      retries: 50
+    volumes:
+      - ./db2/sql/instruments-latest.sql:/docker-entrypoint-initdb.d/instruments-latest.sql
+      - ./db2/sql/instruments-conductors-japan-gold.sql:/docker-entrypoint-initdb.d/instruments-conductors-japan-gold.sql
+      - ./db2/sql/instruments-conductors-canada-gold.sql:/docker-entrypoint-initdb.d/instruments-conductors-canada-gold.sql
+      - ./db2/sql/instruments-conductors-italy-gold.sql:/docker-entrypoint-initdb.d/instruments-conductors-italy-gold.sql
+      - ./db2/sql/instruments-conductors-us-silver.sql:/docker-entrypoint-initdb.d/instruments-conductors-us-silver.sql
+      - ./db2/sql/instruments-conductors-japan-silver.sql:/docker-entrypoint-initdb.d/instruments-conductors-japan-silver.sql
+      - ./db2/sql/instruments-conductors-canada-silver.sql:/docker-entrypoint-initdb.d/instruments-conductors-canada-silver.sql
+      - ./db2/sql/instruments-conductors-italy-silver.sql:/docker-entrypoint-initdb.d/instruments-conductors-italy-silver.sql
+      - ./db2/sql/instruments-conductors-us-platinum.sql:/docker-entrypoint-initdb.d/instruments-conductors-us-platinum.sql
+      - ./db2/sql/instruments-conductors-japan-platinum.sql:/docker-entrypoint-initdb.d/instruments-conductors-japan-platinum.sql
+      - ./db2/sql/instruments-conductors-canada-platinum.sql:/docker-entrypoint-initdb.d/instruments-conductors-canada-platinum.sql
+      - ./db2/sql/instruments-conductors-italy-platinum.sql:/docker-entrypoint-initdb.d/instruments-conductors-italy-platinum.sql
+      - ./db2/sql/instruments-conductors-us.sql:/docker-entrypoint-initdb.d/instruments-conductors-us.sql
+      - ./db2/sql/instruments-conductors-japan.sql:/docker-entrypoint-initdb.d/instruments-conductors-japan.sql
+      - ./db2/sql/instruments-conductors-canada.sql:/docker-entrypoint-initdb.d/instruments-conductors-canada.sql
+      - ./db2/sql/instruments-conductors-italy.sql:/docker-entrypoint-initdb.d/instruments-conductors-italy.sql
+     
+     
