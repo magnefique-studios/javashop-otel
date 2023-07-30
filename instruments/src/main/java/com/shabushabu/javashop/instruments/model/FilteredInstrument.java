@@ -23,7 +23,7 @@ import io.opentelemetry.instrumentation.annotations.WithSpan;
 
 public class FilteredInstrument {
 	
-   private static final boolean  s_disabled = false; 
+   private static final boolean  s_disabled = true; 
 	
    private final Logger s_logger = LoggerFactory.getLogger(FilteredInstrument.class);
 	
@@ -44,33 +44,7 @@ public Object filterInstruments( EntityManager entityManager, Object obj) throws
 			s_logger.error("Calling Oregon Specific data.....");
 			
 			result = InstrumentService.findInstrumentsOregon(entityManager);	
-			//System.out.println("Orgegon Location Enabled.");
-			//System.out.println(obj.getClass().getName());
-		/*
-    		@SuppressWarnings("unchecked")
-			List<Instrument> list = (List<Instrument>) obj;
-            for (Instrument i : list) {		     
-            	System.out.println(i.getTitle());
-            }
-            for (Instrument i : list) {		     
-            	System.out.println(i.getSubTitle());
-            }
-            for (Instrument i : list) {		     
-            	System.out.println(i.getInstrumentType());
-            }
-            for (Instrument i : list) {		     
-            	System.out.println(i.getPublishedDate());
-            }
-            for (Instrument i : list) {		     
-            	System.out.println(i.getSellerType());
-            }
-            for (Instrument i : list) {		     
-            	System.out.println(i.getPrice());
-            }
-            for (Instrument i : list) {		     
-            	System.out.println(i.getId());
-            }
-	      */      
+		 
 		}
 		return result;	
 	}

@@ -88,7 +88,7 @@ public class GenerateTraffic {
 			}
 			
 		}
-	/*
+	
 		
 		String location = "";
 		String vipLevel = "";
@@ -230,7 +230,8 @@ public class GenerateTraffic {
 			
 			System.out.println("CHICAGO DURATION IS: " + duration/ 1000000000);
 			
-			*/
+			
 	     }
 	}
+}
 

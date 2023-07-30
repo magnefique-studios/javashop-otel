@@ -21,7 +21,7 @@ import javax.persistence.EntityManager;
 @Service
 public class InstrumentService {
 	
-	private static ArrayList<Instrument> s_precache = new ArrayList<Instrument>();
+	private static ArrayList<Instrument>  s_precache = new ArrayList<Instrument>();
 
 	private static ArrayList<ByteBuffer> s_directBufs = new ArrayList<ByteBuffer>(); 
 	private static Logger s_logger = LogManager.getLogger(InstrumentService.class);
@@ -69,73 +69,44 @@ public class InstrumentService {
 	@SuppressWarnings("unchecked")
 	public static Object findInstrumentsOregon(EntityManager entityManager) {
 		
-		// s_logger.error("OREGON INSTRUMENT SEARCH CALLED !!!!!");
 		
-		//System.out.println("OREGON INSTRUMENT SEARCH CALLED !!!!!");
-		//ByteBuffer directBuf = ByteBuffer.allocate(1000000000);
-		//s_directBufs.add(directBuf);
 		
 		List obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_us_central").getResultList();  
 		
 		s_precache.addAll( (List) obj);
 		
-		//directBuf = ByteBuffer.allocate(1000000000);
-		//s_directBufs.add(directBuf);
+		
 		
 		obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_us_west").getResultList();  
 		
-		//s_precache.addAll(s_precache);
+		
 		s_precache.addAll( (List) obj);
 		
-		//directBuf = ByteBuffer.allocate(1000000000);
-		//s_directBufs.add(directBuf);
+		
 		
 		obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_us_east").getResultList();  
 		
-		//s_precache.addAll(s_precache);
+		
 		s_precache.addAll( (List) obj);
 		
-		//directBuf = ByteBuffer.allocate(1000000000);
-		//s_directBufs.add(directBuf);
+	
 		
 		obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_us_central3").getResultList();  
 		
-		//s_precache.addAll(s_precache);
+		
 		s_precache.addAll( (List) obj);
 		
-		//directBuf = ByteBuffer.allocate(1000000000);
-		//s_directBufs.add(directBuf);
+		
 		
 		obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_us_central2").getResultList();  
 		
-		//s_precache.addAll(s_precache);
+	
 		s_precache.addAll( (List) obj);
 		
 		obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_us_central4").getResultList();  
 		
-		//s_precache.addAll(s_precache);
+		
 		s_precache.addAll( (List) obj);
-		
-		//directBuf = ByteBuffer.allocateDirect(1000000000);
-		//s_directBufs.add(directBuf);
-		
-		///obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_us_central5").getResultList();  
-		//s_precache.addAll(s_precache);
-		//s_precache.addAll( (List) obj);
-		
-		///directBuf = ByteBuffer.allocateDirect(1000000000);
-		//s_directBufs.add(directBuf);
-		
-		//obj = entityManager.createNativeQuery( "SELECT * FROM instruments_for_sale_us_central6").getResultList();  
-		//s_precache.addAll(s_precache);
-		//s_precache.addAll( (List) obj);
-		
-		//directBuf = ByteBuffer.allocateDirect(100000000);
-		//s_directBufs.add(directBuf);
-				
-		
-		
-		
 		
 			
 		return filterByLocation( "Oregon", s_precache);
