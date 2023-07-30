@@ -20,14 +20,14 @@ services:
     healthcheck:
       test: curl -sS http://localhost:8010/healthcheck | grep -c 200 > /dev/null
       interval: 2s
-      retries: 15
-      start_period: 5s
+      retries: 25
+      start_period: 15s
       timeout: 2s
     depends_on:
       instruments:
         condition: service_healthy
-      #conductors:
-       # condition: service_healthy
+      conductors:
+        condition: service_healthy
   products:
     image: shabushabu/javashop.products:latest
     build:
@@ -90,7 +90,7 @@ services:
       #curl --fail http://localhost:8040//healthcheck  || exit 1
       interval: 2s
       retries: 45
-      start_period: 45s
+      start_period: 25s
       timeout: 2s
     links:
       - postgresDB
@@ -110,7 +110,7 @@ services:
   postgresDB:
     image: "postgres:13.1-alpine"
     container_name: postgresDB
-#    restart: always
+    restart: always
     environment:
       - POSTGRES_USER=instruments
       - POSTGRES_PASSWORD=instruments
@@ -149,7 +149,7 @@ services:
       #curl --fail http://localhost:8040//healthcheck  || exit 1
       interval: 2s
       retries: 45
-      start_period: 45s
+      start_period: 25s
       timeout: 2s
     links:
       - conductorsDB
@@ -158,11 +158,11 @@ services:
       - USERNAME=${SHOP_USER}
       - TOKEN=${SPLUNK_ACCESS_TOKEN}
       - REALM=${SPLUNK_REALM}
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresDB:5432/instruments
-      - SPRING_DATASOURCE_USERNAME=instruments
-      - SPRING_DATASOURCE_PASSWORD=instruments
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://conductorsDB:5433/conductors
+      - SPRING_DATASOURCE_USERNAME=conductors
+      - SPRING_DATASOURCE_PASSWORD=conductors
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-      - PGUSER=instruments
+      - PGUSER=conductors
     depends_on:
       conductorsDB:
         condition: service_healthy
@@ -181,7 +181,7 @@ services:
       test: ["CMD-SHELL", "pg_isready"]
       interval: 2s
       timeout: 2s
-      start_period: 20s
+      start_period: 35s
       retries: 50
     volumes:
       - ./db2/sql/instruments-latest.sql:/docker-entrypoint-initdb.d/instruments-latest.sql

@@ -12,7 +12,7 @@ public class GenerateTraffic {
 	
 	public static void main(String[] args) {
                 try {	
-		  Thread.sleep(45000);
+		  Thread.sleep(120000);
 		}catch(Exception e){
 		}
 		  
