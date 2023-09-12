@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.NoPermissionException;
 
@@ -37,14 +40,13 @@ public class HomeController {
     
     
     @RequestMapping(value="/")
-    public String getProductsAllLocations(Model model,  
+    public String getProductsAllLocations(Model model,  @RequestParam(value="score",required=false) Boolean score, 
     													@RequestParam(value="name",required=false) String theName, 
     													@RequestParam(value="location", required=false) String theLocation,													
     													@RequestParam(value="userid", required=false) String userid) throws Exception {
-
     	
     	
-		if (null == theName ) {
+    	if (null == theName ) {
 		
 			theName = "Guest";
 		}	
@@ -73,6 +75,16 @@ public class HomeController {
 		return "index";
     
     } 
+   
+    @RequestMapping(value = "/score")
+    public @ResponseBody List<Integer> greeting() {
+        Integer int1 = 1;
+        Integer int2 = 2;
+        List<Integer> list = new ArrayList<Integer>();
+        list.add(int1);
+        list.add(int2);
+        return list;
+    }
     
     @WithSpan
     public void allParameters( @SpanAttribute("name") String name, @SpanAttribute("location") String location, 
@@ -120,42 +132,6 @@ public class HomeController {
    	 
    	 return "";
     }
-    
-    /*
-    @RequestMapping(value="/conductors")
-    public String getProductsConductorsAllLocations(Model model, @RequestParam(value="name",required=false) String theName, 
-			@RequestParam(value="location", required=false) String theLocation,
-			@RequestParam(value="vipLevel", required=false) String vipLevel) {
-
-
-			if (null == theName ) {
-			
-			theName = "Guest";
-			}	
-			
-			if (null == theLocation ) {
-			theLocation="California";
-			}
-			
-			User user = new User();
-			user.setLocation(theLocation);
-			user.setName(theName);
-			model.addAttribute("user", user);
-			
-			
-			//model.addAttribute("products", productService.getProducts(theLocation));
-			
-			//model.addAttribute("instruments", instrumentService.getInstruments(theLocation));
-			
-			if (null == vipLevel ) {
-				vipLevel = "NONE";
-			}
-			if (bEnableConductors) {
-				System.out.println(" WE ARE SENDING TRAFFIC TO CONDUCTORS !!!!!! -- ONE TIME");
-				model.addAttribute("conductors", conductorsService.getConductorInstruments(theLocation, vipLevel ));
-			}
-			return "index";
-    } */
     
     @RequestMapping("/healthcheck")
     @ResponseStatus(code = HttpStatus.OK, reason = "OK")
