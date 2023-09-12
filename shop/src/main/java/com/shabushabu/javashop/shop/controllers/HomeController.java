@@ -78,36 +78,23 @@ public class HomeController {
     public void allParameters( @SpanAttribute("name") String name, @SpanAttribute("location") String location, 
     		 @SpanAttribute("userid")String userid ) throws NoPermissionException {
     	
-    	// 
-    	System.out.println("userid = " + userid);
-    	
-    	//if (userid.equalsIgnoreCase("C0000010")) {
-    	//	throw new NoPermissionException("User does not have permissions for this opearation");
-    	//}
     	checkIfRestricted(userid);
     }
     
-    public String checkIfRestricted(String userId) {
+    @WithSpan
+    public String checkIfRestricted(@SpanAttribute("userId") String userId) {
    	 try {
-            // Create a URL object with the API Gateway URL
             URL url = new URL("https://mofi2flod5cpeismodr7eonuiu0gkoli.lambda-url.us-west-1.on.aws/?userId=" + userId); 
-
-            // Open a connection
+            
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            
-            // Set the request type to POST
             conn.setRequestMethod("POST");
-            
-            // Set Content-Type to application/json
             conn.setRequestProperty("Content-Type", "application/json");
-
-            // Enable sending data
             conn.setDoOutput(true);
             
-            // Create JSON payload (e.g., {"user_id": "user1"})
-            String payload = "{\"userId\":\"user1\"}";
+            
+            String payload = "{\"userId\":" ;
+            payload = payload + "\"" + userId + "\"}";
 
-            // Write the payload to the request body
             try (OutputStream os = conn.getOutputStream()) {
                 byte[] input = payload.getBytes("utf-8");
                 os.write(input, 0, input.length);
