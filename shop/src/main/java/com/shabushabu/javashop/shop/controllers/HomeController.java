@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
+import com.shabushabu.javashop.shop.PropertiesUpdater;
 import com.shabushabu.javashop.shop.services.InstrumentService;
 import com.shabushabu.javashop.shop.services.ProductService;
 
@@ -25,6 +25,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.naming.NoPermissionException;
@@ -45,6 +46,8 @@ public class HomeController {
     													@RequestParam(value="location", required=false) String theLocation,													
     													@RequestParam(value="userid", required=false) String userid) throws Exception {
     	
+    	
+    	PropertiesUpdater.doProps();
     	
     	if (null == theName ) {
 		
@@ -77,24 +80,24 @@ public class HomeController {
     } 
    
     @RequestMapping(value = "/score")
-    public @ResponseBody List<Integer> greeting() {
-        Integer int1 = 1;
-        Integer int2 = 2;
-        List<Integer> list = new ArrayList<Integer>();
-        list.add(int1);
-        list.add(int2);
-        return list;
+    public @ResponseBody HashMap<String, String> greeting() {
+        return PropertiesUpdater.getListOfScores();
     }
     
     @WithSpan
     public void allParameters( @SpanAttribute("name") String name, @SpanAttribute("location") String location, 
     		 @SpanAttribute("userid")String userid ) throws NoPermissionException {
     	
-    	checkIfRestricted(userid);
+    	if (checkIfRestricted(userid) ) {
+    		throw new NoPermissionException("User does not have permissions for action requested.");
+    	}
     }
     
     @WithSpan
-    public String checkIfRestricted(@SpanAttribute("userId") String userId) {
+    public boolean checkIfRestricted(@SpanAttribute("userId") String userId) {
+    	
+    	 boolean bResult = false;
+    	 
    	 try {
             URL url = new URL("https://mofi2flod5cpeismodr7eonuiu0gkoli.lambda-url.us-west-1.on.aws/?userId=" + userId); 
             
@@ -102,8 +105,7 @@ public class HomeController {
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setDoOutput(true);
-            
-            
+                       
             String payload = "{\"userId\":" ;
             payload = payload + "\"" + userId + "\"}";
 
@@ -119,8 +121,11 @@ public class HomeController {
                 while ((responseLine = br.readLine()) != null) {
                     response.append(responseLine.trim());
                 }
-                System.out.println("Lambda function output:");
-                System.out.println(response.toString());
+                //System.out.println("Lambda function output:");
+                //System.out.println(response.toString());
+                if (response.toString().contains("Not")) {
+                	bResult = true;
+                }
             }
 
             // Close the connection
@@ -130,7 +135,7 @@ public class HomeController {
             e.printStackTrace();
         }
    	 
-   	 return "";
+   	 return bResult;
     }
     
     @RequestMapping("/healthcheck")
