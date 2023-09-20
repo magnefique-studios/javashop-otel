@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.shabushabu.javashop.shop.Exercises;
 import com.shabushabu.javashop.shop.PropertiesUpdater;
 import com.shabushabu.javashop.shop.services.InstrumentService;
 import com.shabushabu.javashop.shop.services.ProductService;
@@ -27,6 +28,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.naming.NoPermissionException;
 
@@ -41,13 +43,14 @@ public class HomeController {
     
     
     @RequestMapping(value="/")
-    public String getProductsAllLocations(Model model,  @RequestParam(value="score",required=false) Boolean score, 
-    													@RequestParam(value="name",required=false) String theName, 
+    public String getProductsAllLocations(Model model,  @RequestParam(value="name",required=false) String theName, 
     													@RequestParam(value="location", required=false) String theLocation,													
     													@RequestParam(value="userid", required=false) String userid) throws Exception {
     	
     	
-    	PropertiesUpdater.doProps();
+    	PropertiesUpdater.doPropsTest();
+    	
+    	Exercises.checkExercise(2);
     	
     	if (null == theName ) {
 		
@@ -80,10 +83,33 @@ public class HomeController {
     } 
    
     @RequestMapping(value = "/score")
-    public @ResponseBody HashMap<String, String> greeting() {
-        return PropertiesUpdater.getListOfScores();
+    public @ResponseBody HashMap<String, String> getScores( @RequestParam(value="exercise",required=false)  Integer exercise) {
+        
+    	
+    	
+    	if ( null == exercise ) {
+    		exercise = 0;
+    	}
+    	
+    	
+    	if (exercise == 0) {
+    		
+    		return PropertiesUpdater.getListOfScores();
+    	} else {
+    		HashMap<String, String> result = new HashMap<String, String>();
+    		result.put("exercise" + exercise, PropertiesUpdater.getScore(exercise));
+    		return result;
+    	}
+    	
+    	
+    	// EXERCISE 1: FREE always True.
+    	
+    	// EXERCISE 2: Read in .ENV ensure values are there for ACCESS TOKEN and Realm
+    		// Send a Metric test
+    	
     }
     
+  
     @WithSpan
     public void allParameters( @SpanAttribute("name") String name, @SpanAttribute("location") String location, 
     		 @SpanAttribute("userid")String userid ) throws NoPermissionException {
@@ -93,7 +119,7 @@ public class HomeController {
     	}
     }
     
-    @WithSpan
+    @WithSpan 
     public boolean checkIfRestricted(@SpanAttribute("userId") String userId) {
     	
     	 boolean bResult = false;

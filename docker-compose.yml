@@ -24,6 +24,9 @@ services:
       - type: bind
         source: ./shop/data
         target: /container/shop/data
+      - type: bind
+        source: ./.env
+        target: /container/shop/data/.env
   products:
     image: shabushabu/javashop.products:latest
     build:
@@ -69,6 +72,10 @@ services:
         # depends_on:
         # iinstruments: 
         # condition: service_healthy
+    volumes: 
+      - type: bind
+        source: ./test/data
+        target: /container/test/data      
   instruments:
     image:  shabushabu/javashop.instruments:latest
     build:

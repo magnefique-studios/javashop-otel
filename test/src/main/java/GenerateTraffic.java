@@ -1,30 +1,60 @@
 
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-
-
+import java.util.Properties;
 
 public class GenerateTraffic {
+	
+	private static final String TESTER_PROPS_FILE = "/container/test/data/tester.properties";
+	private static final String TESTER_FIRST_RUN = "FirstRun";
 
 	
 	public static void main(String[] args) {
-                try {	
-		  Thread.sleep(120000);
-		}catch(Exception e){
-		}
-		  
-	        String url ="http://shop:8010";
+
+
+		 Properties properties = new Properties();
+		 try (FileInputStream inputStream = new FileInputStream(TESTER_PROPS_FILE)) {
+			 properties.load(inputStream);
+			 System.out.println("Properties read: " + properties);
+		 } catch (IOException e) {
+			 System.err.println("Failed to read properties file: " + e.getMessage());
+			 return;
+		 }
+
+		 Boolean firstTimeAutoBoot = Boolean.parseBoolean((String)properties.getProperty(TESTER_FIRST_RUN));
+
+		 if (firstTimeAutoBoot) {
+
+			 properties.setProperty(TESTER_FIRST_RUN, "False");
+			 try (FileOutputStream outputStream = new FileOutputStream(TESTER_PROPS_FILE)) {
+				 properties.store(outputStream, null);
+				 System.out.println("Properties written: " + properties);
+				 return;
+			 } catch (IOException e) {
+				 System.err.println("Failed to write properties file: " + e.getMessage());
+			 }
+		 }
+		 
+
+		 try {
+			 Thread.sleep(60000);
+		 }catch(Exception e) {
+			 e.printStackTrace();
+		 }
+
+		 String url ="http://shop:8010";
 		boolean chicago = false;
 		
 		if (null != args && args.length >0 ) {
 				chicago = args[0].equalsIgnoreCase("-chicago");
 		}
 		
-		
-	
 		System.out.println("Utah Location");
 		for (int j=0; j<40; j++) {
 			try {
@@ -47,8 +77,7 @@ public class GenerateTraffic {
 		
 		System.out.println("California Location");
 		long startTime = System.nanoTime();
-	
-		
+			
 		for (int k=0; k<40; k++) {
 				
 			try {
@@ -88,13 +117,6 @@ public class GenerateTraffic {
 			}
 			
 		}
-	
-		
-		
-		
-	
-		
-		
 		long endTime = System.nanoTime();
 
 		long duration = (endTime - startTime);

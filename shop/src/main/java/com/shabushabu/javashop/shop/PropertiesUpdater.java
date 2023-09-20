@@ -38,8 +38,7 @@ public class PropertiesUpdater {
 		if (null != s_instance.m_props) {
 			
 			Enumeration<?> exercises = s_instance.m_props.propertyNames();
-			
-			
+				
 			while (exercises.hasMoreElements()) {
 				String key = (String) exercises.nextElement();
 				System.out.println(key + " -- " + s_instance.m_props.getProperty(key) + " : " +  s_instance.m_props.getProperty(key) );
@@ -48,6 +47,16 @@ public class PropertiesUpdater {
 		}
 		
 		return results;
+	}
+	
+	public static String getScore(int exercise) {
+		if (null == s_instance.m_props) {
+			return "false";
+		}
+		
+		return  s_instance.m_props.getProperty("exercise" + exercise);
+
+		
 	}
 	
 	
@@ -80,7 +89,7 @@ public class PropertiesUpdater {
 		}
 	}
 
-    public static void doProps() throws IOException {
+    public static void doPropsTest() throws IOException {
         Properties properties = new Properties();
         try (FileInputStream inputStream = new FileInputStream(SHOP_PROPS_FILE)) {
             properties.load(inputStream);
