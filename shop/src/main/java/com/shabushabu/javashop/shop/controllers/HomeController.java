@@ -34,6 +34,9 @@ import javax.naming.NoPermissionException;
 
 @Controller
 public class HomeController {
+	
+	public static long s_coloradoLatency = 0;
+	public static long s_utahLatency = 0 ;
 
     @Autowired
     private ProductService productService;
@@ -46,11 +49,9 @@ public class HomeController {
     public String getProductsAllLocations(Model model,  @RequestParam(value="name",required=false) String theName, 
     													@RequestParam(value="location", required=false) String theLocation,													
     													@RequestParam(value="userid", required=false) String userid) throws Exception {
+    		
+    	Exercises.incrementTracesSent();
     	
-    	
-    	PropertiesUpdater.doPropsTest();
-    	
-    	Exercises.checkExercise(2);
     	
     	if (null == theName ) {
 		
@@ -59,7 +60,8 @@ public class HomeController {
 		
 		if (null == theLocation ) {
 			theLocation="California";
-		}
+		} 
+		
 		
 		if (null == userid) {
 			userid="X0000";
@@ -72,11 +74,26 @@ public class HomeController {
 		user.setName(theName);
 		model.addAttribute("user", user);
 		
+		long startTime = System.nanoTime();
 		
 		model.addAttribute("products", productService.getProducts(theLocation));
-	
+		
+		long endTime = System.nanoTime();
+		
+		long duration = startTime - endTime;
+		if (theLocation.compareToIgnoreCase("Utah") == 0 ) {
+			if (duration > s_utahLatency) {
+				s_utahLatency = duration;
+			}
+			// Reset Colorado Latency
+			s_coloradoLatency = 0;
+		} else if (theLocation.compareToIgnoreCase("Colorado") == 0 ) {
+			if (s_coloradoLatency < duration ) {
+				s_coloradoLatency = duration;
+			}
+		}
+			
 		model.addAttribute("instruments", instrumentService.getInstruments(theLocation));
-
 		
 		return "index";
     
@@ -85,12 +102,9 @@ public class HomeController {
     @RequestMapping(value = "/score")
     public @ResponseBody HashMap<String, String> getScores( @RequestParam(value="exercise",required=false)  Integer exercise) {
         
-    	
-    	
     	if ( null == exercise ) {
     		exercise = 0;
     	}
-    	
     	
     	if (exercise == 0) {
     		
@@ -147,8 +161,7 @@ public class HomeController {
                 while ((responseLine = br.readLine()) != null) {
                     response.append(responseLine.trim());
                 }
-                //System.out.println("Lambda function output:");
-                //System.out.println(response.toString());
+                
                 if (response.toString().contains("Not")) {
                 	bResult = true;
                 }

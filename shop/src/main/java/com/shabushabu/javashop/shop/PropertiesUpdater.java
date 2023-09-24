@@ -54,9 +54,7 @@ public class PropertiesUpdater {
 			return "false";
 		}
 		
-		return  s_instance.m_props.getProperty("exercise" + exercise);
-
-		
+		return  s_instance.m_props.getProperty("exercise" + exercise);	
 	}
 	
 	

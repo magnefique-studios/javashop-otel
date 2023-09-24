@@ -10,11 +10,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Properties;
 
+import com.shabushabu.javashop.shop.controllers.HomeController;
+
 public class Exercises {
 	
 	private static final String SHOP_ENV_FILE = "/container/shop/data/.env";
 	public static final String TRACES_SENT = "TRACES_SENT";
 	private static final int MIN_TRACES_EXPECTED = 180;
+	public static boolean exceptionThrownForUser = false;
 	
 	private Properties m_props;
 	private static final Exercises s_instance = new Exercises();
@@ -32,22 +35,49 @@ public class Exercises {
 		m_props = properties;
 	}
 	
-	public static boolean checkExercise(int exercise ) {
+	protected void finalize() throws Throwable{
+        try {
+        	resetTracesSent();
+        	 try {     
+                 FileOutputStream outputStream = new FileOutputStream(SHOP_ENV_FILE) ;
+                 m_props.store(outputStream, null);
+                 System.out.println("Properties written: " + m_props);
+     		} catch (Exception e) {
+     			e.printStackTrace();
+     		}
+            
+        }
+        catch (Throwable e) {
+ 
+            throw e;
+        }
+        finally {
+ 
+            // Calling finalize() of Object class
+            super.finalize();
+        }
+    }
+	
+	public static boolean checkExercise(int exercise, HomeController controller ) {
 		
 		boolean bResult = false;
 		
 		switch(exercise) {
 			case 2: 
-				bResult = checkExercise2();
+				bResult = checkExercise2(controller);
 			break;
 			
-//			case3: 
-//				
-//			break;
-//				
-//			case 4: 
-//				
-//			break;
+			case 3: 
+				bResult = checkExercise3(controller);
+			break;
+				
+			case 4: 
+				bResult = checkExercise4(controller);	
+			break;
+			
+			case 5:
+				bResult = checkExercise5(controller);
+			break;
 //				
 //				
 //			case 5: 
@@ -98,26 +128,44 @@ public class Exercises {
 		Properties properties = s_instance.m_props;
 		boolean result = false;
 		
-		
         String traces = (String) properties.get(TRACES_SENT);
         Integer iTraces = Integer.parseInt( traces );
             
         iTraces++;
-       
-        try {     
-            FileOutputStream outputStream = new FileOutputStream(SHOP_ENV_FILE) ;
-            properties.store(outputStream, null);
-            System.out.println("Properties written: " + properties);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        
+        properties.setProperty(TRACES_SENT, iTraces.toString());
 		
 		return result;
 		
 	}
 	
+	public static boolean checkExercise5(HomeController controller) {
+		boolean result = false;
+		// C0000010
+		try {
+			controller.checkIfRestricted("C0000010");
+		} catch(Exception e) {
+			result = true;	
+		}
+		
+		return result;
+	}
 	
-	public static boolean checkExercise3() {
+	public static boolean checkExercise4 (HomeController controller) {
+		boolean result = false;
+		
+		System.out.println("LATECNY COLORADO MAX: " + HomeController.s_coloradoLatency);
+		System.out.println("LATECNY UTAH MAX: " + HomeController.s_utahLatency);
+		
+		if ( HomeController.s_coloradoLatency < HomeController.s_utahLatency * 2 ) {
+			result = true;
+		}
+		
+		return result;
+	}
+	
+	
+	public static boolean checkExercise3(HomeController controller) {
 
 		Properties properties = s_instance.m_props;
 		boolean result = false;
@@ -133,7 +181,8 @@ public class Exercises {
 	}
 	
 	
-	public static boolean checkExercise2() {
+	public static boolean checkExercise2(HomeController controller) {
+		// Can I send a metric to O11y cloud using .env information ?
 		boolean bResult = false;
 		
 		Properties properties = s_instance.m_props;
@@ -173,9 +222,6 @@ public class Exercises {
                         //System.out.println("Lambda function output:");
                        
                         if (response.toString().compareToIgnoreCase("OK") == 0 ) {
-                        	System.out.println("Succesfully sent datapoint !!!!!");
-                        	System.out.println("Succesfully sent datapoint !!!!!");
-                        	System.out.println("Succesfully sent datapoint !!!!!");
                         	
                         	bResult = true;
                         }
