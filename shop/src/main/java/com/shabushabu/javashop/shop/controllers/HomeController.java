@@ -51,7 +51,7 @@ public class HomeController {
     													@RequestParam(value="userid", required=false) String userid) throws Exception {
     		
     	Exercises.incrementTracesSent();
-    	
+
     	
     	if (null == theName ) {
 		
@@ -100,20 +100,21 @@ public class HomeController {
     } 
    
     @RequestMapping(value = "/score")
-    public @ResponseBody HashMap<String, String> getScores( @RequestParam(value="exercise",required=false)  Integer exercise,
+    public @ResponseBody HashMap<String, String> getScores( @RequestParam(value="exercise",required=false)  String exercise,
     														@RequestParam(value="data",required=false)  String data) {
-        
     	if ( null == exercise ) {
-    		exercise = 0;
+    		exercise = "0";
     	}
     	
-    	if (exercise == 0) {
+    	Integer iExercise = Integer.valueOf(exercise);
+    	
+    	if (iExercise == 0) {
     		
     		return PropertiesUpdater.getListOfScores();
     	} else {
     		HashMap<String, String> result = new HashMap<String, String>();
     		
-    		boolean bResult = Exercises.checkExercise(exercise, data, this);
+    		boolean bResult = Exercises.checkExercise(iExercise, data, this);
     		result.put("exercise" + exercise, bResult ? "true" : "false");
     		return result;
     	}    	

@@ -70,7 +70,7 @@ public class Instrument {
     	    	throw new InvalidLocaleException("Non English Characters found in Instrument Data");
     	    } else {
     	    	
-    	    	System.out.println("Characters OK ");
+    	    	//System.out.println("Characters OK ");
     	    }
 
     	 	this.title = title;

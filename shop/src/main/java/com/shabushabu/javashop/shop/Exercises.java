@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Properties;
 
 import com.shabushabu.javashop.shop.controllers.HomeController;
@@ -18,6 +19,7 @@ public class Exercises {
 	public static final String TRACES_SENT = "TRACES_SENT";
 	private static final int MIN_TRACES_EXPECTED = 180;
 	public static boolean exceptionThrownForUser = false;
+	public static final int NUM_EXERCISES = 15;
 	
 	private Properties m_props;
 	private static final Exercises s_instance = new Exercises();
@@ -33,9 +35,10 @@ public class Exercises {
             return;
         }
 		m_props = properties;
+		m_props.setProperty(TRACES_SENT, "0");
 	}
 	
-	protected void finalize() throws Throwable{
+	protected void finalize() throws Throwable {
         try {
         	resetTracesSent();
         	 try {     
@@ -45,14 +48,12 @@ public class Exercises {
      		} catch (Exception e) {
      			e.printStackTrace();
      		}
-            
         }
         catch (Throwable e) {
  
             throw e;
         }
         finally {
- 
             // Calling finalize() of Object class
             super.finalize();
         }
@@ -138,8 +139,8 @@ public class Exercises {
 		return Integer.valueOf((String)s_instance.m_props.get(TRACES_SENT));
 	};
 	
-	 public static void resetTracesSent() {
-		 s_instance.m_props.setProperty(TRACES_SENT, "0");
+	 protected void resetTracesSent() {
+		m_props.setProperty(TRACES_SENT, "0");
 	 }
 	
 	public static boolean incrementTracesSent() {
