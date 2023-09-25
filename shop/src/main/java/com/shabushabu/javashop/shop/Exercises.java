@@ -91,7 +91,7 @@ public class Exercises {
 			break;
 			
 			case 7: 
-				bResult =  (data.compareToIgnoreCase("Products")==0);
+				bResult =  (data.compareToIgnoreCase("Shop;Products")==0);
 			break;
 			
 			case 8: 
@@ -99,11 +99,11 @@ public class Exercises {
 			break;
 				
 			case 9: 
-				bResult = (data.compareToIgnoreCase("ProductResource.getAllProducts")==0);
+				bResult = (data.compareToIgnoreCase("getAllProducts")==0);
 			break;
 			
 			case 10: 
-				if (data.compareToIgnoreCase("ProductResource.getAllProducts")!=0) {
+				if (data.compareToIgnoreCase("getAllProducts")!=0) {
 					if (data.startsWith("myCool") || data.startsWith("lookup")) {
 						bResult = true;
 					}
@@ -120,7 +120,7 @@ public class Exercises {
 				bResult = checkExercise3(controller);
 			break;
 			case 13:
-				bResult = (data.compareToIgnoreCase("ProductResource.myCoolFunction234234234")==0);
+				bResult = (data.compareToIgnoreCase("myCoolFunction234234234")==0);
 			break;
 			case 14: 
 				
