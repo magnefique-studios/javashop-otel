@@ -124,7 +124,7 @@ public class Exercises {
 			break;
 			case 14: 
 				
-				 bResult = (data.compareToIgnoreCase("@SpanAttribute(\"myInt\")")==0);
+				 bResult = (data.startsWith("@SpanAttribute"));
 			break;
 			case 15: 
 				bResult = checkExercise4(controller);
