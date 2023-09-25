@@ -100,7 +100,8 @@ public class HomeController {
     } 
    
     @RequestMapping(value = "/score")
-    public @ResponseBody HashMap<String, String> getScores( @RequestParam(value="exercise",required=false)  Integer exercise) {
+    public @ResponseBody HashMap<String, String> getScores( @RequestParam(value="exercise",required=false)  Integer exercise,
+    														@RequestParam(value="data",required=false)  String data) {
         
     	if ( null == exercise ) {
     		exercise = 0;
@@ -111,16 +112,11 @@ public class HomeController {
     		return PropertiesUpdater.getListOfScores();
     	} else {
     		HashMap<String, String> result = new HashMap<String, String>();
-    		result.put("exercise" + exercise, PropertiesUpdater.getScore(exercise));
+    		
+    		boolean bResult = Exercises.checkExercise(exercise, data, this);
+    		result.put("exercise" + exercise, bResult ? "true" : "false");
     		return result;
-    	}
-    	
-    	
-    	// EXERCISE 1: FREE always True.
-    	
-    	// EXERCISE 2: Read in .ENV ensure values are there for ACCESS TOKEN and Realm
-    		// Send a Metric test
-    	
+    	}    	
     }
     
   

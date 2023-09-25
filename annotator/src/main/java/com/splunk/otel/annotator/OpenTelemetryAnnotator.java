@@ -2,6 +2,7 @@ package com.splunk.otel.annotator;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URI;
@@ -9,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.stream.Stream;
 
 /*
@@ -31,6 +33,7 @@ import com.github.javaparser.printer.lexicalpreservation.LexicalPreservingPrinte
 
 public class OpenTelemetryAnnotator {
 	
+	private static final String SHOP_ENV_FILE = "../.env";
 	private static final String FILE_PATH = "../shop/";
 	private static final String FILE_PATH2 = 
 			"../products/src/main/java/com/shabushabu/javashop/products/resources";
@@ -119,6 +122,26 @@ public class OpenTelemetryAnnotator {
 	     
 	     projectDir = new File(FILE_PATH3);
 	     annotateCodebase(projectDir);
+	    
+		Properties properties = new Properties();
+		 
+		try (FileInputStream inputStream = new FileInputStream(SHOP_ENV_FILE)) {
+            properties.load(inputStream);
+            System.out.println("Properties read: " + properties);
+        } catch (IOException e) {
+            System.err.println("Failed to read properties file: " + e.getMessage());
+            return;
+        }
+		
+		properties.setProperty("Annotated",  "true");
+          
+		 try {     
+             FileOutputStream outputStream = new FileOutputStream(SHOP_ENV_FILE) ;
+             properties.store(outputStream, null);
+             System.out.println("Properties written: " + properties);
+ 		} catch (Exception e) {
+ 			e.printStackTrace();
+ 		}   
        
     }
 

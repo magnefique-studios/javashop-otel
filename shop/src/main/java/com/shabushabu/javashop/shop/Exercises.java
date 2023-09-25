@@ -58,11 +58,15 @@ public class Exercises {
         }
     }
 	
-	public static boolean checkExercise(int exercise, HomeController controller ) {
+	public static boolean checkExercise(int exercise, String data, HomeController controller ) {
 		
 		boolean bResult = false;
 		
 		switch(exercise) {
+			case 1:
+				// 1 is free always returns true !
+				bResult = true;
+			break;
 			case 2: 
 				bResult = checkExercise2(controller);
 			break;
@@ -72,42 +76,56 @@ public class Exercises {
 			break;
 				
 			case 4: 
-				bResult = checkExercise4(controller);	
+				bResult = !checkExercise4(controller);	
 			break;
 			
 			case 5:
 				bResult = checkExercise5(controller);
 			break;
-//				
-//				
-//			case 5: 
-//				
-//			break;
-//				
-//				
-//			case 6: 
-//				
-//			break;
-//				
-//				
-//			case 7: 
-//				
-//			break;
-//				
-//				
-//			case 8: 
-//				
-//			break;
-//				
-//				
-//			case 9: 
-//				
-//			break;
-//				
-//				
-//			case 10: 
-//				
-//			break;
+			
+			case 6: 
+				bResult =  (data.compareToIgnoreCase("Authorization")==0);
+			break;
+			
+			case 7: 
+				bResult =  (data.compareToIgnoreCase("Products")==0);
+			break;
+			
+			case 8: 
+				bResult = (data.compareToIgnoreCase("Not Authorized")==0);
+			break;
+				
+			case 9: 
+				bResult = (data.compareToIgnoreCase("ProductResource.getAllProducts")==0);
+			break;
+			
+			case 10: 
+				if (data.compareToIgnoreCase("ProductResource.getAllProducts")!=0) {
+					if (data.startsWith("myCool") || data.startsWith("lookup")) {
+						bResult = true;
+					}
+				}
+				bResult = false;
+				
+			break;
+			
+			case 11: 
+				bResult = checkExercise11(controller);
+			break;
+			
+			case 12: 
+				bResult = checkExercise3(controller);
+			break;
+			case 13:
+				bResult = (data.compareToIgnoreCase("ProductResource.myCoolFunction234234234")==0);
+			break;
+			case 14: 
+				
+				 bResult = (data.compareToIgnoreCase("@SpanAttribute(\"myInt\")")==0);
+			break;
+			case 15: 
+				bResult = checkExercise4(controller);
+			break;
 		}
 		
 		return bResult;
@@ -137,6 +155,15 @@ public class Exercises {
 		
 		return result;
 		
+	}
+	
+	public static boolean checkExercise11( HomeController controller) {
+		
+		Properties properties = s_instance.m_props;
+		
+		String bVal = (String) properties.getProperty("Annotated");
+		
+		return bVal.compareToIgnoreCase("true") == 0;
 	}
 	
 	public static boolean checkExercise5(HomeController controller) {
