@@ -62,7 +62,9 @@ public class Exercises {
 	public static boolean checkExercise(int exercise, String data, HomeController controller ) {
 		
 		boolean bResult = false;
-		
+		if ( null == data  ) {
+			data = "";
+		}
 		switch(exercise) {
 			case 1:
 				// 1 is free always returns true !
