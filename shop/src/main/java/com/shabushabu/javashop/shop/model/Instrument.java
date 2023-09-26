@@ -67,7 +67,7 @@ public class Instrument {
     	 	this.id= id;
     	 	
     	    if (!isEnglish(title)) {
-    	    	throw new InvalidLocaleException("Non English Characters found in Instrument Data");
+    	  // 	throw new InvalidLocaleException("Non English Characters found in Instrument Data");
     	    } else {
     	    	
     	    	//System.out.println("Characters OK ");

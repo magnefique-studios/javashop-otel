@@ -89,19 +89,15 @@ public class Exercises {
 			case 6: 
 				bResult =  (data.compareToIgnoreCase("Authorization")==0);
 			break;
-			
 			case 7: 
 				bResult =  (data.compareToIgnoreCase("Shop;Products")==0);
 			break;
-			
 			case 8: 
 				bResult = (data.compareToIgnoreCase("Not Authorized")==0);
 			break;
-				
 			case 9: 
 				bResult = (data.compareToIgnoreCase("getAllProducts")==0);
 			break;
-			
 			case 10: 
 				if (data.compareToIgnoreCase("getAllProducts")!=0) {
 					if (data.startsWith("myCool") || data.startsWith("lookup")) {
@@ -111,7 +107,6 @@ public class Exercises {
 				bResult = false;
 				
 			break;
-			
 			case 11: 
 				bResult = checkExercise11(controller);
 			break;
@@ -123,7 +118,6 @@ public class Exercises {
 				bResult = (data.compareToIgnoreCase("myCoolFunction234234234")==0);
 			break;
 			case 14: 
-				
 				 bResult = (data.startsWith("@SpanAttribute"));
 			break;
 			case 15: 

@@ -26,7 +26,7 @@ public class ProductService {
     public List<Product> getProducts(String location) {
         Map<String, ProductDTO> productDTOs = productRepo.getProductDTOs(location);
         Map<String, StockDTO> stockDTOMap = stockRepo.getStockDTOs();
-
+        System.out.println("Get Products");
         // Merge productDTOs and stockDTOs to a List of Products
         return productDTOs.values().stream()
                 .map(productDTO -> {

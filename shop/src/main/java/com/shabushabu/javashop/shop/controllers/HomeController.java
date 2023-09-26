@@ -75,20 +75,28 @@ public class HomeController {
 		model.addAttribute("user", user);
 		
 		long startTime = System.nanoTime();
-		
+		//System.out.println("THE START TIME IS ... " + startTime);
 		model.addAttribute("products", productService.getProducts(theLocation));
 		
 		long endTime = System.nanoTime();
+		//System.out.println("THE END TIME IS ... " + endTime);
 		
-		long duration = startTime - endTime;
+		long duration = endTime - startTime;
+		
+		//System.out.println("THE DURATION IS " + duration);
 		if (theLocation.compareToIgnoreCase("Utah") == 0 ) {
+			
+		//	System.out.println("UTAH Latency Check is ... " + duration);
 			if (duration > s_utahLatency) {
+		//		System.out.println("Utah latency increased to : " + duration);
+
 				s_utahLatency = duration;
 			}
 			// Reset Colorado Latency
 			s_coloradoLatency = 0;
 		} else if (theLocation.compareToIgnoreCase("Colorado") == 0 ) {
 			if (s_coloradoLatency < duration ) {
+		//		System.out.println("Colorado latency increased to : " + duration);
 				s_coloradoLatency = duration;
 			}
 		}
@@ -109,7 +117,6 @@ public class HomeController {
     	Integer iExercise = Integer.valueOf(exercise);
     	
     	if (iExercise == 0) {
-    		
     		return PropertiesUpdater.getListOfScores();
     	} else {
     		HashMap<String, String> result = new HashMap<String, String>();
