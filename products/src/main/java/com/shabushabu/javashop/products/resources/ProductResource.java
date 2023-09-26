@@ -591,10 +591,10 @@ public class ProductResource {
 	    	// Generate a FAST sleep of 0 time !
 	    	Random sleepy = new Random();
 	    	try{
-	        if (999==myInt) 
-	        Thread.sleep(
-	        sleepy.nextInt(5000 - 3000)
-	        + 3000);
+	        //if (999==myInt) 
+	        //Thread.sleep(
+	       // sleepy.nextInt(5000 - 3000)
+	       // + 3000);
 	        } catch (Exception e){
 	       
 	        }
