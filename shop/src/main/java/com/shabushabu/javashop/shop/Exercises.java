@@ -164,15 +164,10 @@ public class Exercises {
 	}
 	
 	public static boolean checkExercise5(HomeController controller) {
-		boolean result = false;
-		// C0000010
-		try {
-			controller.checkIfRestricted("C0000010");
-		} catch(Exception e) {
-			result = true;	
-		}
 		
-		return result;
+		// C0000010
+		return controller.checkIfRestricted("C0000010");
+	
 	}
 	
 	public static boolean checkExercise4 (HomeController controller) {
