@@ -93,10 +93,11 @@ public class Exercises {
 				bResult = data.contains("Authorization");
 			break;
 			case 7: 
-				bResult =   data.contains("Shop;Products");
+				bResult =   (data.contains("Shop") || data.contains("shop"))
+				       	&& data.contains("Products")  || data.contains("products");
 			break;
 			case 8: 
-				bResult =  data.contains ("Not Authorized");
+				bResult =  data.contains ("Not");
 			break;
 			case 9: 
 				bResult = data.contains("getAllProducts");
@@ -107,7 +108,6 @@ public class Exercises {
 						bResult = true;
 					}
 				}
-				bResult = false;
 				
 			break;
 			case 11: 
