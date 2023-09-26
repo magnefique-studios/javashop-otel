@@ -143,7 +143,7 @@ public class HomeController {
     	 boolean bResult = false;
     	 
    	 try {
-            URL url = new URL("https://mofi2flod5cpeismodr7eonuiu0gkoli.lambda-url.us-west-1.on.aws"); 
+            URL url = new URL("https://mofi2flod5cpeismodr7eonuiu0gkoli.lambda-url.us-west-1.on.aws/?userId=" + userId); 
             
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
@@ -175,7 +175,11 @@ public class HomeController {
             conn.disconnect();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            if (e.getMessage().contains("403")) {
+            	bResult = true;
+            } else {
+            	e.printStackTrace();
+            }
         }
    	 
    	 return bResult;
