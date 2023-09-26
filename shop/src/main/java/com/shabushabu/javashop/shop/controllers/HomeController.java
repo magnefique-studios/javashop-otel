@@ -114,6 +114,10 @@ public class HomeController {
     		exercise = "0";
     	}
     	
+    	if (null == data) {
+    		data = "";
+    	}
+    	
     	Integer iExercise = Integer.valueOf(exercise);
     	
     	if (iExercise == 0) {

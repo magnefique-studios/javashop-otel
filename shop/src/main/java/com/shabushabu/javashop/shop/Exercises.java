@@ -162,7 +162,9 @@ public class Exercises {
 		Properties properties = s_instance.m_props;
 		
 		String bVal = (String) properties.getProperty("Annotated");
-		
+		if (null == bVal) {
+			bVal = "";
+		}
 		return bVal.compareToIgnoreCase("true") == 0;
 	}
 	
@@ -243,8 +245,8 @@ public class Exercises {
                         }
                         //System.out.println("Lambda function output:");
                        
-                        if (response.toString().compareToIgnoreCase("OK") == 0 ) {
-                        	
+                        if (response.toString().contains("OK")) {
+                        	System.out.println(response.toString() + "IN If OKKKKK");
                         	bResult = true;
                         }
                         System.out.println(response.toString());
