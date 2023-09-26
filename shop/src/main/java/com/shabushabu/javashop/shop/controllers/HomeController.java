@@ -120,7 +120,8 @@ public class HomeController {
     		return PropertiesUpdater.getListOfScores();
     	} else {
     		HashMap<String, String> result = new HashMap<String, String>();
-    		
+    		System.out.println("DATA IS FOUND: " + data + " . . .  Exercise is: " + iExercise);
+	
     		boolean bResult = Exercises.checkExercise(iExercise, data, this);
     		result.put("exercise" + exercise, bResult ? "true" : "false");
     		return result;

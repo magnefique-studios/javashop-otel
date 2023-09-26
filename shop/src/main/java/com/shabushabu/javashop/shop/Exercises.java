@@ -79,7 +79,7 @@ public class Exercises {
 			break;
 				
 			case 4: 
-				bResult = !checkExercise4(controller);	
+				bResult = checkExercise4(controller);	
 			break;
 			
 			case 5:
@@ -87,20 +87,23 @@ public class Exercises {
 			break;
 			
 			case 6: 
-				bResult =  (data.compareToIgnoreCase("Authorization")==0);
+				System.out.println("data is...:" + data );
+				System.out.println("data is...:" + data );
+				System.out.println("data is...:" + data );
+				bResult = data.contains("Authorization");
 			break;
 			case 7: 
-				bResult =  (data.compareToIgnoreCase("Shop;Products")==0);
+				bResult =   data.contains("Shop;Products");
 			break;
 			case 8: 
-				bResult = (data.compareToIgnoreCase("Not Authorized")==0);
+				bResult =  data.contains ("Not Authorized");
 			break;
 			case 9: 
-				bResult = (data.compareToIgnoreCase("getAllProducts")==0);
+				bResult = data.contains("getAllProducts");
 			break;
 			case 10: 
-				if (data.compareToIgnoreCase("getAllProducts")!=0) {
-					if (data.startsWith("myCool") || data.startsWith("lookup")) {
+				if (!data.contains("getAllProducts")) {
+					if (data.contains("myCool") || data.contains("lookup")) {
 						bResult = true;
 					}
 				}
@@ -115,16 +118,16 @@ public class Exercises {
 				bResult = checkExercise3(controller);
 			break;
 			case 13:
-				bResult = (data.compareToIgnoreCase("myCoolFunction234234234")==0);
+				bResult = data.contains("myCoolFunction234234234");
 			break;
 			case 14: 
-				 bResult = (data.startsWith("@SpanAttribute"));
+				 bResult = data.contains("@SpanAttribute");
 			break;
 			case 15: 
-				bResult = checkExercise4(controller);
+				bResult = !checkExercise4(controller);
 			break;
 		}
-		
+
 		return bResult;
 		
 		
