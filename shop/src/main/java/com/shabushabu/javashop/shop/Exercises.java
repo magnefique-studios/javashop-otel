@@ -176,13 +176,13 @@ public class Exercises {
 	}
 	
 	public static boolean checkExercise4 (HomeController controller) {
-		boolean result = true;
+		boolean result = false;
 		
 		System.out.println("LATECNY COLORADO MAX: " + HomeController.s_coloradoLatency);
 		System.out.println("LATECNY UTAH MAX: " + HomeController.s_utahLatency);
 		
-		if (  HomeController.s_coloradoLatency < HomeController.s_utahLatency * 2 ) {
-			result = false;
+		if (  HomeController.s_coloradoLatency > HomeController.s_utahLatency ) {
+			result = true;
 		}
 		
 		return result;
