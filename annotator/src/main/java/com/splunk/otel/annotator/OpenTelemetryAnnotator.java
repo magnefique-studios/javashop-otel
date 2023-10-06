@@ -161,15 +161,16 @@ public class OpenTelemetryAnnotator {
         		if (md.getName().asString().startsWith("get") && md.getName().asString().compareToIgnoreCase("getInstruments")!=0) {
         			return;
         		}
-        		
-        		md.addAnnotation("WithSpan");
-        		NodeList<Parameter> params = md.getParameters();
-        		params.forEach((param) -> {
+        		if ( null == md.getAnnotationByName("WithSpan") ) {
+        			md.addAnnotation("WithSpan");
+        			NodeList<Parameter> params = md.getParameters();
+        			params.forEach((param) -> {
         			
-        			String paramName = "`" + param.getNameAsString() + "`"; 
-        			paramName = paramName.replace('`', '"');
-        			param.addSingleMemberAnnotation("SpanAttribute", paramName);
-                });
+        				String paramName = "`" + param.getNameAsString() + "`"; 
+        				paramName = paramName.replace('`', '"');
+        				param.addSingleMemberAnnotation("SpanAttribute", paramName);
+        			});
+        		}
         		
         	}
         }
