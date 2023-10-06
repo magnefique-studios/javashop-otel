@@ -34,11 +34,11 @@ import com.github.javaparser.printer.lexicalpreservation.LexicalPreservingPrinte
 public class OpenTelemetryAnnotator {
 	
 	private static final String SHOP_ENV_FILE = "../.env";
-	private static final String FILE_PATH = "../shop/";
+	//private static final String FILE_PATH = "../shop/";
 	private static final String FILE_PATH2 = 
 			"../products/src/main/java/com/shabushabu/javashop/products/resources";
-	private static final String FILE_PATH3 = 
-			"../instruments/";
+	//private static final String FILE_PATH3 = 
+	//		"../instruments/";
 	
 	  // list all files from this path
     public static ArrayList<Path> listFiles(URI path) throws IOException {
@@ -113,15 +113,15 @@ public class OpenTelemetryAnnotator {
 	}
 	
     public static void main(String[] args) throws Exception {
-    	  File projectDir = new File(FILE_PATH);
+    	//  File projectDir = new File(FILE_PATH);
     	  //listFiles(projectDir.toURI());
+	    // annotateCodebase(projectDir);
+	     
+	     File projectDir = new File(FILE_PATH2);
 	     annotateCodebase(projectDir);
 	     
-	     projectDir = new File(FILE_PATH2);
-	     annotateCodebase(projectDir);
-	     
-	     projectDir = new File(FILE_PATH3);
-	     annotateCodebase(projectDir);
+	    // projectDir = new File(FILE_PATH3);
+	   //  annotateCodebase(projectDir);
 	    
 		Properties properties = new Properties();
 		 
@@ -161,7 +161,7 @@ public class OpenTelemetryAnnotator {
         		if (md.getName().asString().startsWith("get") && md.getName().asString().compareToIgnoreCase("getInstruments")!=0) {
         			return;
         		}
-        		if ( null == md.getAnnotationByName("WithSpan") ) {
+        		
         			md.addAnnotation("WithSpan");
         			NodeList<Parameter> params = md.getParameters();
         			params.forEach((param) -> {
@@ -170,8 +170,6 @@ public class OpenTelemetryAnnotator {
         				paramName = paramName.replace('`', '"');
         				param.addSingleMemberAnnotation("SpanAttribute", paramName);
         			});
-        		}
-        		
         	}
         }
     }
