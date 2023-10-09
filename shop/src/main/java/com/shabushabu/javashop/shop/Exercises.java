@@ -67,21 +67,20 @@ public class Exercises {
 		}
 		switch(exercise) {
 			case 1:
-				// 1 is free always returns true !
-				bResult = true;
-			break;
-			case 2: 
+				// Return true if we can send a datapoint to us1 with user entered acccess code.
 				bResult = checkExercise2(controller, data);
 			break;
 			
-			case 3: 
+			
+			case 2:
+				// Return true if using the .env access code entry we can send a datapoint to realm from file. 
 				bResult = checkExercise2(controller, "");
 			break;
 			
-			/*case 3: 
+			case 3: 
 				bResult = checkExercise3(controller);
 			break;
-			*/
+			
 			
 			case 4: 
 				bResult = checkExercise4(controller);	
