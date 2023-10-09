@@ -91,9 +91,6 @@ public class Exercises {
 			break;
 			
 			case 6: 
-				System.out.println("data is...:" + data );
-				System.out.println("data is...:" + data );
-				System.out.println("data is...:" + data );
 				bResult = data.contains("Authorization");
 			break;
 			case 7: 
