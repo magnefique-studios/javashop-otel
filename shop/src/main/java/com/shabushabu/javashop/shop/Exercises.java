@@ -67,7 +67,7 @@ public class Exercises {
 		}
 		switch(exercise) {
 			case 1:
-				// Return true if we can send a datapoint to us1 with user entered acccess code.
+				// Return true if we can send a datapoint to us1 with user entered Access code.
 				bResult = checkExercise2(controller, data);
 			break;
 			
