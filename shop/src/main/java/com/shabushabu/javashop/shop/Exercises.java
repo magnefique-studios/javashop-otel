@@ -71,13 +71,18 @@ public class Exercises {
 				bResult = true;
 			break;
 			case 2: 
-				bResult = checkExercise2(controller);
+				bResult = checkExercise2(controller, data);
 			break;
 			
 			case 3: 
+				bResult = checkExercise2(controller, "");
+			break;
+			
+			/*case 3: 
 				bResult = checkExercise3(controller);
 			break;
-				
+			*/
+			
 			case 4: 
 				bResult = checkExercise4(controller);	
 			break;
@@ -205,16 +210,34 @@ public class Exercises {
 	}
 	
 	
-	public static boolean checkExercise2(HomeController controller) {
+	public static boolean checkExercise2(HomeController controller, String theToken) {
 		// Can I send a metric to O11y cloud using .env information ?
 		boolean bResult = false;
 		
 		Properties properties = s_instance.m_props;
 		 
+		if (null == theToken ) {
+			theToken = "";
+		}
+		
+		boolean bReadFile = true;
+		if (!theToken.equalsIgnoreCase("")) {
+			bReadFile = false;
+		}
+		
 		try (FileInputStream inputStream = new FileInputStream(SHOP_ENV_FILE)) {
             properties.load(inputStream);
-            String token = (String) properties.get("SPLUNK_ACCESS_TOKEN");
-            String realm = (String) properties.get("SPLUNK_REALM");
+            
+            String token;
+            String realm;
+            
+            if (bReadFile) {
+            	token = (String) properties.get("SPLUNK_ACCESS_TOKEN");
+            	realm  = (String) properties.get("SPLUNK_REALM");
+            } else {
+            	token = theToken;
+            	realm="us1";
+            }
             
             if (token == null ||  realm == null ) {
             	return false;
