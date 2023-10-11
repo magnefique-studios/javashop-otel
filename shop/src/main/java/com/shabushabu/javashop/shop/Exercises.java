@@ -182,7 +182,7 @@ public class Exercises {
 		System.out.println("LATECNY COLORADO MAX: " + HomeController.s_coloradoLatency);
 		System.out.println("LATECNY UTAH MAX: " + HomeController.s_utahLatency);
 		
-		if (  HomeController.s_coloradoLatency > HomeController.s_utahLatency ) {
+		if (  HomeController.s_coloradoLatency > HomeController.s_utahLatency*1.2 ) {
 			result = true;
 		}
 		
