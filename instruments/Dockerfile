@@ -1,12 +1,18 @@
-FROM openjdk:8-jre
+FROM openjdk:15
 ADD target/javashop.instruments-latest.jar app.jar
 EXPOSE 8040
 
-
-ADD https://github.com/signalfx/splunk-otel-java/releases/latest/download/splunk-otel-javaagent-all.jar .
+ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
 
 ENV JAVA_OPTS="-Xms2048M -Xmx2048M"
 
-ENTRYPOINT java $JAVA_OPTS -javaagent:splunk-otel-javaagent-all.jar -Dsplunk.access.token=${TOKEN} -Dsplunk.realm=${REALM} -Dotel.traces.sampler=rules -Dotel.traces.sampler.arg=drop=healthcheck,drop=ingest -Dotel.resource.attributes=service.name=instruments,deployment.environment=${USERNAME}_xApm_Instrumentation_Shop -jar app.jar
-
-
+ENTRYPOINT java $JAVA_OPTS  -javaagent:dd-java-agent.jar \
+  -Ddd.profiling.enabled=true \
+  -XX:FlightRecorderOptions=stackdepth=256 \
+  -Ddd.agent.host=datadog \
+  -Ddd.logs.injection=true \
+  -Ddd.trace.sample.rate=1 \
+  -Ddd.appsec.enabled=true \
+  -Ddd.iast.enabled=true  \
+  -Ddd.service=instruments \
+  -Ddd.env=${USERNAME}_xApm_Instrumentation_Shop -jar app.jar

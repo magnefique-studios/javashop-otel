@@ -146,7 +146,7 @@ public class HomeController {
     public boolean checkIfRestricted(@SpanAttribute("userId") String userId) {
     	
     	 boolean bResult = false;
-    	 
+    	/* 
    	 try {
             URL url = new URL("https://mofi2flod5cpeismodr7eonuiu0gkoli.lambda-url.us-west-1.on.aws/?userId=" + userId); 
             
@@ -186,7 +186,7 @@ public class HomeController {
             	e.printStackTrace();
             }
         }
-   	 
+   	 */
    	 return bResult;
     }
     
