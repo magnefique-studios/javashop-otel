@@ -2,7 +2,9 @@ FROM openjdk:15
 ADD target/javashop.stock-latest.jar app.jar
 EXPOSE 8030
 
-ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
+#ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
+
+COPY dd-java-agent.jar  .
 
 ENTRYPOINT java -javaagent:dd-java-agent.jar \
   -Ddd.profiling.enabled=true \

@@ -1,4 +1,6 @@
-FROM openjdk:15
+#FROM openjdk:15
+FROM openjdk:17-jdk-slim
+
 ADD target/javashop.shop-latest.jar ./app.jar
 EXPOSE 8010
 

@@ -2,7 +2,9 @@ FROM openjdk:15
 ADD target/javashop.instruments-latest.jar app.jar
 EXPOSE 8040
 
-ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
+#ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
+
+COPY dd-java-agent.jar  .
 
 ENV JAVA_OPTS="-Xms2048M -Xmx2048M"
 
