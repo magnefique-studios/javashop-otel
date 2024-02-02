@@ -1,4 +1,5 @@
 ### Maven template
+.env
 postgres-data
 target/
 build/
