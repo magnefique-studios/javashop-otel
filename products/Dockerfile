@@ -11,7 +11,8 @@ COPY dd-java-agent.jar  .
 ENTRYPOINT java -javaagent:dd-java-agent.jar \
   -Ddd.profiling.enabled=true \
   -XX:FlightRecorderOptions=stackdepth=256 \
-  -Ddd.agent.host=datadog \
+#  -Ddd.agent.host=datadog \
+  -Ddd.agent.host=localhost \
   -Ddd.logs.injection=true \
   -Ddd.trace.sample.rate=1 \
   -Ddd.appsec.enabled=true \

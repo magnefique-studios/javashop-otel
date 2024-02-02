@@ -1,5 +1,29 @@
 version: '3'
 services:
+  redis:
+    image: redis
+    labels:
+      com.datadoghq.ad.logs: '[{"source": "redis", "service": "redis"}]'
+  datadog:
+    build: datadog
+    pid: host
+    environment:
+     - DD_API_KEY=${DD_API_KEY}
+     - DD_SITE=us5.datadoghq.com
+     - DD_LOGS_ENABLED=true
+     - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
+    volumes:
+     - /var/run/docker.sock:/var/run/docker.sock
+     - /proc/:/host/proc/:ro
+     - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
+     - /var/lib/docker/containers:/var/lib/docker/containers:ro
+    healthcheck:
+      test: /opt/datadog-agent/bin/agent/agent health  | grep -c "PASS" > /dev/null
+      interval: 2s
+      retries: 10
+      start_period: 5s
+      timeout: 2s
+
   shop:
     image: shabushabu/javashop.shop:latest
     build:
@@ -21,8 +45,6 @@ services:
       retries: 5
       start_period: 5s
       timeout: 2s
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     volumes:
       - type: bind
         source: ./shop/data
@@ -30,9 +52,9 @@ services:
       - type: bind
         source: ./.env
         target: /container/shop/data/.env
-          #depends_on:
-          #datadog:
-          #condition: service_healthy
+    depends_on:
+      datadog:
+        condition: service_healthy
   products:
     image: shabushabu/javashop.products:latest
     labels:

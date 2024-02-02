@@ -11,7 +11,7 @@ ENV JAVA_OPTS="-Xms2048M -Xmx2048M"
 ENTRYPOINT java $JAVA_OPTS  -javaagent:dd-java-agent.jar \
   -Ddd.profiling.enabled=true \
   -XX:FlightRecorderOptions=stackdepth=256 \
-  -Ddd.agent.host=datadog \
+  -Ddd.agent.host=192.168.1.35  \
   -Ddd.logs.injection=true \
   -Ddd.trace.sample.rate=1 \
   -Ddd.appsec.enabled=true \
