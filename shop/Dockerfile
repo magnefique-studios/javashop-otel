@@ -1,4 +1,4 @@
-FROM openjdk:15
+FROM openjdk:11
 #FROM openjdk:17-jdk-slim
 
 ADD target/javashop.shop-latest.jar ./app.jar
@@ -13,8 +13,9 @@ COPY dd-java-agent.jar  .
 ENTRYPOINT java -javaagent:dd-java-agent.jar \
   -Ddd.profiling.enabled=true \
   -XX:FlightRecorderOptions=stackdepth=256 \
-  -Ddd.agent.host=192.168.1.35 \
-  -Ddd.logs.injection=true \
+#  -Ddd.agent.host=${DD_AGENT_HOST} \
+  -Ddd.agent.host=192.168.1.39 \
+  -Ddd.logs.injection=false \
   -Ddd.dynamic.instrumentation.enabled=true \
   -Ddd.trace.sample.rate=1 \
   -Ddd.appsec.enabled=true \
