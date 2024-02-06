@@ -1,4 +1,4 @@
-FROM openjdk:8
+FROM openjdk:15
 ADD target/javashop.products-latest.jar app.jar
 ADD products.yml app-config.yml
 EXPOSE 8020
@@ -11,9 +11,9 @@ COPY dd-java-agent.jar  .
 ENTRYPOINT java -javaagent:dd-java-agent.jar \
   -Ddd.profiling.enabled=true \
   -XX:FlightRecorderOptions=stackdepth=256 \
-#  -Ddd.agent.host=datadog \
+  -Ddd.agent.host=datadog \
 #  -Ddd.agent.host=192.168.1.35 \
-  -Ddd.agent.host=${DD_AGENT_HOST} \
+#  -Ddd.agent.host=${DD_AGENT_HOST} \
   -Ddd.logs.injection=true \
   -Ddd.trace.sample.rate=1 \
   -Ddd.appsec.enabled=true \
