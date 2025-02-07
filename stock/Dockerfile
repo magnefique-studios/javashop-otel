@@ -1,8 +1,8 @@
-FROM openjdk:8-jre
+FROM openjdk:17-jdk-slim
 ADD target/javashop.stock-latest.jar app.jar
 EXPOSE 8030
 
-ADD https://github.com/signalfx/splunk-otel-java/releases/latest/download/splunk-otel-javaagent-all.jar .
+#ADD https://github.com/signalfx/splunk-otel-java/releases/latest/download/splunk-otel-javaagent-all.jar .
 
-ENTRYPOINT java -javaagent:splunk-otel-javaagent-all.jar -Dsplunk.access.token=${TOKEN} -Dsplunk.realm=${REALM} -Dotel.traces.sampler=rules -Dotel.traces.sampler.arg=drop=healthcheck -Dotel.resource.attributes=service.name=stock,deployment.environment=${USERNAME}_xApm_Instrumentation_Shop -jar app.jar
+ENTRYPOINT java  -Dsplunk.access.token=${TOKEN} -Dsplunk.realm=${REALM} -Dotel.traces.sampler=rules -Dotel.traces.sampler.arg=drop=healthcheck -Dotel.resource.attributes=service.name=stock,deployment.environment=${USERNAME}_xApm_Instrumentation_Shop -jar app.jar
 

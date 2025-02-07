@@ -2,14 +2,14 @@ package com.shabushabu.javashop.instruments.model;
 
 
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Table;
 
 //import org.springframework.data.annotation.Id;
-import javax.persistence.Id;
+import jakarta.persistence.Id;
 
 @Entity
 @Table(name = "instruments_for_sale")

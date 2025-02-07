@@ -1,6 +1,7 @@
 package com.shabushabu.javashop.shop.repo;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class StockRepo {
     @Qualifier(value = "stdRestTemplate")
     private RestTemplate restTemplate;
 
-    @HystrixCommand(fallbackMethod = "stocksNotFound") 
+    @CircuitBreaker(name = "stockRepo", fallbackMethod = "stocksNotFound") 
     public Map<String, StockDTO> getStockDTOs() {
         LOGGER.info("getStocksDTOs");
         ResponseEntity<List<StockDTO>> stockManagerResponse =
@@ -44,7 +45,7 @@ public class StockRepo {
                 .collect(Collectors.toMap(StockDTO::getProductId, Function.identity()));
     }
     
-    @HystrixCommand(fallbackMethod = "stocksNotFound") 
+    @CircuitBreaker(name = "stockRepo",fallbackMethod = "stocksNotFound") 
     public Map<String, StockDTO> getInstrumentStockDTOs() {
         LOGGER.info("getStocksInstrumentDTOs");
         ResponseEntity<List<StockDTO>> stockManagerResponse =

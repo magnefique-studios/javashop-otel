@@ -1,12 +1,12 @@
-FROM openjdk:8-jre
+FROM openjdk:17-jdk-slim
 ADD target/javashop.shop-latest.jar ./app.jar
 EXPOSE 8010
 
 #EXPOSE 8001
 
-ADD https://github.com/signalfx/splunk-otel-java/releases/latest/download/splunk-otel-javaagent-all.jar .
+#ADD https://github.com/signalfx/splunk-otel-java/releases/latest/download/splunk-otel-javaagent-all.jar .
 
-ENTRYPOINT java -javaagent:splunk-otel-javaagent-all.jar -Dsplunk.access.token=${TOKEN} -Dsplunk.realm=${REALM} -Dotel.traces.sampler=rules -Dotel.traces.sampler.arg=drop=healthcheck -Dotel.resource.attributes=service.name=shop,deployment.environment=${USERNAME}_xApm_Instrumentation_Shop -jar app.jar
+ENTRYPOINT java  -Dsplunk.access.token=${TOKEN} -Dsplunk.realm=${REALM} -Dotel.traces.sampler=rules -Dotel.traces.sampler.arg=drop=healthcheck -Dotel.resource.attributes=service.name=shop,deployment.environment=${USERNAME}_xApm_Instrumentation_Shop -jar app.jar
 
 # Test Start: ENTRYPOINT java  -Dotel.resource.attributes=service.name=shop,deployment.environment=${USERNAME}2_Apm_Instrumentation_Shop -jar app.jar
 

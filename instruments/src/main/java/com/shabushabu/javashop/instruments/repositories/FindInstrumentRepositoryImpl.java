@@ -1,13 +1,12 @@
 package com.shabushabu.javashop.instruments.repositories;
 
 
-import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 import com.shabushabu.javashop.instruments.model.Instrument;
 import com.shabushabu.javashop.instruments.resources.InstrumentResource;
-
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

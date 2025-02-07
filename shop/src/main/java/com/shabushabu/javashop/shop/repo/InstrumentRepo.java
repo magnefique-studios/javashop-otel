@@ -1,6 +1,7 @@
 package com.shabushabu.javashop.shop.repo;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class InstrumentRepo {
     @Qualifier(value = "stdRestTemplate")
     private RestTemplate restTemplate;
 
-    @HystrixCommand(fallbackMethod = "instrumentsNotFound") 
+    @CircuitBreaker(name = "instrumentRepo", fallbackMethod = "instrumentsNotFound") 
     public Map<Long, InstrumentDTO> getinstrumentDTOs() {
         LOGGER.info("getInstrument DTOS");
         ResponseEntity<List<InstrumentDTO>> instrumentsResponse =

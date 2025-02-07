@@ -1,11 +1,5 @@
-FROM openjdk:8-jre
-ADD target/javashop.products-latest.jar app.jar
-ADD products.yml app-config.yml
-EXPOSE 8020
-
-ADD https://github.com/signalfx/splunk-otel-java/releases/latest/download/splunk-otel-javaagent-all.jar .
-
-ENTRYPOINT java -javaagent:splunk-otel-javaagent-all.jar -Dsplunk.access.token=${TOKEN} -Dsplunk.realm=${REALM} -Dotel.traces.sampler=rules -Dotel.traces.sampler.arg=drop=healthcheck -Dotel.resource.attributes=service.name=products,deployment.environment=${USERNAME}_xApm_Instrumentation_Shop -jar app.jar server app-config.yml
-
-
-#ENTRYPOINT java -javaagent:splunk-otel-javaagent-all.jar -Dsplunk.access.token=${TOKEN} -Dsplunk.realm=${REALM} -Dotel.traces.sampler=rules -Dotel.traces.sampler.arg=drop=healthcheck -Dotel.resource.attributes=service.name=products,deployment.environment=${USERNAME}_xApm_Instrumentation_Shop -jar app.jar server app-config.yml
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+COPY target/dropwizard-guice-service-1.0-SNAPSHOT.jar app.jar
+CMD ["java", "-jar", "app.jar", "server", "config.yml"]
+EXPOSE 8080
