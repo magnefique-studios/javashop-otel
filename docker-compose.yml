@@ -2,6 +2,8 @@ version: '3'
 services:
   shop:
     image: shabushabu/javashop.shop:latest
+    extra_hosts:
+      - "host.docker.internal:172.31.16.1"
     build:
       ./shop
     ports:
@@ -14,6 +16,9 @@ services:
       - USERNAME=${SHOP_USER}
       - TOKEN=${SPLUNK_ACCESS_TOKEN}
       - REALM=${SPLUNK_REALM}
+      - OTEL_EXPORTER_OTLP_ENDPOINT=${SPLUNK_ENDPOINT}
+      - OTEL_LOGS_EXPORTER=none
+        #- OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
     healthcheck:
       test: curl -sS http://localhost:8010/healthcheck | grep -c 200 > /dev/null
       interval: 2s
@@ -29,6 +34,8 @@ services:
         target: /container/shop/data/.env
   products:
     image: shabushabu/javashop.products:latest
+    extra_hosts:
+      - "host.docker.internal:172.31.16.1"
     build:
       ./products
     ports:
@@ -43,8 +50,13 @@ services:
       - USERNAME=${SHOP_USER}
       - TOKEN=${SPLUNK_ACCESS_TOKEN}
       - REALM=${SPLUNK_REALM}
+      - OTEL_EXPORTER_OTLP_ENDPOINT=${SPLUNK_ENDPOINT}
+      - OTEL_LOGS_EXPORTER=none
+      - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
   stock:
     image: shabushabu/javashop.stock:latest
+    extra_hosts:
+      - "host.docker.internal:172.31.16.1"
     build:
       ./stock
     ports:
@@ -59,6 +71,10 @@ services:
       - USERNAME=${SHOP_USER}
       - TOKEN=${SPLUNK_ACCESS_TOKEN}
       - REALM=${SPLUNK_REALM}
+      - OTEL_EXPORTER_OTLP_ENDPOINT=${SPLUNK_ENDPOINT}
+      - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
+      - OTEL_LOGS_EXPORTER=none
+
   shoptester:
     image: shabushabu/javashop.tester:latest
     build:
@@ -78,6 +94,8 @@ services:
         target: /container/test/data      
   instruments:
     image:  shabushabu/javashop.instruments:latest
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     build:
       ./instruments
     ports:
@@ -95,6 +113,8 @@ services:
       - USERNAME=${SHOP_USER}
       - TOKEN=${SPLUNK_ACCESS_TOKEN}
       - REALM=${SPLUNK_REALM}
+      - OTEL_EXPORTER_OTLP_ENDPOINT=${SPLUNK_ENDPOINT}
+        #- OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresDB:5432/instruments
       - SPRING_DATASOURCE_USERNAME=instruments
       - SPRING_DATASOURCE_PASSWORD=instruments

@@ -137,9 +137,9 @@ public class HomeController {
     public void allParameters( @SpanAttribute("name") String name, @SpanAttribute("location") String location, 
     		 @SpanAttribute("userid")String userid ) throws NoPermissionException {
     	
-    	if (checkIfRestricted(userid) ) {
-    		throw new NoPermissionException("User does not have permissions for action requested.");
-    	}
+    //	if (checkIfRestricted(userid) ) {
+    //		throw new NoPermissionException("User does not have permissions for action requested.");
+    //	}
     }
     
     @WithSpan 
